@@ -1,0 +1,46 @@
+# Secrets and credentials
+.env
+.env.*
+*.env
+credentials/
+credentials*
+cookies/
+cookies*
+tokens/
+tokens*
+secrets/
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Logs, caches, temporary files
+logs/
+*.log
+cache/
+.cache/
+tmp/
+temp/
+work/
+*.tmp
+*.temp
+*.bak
+*.swp
+~$*
+
+# Local databases and runtime state
+*.db
+*.sqlite
+*.sqlite3
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+node_modules/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
