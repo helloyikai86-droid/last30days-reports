@@ -35,6 +35,18 @@ dialog{border:0;border-radius:20px;padding:0;width:min(760px,calc(100% - 24px));
       <input id="search" class="search" placeholder="搜索项目、关键词，例如：浏览器 / Agent / 配音"/>
       <select id="dateSelect" class="date"><option value="all">全部历史项目</option></select>
     </div>
+    <div class="row" style="margin-top:10px;grid-template-columns:1fr 180px">
+      <div></div>
+      <select id="ratingSelect" class="date">
+        <option value="all">全部评分</option>
+        <option value="5">★★★★★ 5分</option>
+        <option value="4">★★★★☆ 4分</option>
+        <option value="3">★★★☆☆ 3分</option>
+        <option value="2">★★☆☆☆ 2分</option>
+        <option value="1">★☆☆☆☆ 1分</option>
+        <option value="unrated">未评分</option>
+      </select>
+    </div>
     <div id="chips" class="chips"></div>
   </div>
   <div id="dayNote" class="note" hidden></div>
@@ -55,6 +67,7 @@ dialog{border:0;border-radius:20px;padding:0;width:min(760px,calc(100% - 24px));
     <div class="kv"><b>核心差异化</b><span id="mDiff"></span></div>
     <div class="kv"><b>商业机会 / 中国市场</b><span id="mBiz"></span></div>
     <div class="kv"><b>明确判断</b><span id="mJudge"></span></div>
+    <div class="kv"><b>我的记录</b><span id="mMine"></span></div>
     <div class="modalActions">
       <a id="mNotes" class="btn primary" target="_blank" rel="noopener">我的笔记</a>
       <a id="mGitHub" class="btn" target="_blank" rel="noopener">打开 GitHub</a>
@@ -64,8 +77,8 @@ dialog{border:0;border-radius:20px;padding:0;width:min(760px,calc(100% - 24px));
 </dialog>
 
 <script>
-let master=[],shown=[],category="全部";
-const categories=["全部","AI/Agent","企业AI","AIGC","增长/内容","开发工具","基础设施"];
+let master=[],shown=[],category="全部",ratingFilter="all";
+const categories=["全部","有笔记","AI/Agent","企业AI","AIGC","增长/内容","开发工具","基础设施"];
 const chips=document.getElementById("chips");
 categories.forEach((c,i)=>{
   const b=document.createElement("button");b.className="chip"+(i===0?" active":"");b.textContent=c;
@@ -83,6 +96,7 @@ function openDetail(p){
   document.getElementById("mDiff").textContent=val(p.difference);
   document.getElementById("mBiz").textContent=val(p.business);
   document.getElementById("mJudge").textContent=val(p.judgment);
+  const mine=[]; if(p.rating) mine.push("评分："+"★".repeat(p.rating)+"☆".repeat(5-p.rating)); if(p.has_notes) mine.push("已做笔记"); document.getElementById("mMine").textContent=mine.length?mine.join(" ｜ "):"未评分 / 暂无笔记";
   document.getElementById("mGitHub").href=p.url;
   const notes=document.getElementById("mNotes"); notes.href=p.notes_url||p.url; notes.style.display=p.notes_url?"inline-flex":"none";
   document.getElementById("dialog").showModal();
@@ -91,7 +105,9 @@ function render(){
   const q=document.getElementById("search").value.trim().toLowerCase();
   const list=shown.filter(p=>{
     const hay=[p.name,p.description,(p.tags||[]).join(" "),p.target_users,p.problem,p.why_hot,p.why,p.difference,p.business,p.judgment].join(" ").toLowerCase();
-    return (!q||hay.includes(q))&&(category==="全部"||(p.tags||[]).includes(category));
+    const categoryOk=category==="全部" || (category==="有笔记" ? !!p.has_notes : (p.tags||[]).includes(category));
+    const ratingOk=ratingFilter==="all" || (ratingFilter==="unrated" ? !p.rating : String(p.rating)===ratingFilter);
+    return (!q||hay.includes(q))&&categoryOk&&ratingOk;
   });
   document.getElementById("count").textContent=`${list.length} 个项目`;
   const grid=document.getElementById("grid");grid.innerHTML="";document.getElementById("empty").hidden=list.length>0;
@@ -99,8 +115,10 @@ function render(){
     const el=document.createElement("article");el.className="card";
     const tags=(p.tags||[]).map(t=>`<span class="tag ${t==="重点"?"hot":""}">${t}</span>`).join("");
     const daily=p.stars_today?`<div class="daily">#${p.rank}　${p.stars_today}　总 Star ${p.total_stars||"—"}　${p.language||""}</div>`:"";
+    const rating=p.rating?`<span class="tag hot">我的评分 ${"★".repeat(p.rating)}${"☆".repeat(5-p.rating)}</span>`:"";
+    const noteTag=p.has_notes?`<span class="tag">已做笔记</span>`:"";
     const notesBtn=p.notes_url?`<a class="btn" href="${p.notes_url}" target="_blank" rel="noopener">我的笔记</a>`:"";
-    el.innerHTML=`<div class="top"><div class="name">${p.name}</div></div>${daily}<div class="desc">${p.description||""}</div><div class="tags">${tags}</div><div class="actions"><button class="btn detail">详细分析</button>${notesBtn}<a class="btn" href="${p.url}" target="_blank" rel="noopener">GitHub</a></div>`;
+    el.innerHTML=`<div class="top"><div class="name">${p.name}</div></div>${daily}<div class="desc">${p.description||""}</div><div class="tags">${rating}${noteTag}${tags}</div><div class="actions"><button class="btn detail">详细分析</button>${notesBtn}<a class="btn" href="${p.url}" target="_blank" rel="noopener">GitHub</a></div>`;
     el.querySelector(".detail").onclick=()=>openDetail(p);grid.appendChild(el);
   });
 }
@@ -111,12 +129,13 @@ async function loadAll(){
 async function loadDate(date){
   const data=await fetch("./daily/"+date+".json?v="+Date.now()).then(r=>r.json());
   const masterById=Object.fromEntries(master.map(p=>[p.id,p]));
-  shown=(data.projects||[]).map(p=>({...p,tags:(masterById[p.id]?.tags)||[],notes_url:masterById[p.id]?.notes_url,notes_issue:masterById[p.id]?.notes_issue}));
+  shown=(data.projects||[]).map(p=>({...p,tags:(masterById[p.id]?.tags)||[],notes_url:masterById[p.id]?.notes_url,notes_issue:masterById[p.id]?.notes_issue,has_notes:masterById[p.id]?.has_notes||false,rating:masterById[p.id]?.rating||null}));
   document.getElementById("modeLabel").textContent=data.date+" 当日 Top 10";
   const n=document.getElementById("dayNote");n.textContent=data.note||"";n.hidden=!data.note;render();
 }
 document.getElementById("search").addEventListener("input",render);
 document.getElementById("dateSelect").addEventListener("change",e=>e.target.value==="all"?loadAll():loadDate(e.target.value));
+document.getElementById("ratingSelect").addEventListener("change",e=>{ratingFilter=e.target.value;render();});
 Promise.all([
   fetch("./projects.json?v="+Date.now()).then(r=>r.json()),
   fetch("./daily/index.json?v="+Date.now()).then(r=>r.json())
