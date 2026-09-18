@@ -13,9 +13,11 @@
 </section></main><script src="./config.js"></script><script>
 const returnUrl=sessionStorage.getItem("notes-return-url")||"./";
 document.getElementById("backLink").href=returnUrl;
-const id=new URLSearchParams(location.search).get("id"),API=(window.NOTES_API||"").replace(/\/$/,"");let project=null,rating=null,key=sessionStorage.getItem("github-opportunity-notes-key")||"";
-function ensureKey(){if(key)return key;const v=prompt("请输入 NOTES_KEY")||"";if(v){key=v;sessionStorage.setItem("github-opportunity-notes-key",v);}return key;}
-async function api(path,opt={}){const k=ensureKey();if(!k)throw new Error("未输入访问密钥");const r=await fetch(API+path,{...opt,headers:{"Content-Type":"application/json","X-Notes-Key":k,...(opt.headers||{})}});if(r.status===401){sessionStorage.removeItem("github-opportunity-notes-key");key="";throw new Error("访问密钥不正确");}if(!r.ok)throw new Error("HTTP "+r.status);return r.json();}
+const id=new URLSearchParams(location.search).get("id"),API=(window.NOTES_API||"").replace(/\/$/,""),KEY_STORE="github-opportunity-notes-key";let project=null,rating=null,key=localStorage.getItem(KEY_STORE)||sessionStorage.getItem(KEY_STORE)||"";
+function rememberKey(v){if(!v)return;localStorage.setItem(KEY_STORE,v);sessionStorage.removeItem(KEY_STORE);}
+function forgetKey(){localStorage.removeItem(KEY_STORE);sessionStorage.removeItem(KEY_STORE);}
+function ensureKey(){if(key)return key;const v=prompt("请输入 NOTES_KEY\n\n验证成功后会记住这台设备。")||"";if(v){key=v;rememberKey(v);}return key;}
+async function api(path,opt={}){const k=ensureKey();if(!k)throw new Error("未输入访问密钥");const r=await fetch(API+path,{...opt,headers:{"Content-Type":"application/json","X-Notes-Key":k,...(opt.headers||{})}});if(r.status===401){forgetKey();key="";throw new Error("访问密钥不正确");}if(r.ok)rememberKey(k);if(!r.ok)throw new Error("HTTP "+r.status);return r.json();}
 function draw(){const box=document.getElementById("stars");box.innerHTML="";for(let i=1;i<=5;i++){const b=document.createElement("button");b.className="star"+((rating||0)>=i?" on":"");b.textContent="★";b.onclick=()=>{rating=i;draw();};box.appendChild(b);}}
 fetch("./projects.json?v="+Date.now()).then(r=>r.json()).then(async d=>{project=(d.projects||[]).find(x=>x.id===id);if(!project)throw 0;document.title=project.name+"｜笔记";document.getElementById("name").textContent=project.name;document.getElementById("desc").textContent=project.description||"";draw();document.getElementById("msg").textContent="正在读取私人笔记…";try{const n=await api("/notes/"+encodeURIComponent(project.id));rating=n.rating;document.getElementById("status").value=n.status||"👀 观察";document.getElementById("note").value=n.note||"";document.getElementById("next").value=n.next_action||"";draw();document.getElementById("msg").textContent="私人笔记已同步。";}catch(e){document.getElementById("msg").textContent="读取失败："+e.message;}})
 .catch(()=>document.getElementById("name").textContent="项目加载失败");
