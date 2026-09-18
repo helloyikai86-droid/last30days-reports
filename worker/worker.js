@@ -31,6 +31,15 @@ async function listNoteIssues(env){
   return issues.filter(x=>!x.pull_request && /^\[项目笔记\]/.test(x.title));
 }
 async function findIssue(projectId,env){ const issues=await listNoteIssues(env); return issues.find(x=>parseIssue(x).project_id===projectId)||null; }
+async function listStarred(env){
+  const out=[];
+  for(let page=1;page<=10;page++){
+    const rows=await gh("/users/"+OWNER+"/starred?per_page=100&page="+page,env);
+    for(const r of rows) if(r.full_name) out.push(r.full_name);
+    if(rows.length<100) break;
+  }
+  return out;
+}
 function buildBody(issue,p){
   const old=issue?parseIssue(issue):{rating:null,status:"👀 观察",note:"",next_action:""};
   const rating=p.rating ?? old.rating; const status=p.status || old.status || "👀 观察"; const note=p.note ?? old.note ?? ""; const next=p.next_action ?? old.next_action ?? "";
@@ -45,6 +54,10 @@ export default {
       const u=new URL(req.url);
       if(u.pathname==="/health") return json({ok:true,storage:"private-github"},200,ch);
       if(!authed(req,env)) return json({error:"unauthorized"},401,ch);
+      if(u.pathname==="/starred" && req.method==="GET"){
+        const starred=await listStarred(env);
+        return json({starred},200,ch);
+      }
       if(u.pathname==="/notes" && req.method==="GET"){
         const issues=await listNoteIssues(env), out={};
         for(const it of issues){ const p=parseIssue(it); if(p.project_id)out[p.project_id]=p; }
