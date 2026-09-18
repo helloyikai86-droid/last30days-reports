@@ -16,7 +16,16 @@
       "why_hot": "一天 +3,606，核心原因是开发者对“Agent 结果可信度”极度敏感，而该项目把复核、证据和验证器做成工作流。",
       "difference": "发现者与验证者分离；使用 coverage ledger、findings schema 和 validator。",
       "business": "可迁移成广告投放审批、财务审核、客服质检、合同审核等“可审计 AI 员工”。",
-      "judgment": "★★★★★+。今天最强的 Agent 架构信号。"
+      "judgment": "★★★★★+。今天最强的 Agent 架构信号。",
+      "what_it_is": "它不是一个普通“让 AI 帮你找漏洞”的 Prompt，而是一套把安全审计拆成阶段化流程的 Agent Skill：先定义审计范围和覆盖面，再发现问题，再由独立 Reviewer 复核，最后用结构化 schema 和程序化校验器检查结果是否完整。",
+      "past_solution": "过去常见做法是人工安全工程师逐文件审阅，或者让单个 LLM 直接扫代码并输出问题。前者成本高、速度慢；后者容易漏覆盖、重复结论，甚至把猜测当证据。",
+      "how_it_works": "核心思路是把执行与复核分开。发现 Agent 负责寻找潜在问题，Reviewer 负责独立验证；coverage ledger 记录哪些区域已检查，findings schema 约束输出字段，validator 再做程序化校验。",
+      "architecture": "可以抽象成“任务分解 → 覆盖台账 → 发现 Agent → 独立 Reviewer → 结构化 findings → 程序校验”。这类架构的关键不是模型更聪明，而是把模型限制在可验证流程里。",
+      "china_opportunity": "中国企业的代码安全、财务审核、广告投放审批、客服质检、合同审核都存在类似需求。真正可卖的不是“一个 Agent”，而是一套可审计、有证据链、可追责的 AI 工作流。",
+      "use_cases": "代码安全审计、财务报表复核、客服质检、广告素材审核、合同条款检查、企业 OA 审批前置检查。",
+      "risks": "最大的限制是 Reviewer 仍可能和执行 Agent 共享同一模型偏差；如果底层证据不足，结构化流程也不能凭空产生正确结论。因此高风险场景仍需要程序规则、人工抽检和权限隔离。",
+      "inspiration": "最值得借鉴的是“执行 Agent 不能自己给自己判通过”。今后任何高风险 Agent，都可以采用执行者、复核者、程序校验三层结构。",
+      "full_analysis": "这个项目真正有价值的地方不是安全审计本身，而是它把“高可靠 Agent 应该怎么设计”示范得很清楚。过去很多 Agent 产品的核心逻辑是：让一个模型完成任务，然后相信它的输出。security-audit-skill 则反过来，默认模型会漏、会猜、会自证，因此用覆盖台账、独立 Reviewer、结构化 findings 和程序 validator 去约束它。这个模式很适合迁移到企业真实业务。比如广告投放 Agent 不应该自己生成投放方案后直接执行，而应该由第二个 Agent 检查预算、素材、合规和目标，再由确定性程序检查金额、账户和阈值。它代表的机会是“可审计 AI 员工”，而不只是“更聪明的聊天机器人”。"
     },
     {
       "rank": 2,
@@ -32,7 +41,16 @@
       "why_hot": "连续多日 +3,000 级增长，企业级生产经验和“确定性 + Agent”方法论传播力很强。",
       "difference": "确定性程序负责文件覆盖、规则与定位，Agent 只负责需要上下文推理的部分。",
       "business": "企业私有 Code Review、行业规则包、CI 插件、高可靠 Agent 工作流。",
-      "judgment": "★★★★★+。值得学方法论，连续项目无需重复深挖。"
+      "judgment": "★★★★★+。值得学方法论，连续项目无需重复深挖。",
+      "what_it_is": "阿里的 AI Code Review 系统，重点不是让 LLM 全权审代码，而是把文件遍历、规则匹配、定位等确定性部分交给程序，把需要语义理解和上下文判断的部分交给 LLM。",
+      "past_solution": "传统 Code Review 依赖人工评审、静态分析器和规则引擎。纯 LLM Review 虽然灵活，但容易漏文件、定位漂移、重复评论，且结果不稳定。",
+      "how_it_works": "先由确定性程序收集改动、构建上下文、执行规则，再把需要判断的代码片段交给 LLM；最终把结果映射回明确文件和代码位置。",
+      "architecture": "本质是“确定性工程层 + LLM 推理层”。工程层负责可枚举、可验证、可定位的任务，LLM 层只处理语义理解、意图判断和开放式推理。",
+      "china_opportunity": "国内大量研发团队已经使用 GitLab/Gitee/Jenkins/企业微信，可以做成私有 Code Review、公司编码规范审查、行业规则包和 CI 插件。",
+      "use_cases": "PR 审查、公司规范检查、安全规则审查、历史缺陷模式检测、自动生成 Review 建议。",
+      "risks": "如果把太多逻辑交给 LLM，成本和误报会迅速上升；如果规则层太重，又会退化成传统静态分析。关键在边界划分。",
+      "inspiration": "非常适合当作 Agent 工程的通用原则：能用程序确定的，不让模型猜；只有真正需要理解上下文的地方才用模型。",
+      "full_analysis": "OpenCodeReview 最值得研究的是“确定性与概率性系统怎么组合”。很多 Agent 项目失败，不是模型不够强，而是把原本可以写死的事情也交给了模型，例如枚举文件、校验路径、判断是否漏扫、定位行号。阿里的做法更像生产系统：程序负责可靠覆盖和约束，LLM 负责语义判断。这个原则可以直接迁移到企业自动化、客服、财务和运营 Agent。对于你今后做 AI 服务平台，这比单纯追求更大模型更重要，因为真正影响交付质量的是流程边界。"
     },
     {
       "rank": 3,
@@ -48,7 +66,16 @@
       "why_hot": "项目总量约 4k，却一天 +1,350；Agent 已经会思考，市场现在缺的是进入真实业务系统的“手”。",
       "difference": "复用用户现有浏览器登录态；Agent 使用独立可见窗口；需要时显式 Borrow Tab；支持验证码/人工确认时临时接管。",
       "business": "企业后台 Agent、运营自动化、订单/客服流程、内容发布、AI RPA 2.0。",
-      "judgment": "★★★★★+。今天最值得新增研究的项目。"
+      "judgment": "★★★★★+。今天最值得新增研究的项目。",
+      "what_it_is": "让 Codex、Claude Code、Cursor、Hermes 等 Agent 直接使用用户已经登录的真实浏览器，而不是重新启动一个没有登录态的自动化浏览器。",
+      "past_solution": "过去 Browser Agent 多依赖 Playwright、Puppeteer 或独立 Chromium Profile。真正进入业务后台时，经常卡在 Cookie、登录、验证码、设备验证、账号风控和双因素认证。",
+      "how_it_works": "Agent 通过 BrowserSkill CLI 与浏览器扩展通信，在独立可见的 Agent Window 中工作；需要操作用户当前标签页时，通过显式 Borrow Tab 借用，用完再归还；遇到验证码或确认步骤可以让人临时接管。",
+      "architecture": "可以理解为“Agent → BrowserSkill CLI → 浏览器扩展 → 用户真实浏览器”。与纯浏览器自动化不同，它把现有登录态和人工接管能力保留下来。",
+      "china_opportunity": "非常适合中国企业后台，因为大量 ERP、企微、广告平台、电商后台并没有完整 API。可以做 AI RPA、订单履约、客服后台处理、内容发布、运营巡检。",
+      "use_cases": "广告后台操作、订单处理、客服系统、CMS 发布、CRM 更新、数据采集、Research Agent。",
+      "risks": "复用真实登录态同时意味着权限更高，误操作风险也更高；需要操作白名单、步骤确认、审计日志、人工接管和高风险动作二次确认。",
+      "inspiration": "这是从“AI 会思考”走向“AI 能进入真实系统工作”的关键拼图。它更像下一代 RPA 的浏览器执行层。",
+      "full_analysis": "BrowserSkill 的意义不只是浏览器自动化。传统 RPA 早就能点击网页，真正难的是把 Agent 接入用户每天实际使用、已经登录、带 Cookie 和账号状态的浏览器，同时又不让它完全抢走人的控制权。它通过独立 Agent Window、Borrow Tab 和人工接管解决了这一点。对商业化来说，这意味着很多没有 API 的企业 SaaS 也能被 Agent 操作。对于国内市场尤其重要，因为大量业务系统的开放 API 不完整，但网页后台非常成熟。下一步如果围绕它做产品，重点不是“让 AI 点网页”，而是权限、风控、审计、失败恢复和人工接管。"
     },
     {
       "rank": 4,
@@ -64,7 +91,16 @@
       "why_hot": "Agent 基础设施从个人配置走向团队标准化和企业托管。",
       "difference": "跨 Codex、Claude Code、Cursor、OpenCode 等环境统一 Harness。",
       "business": "托管 GitHub App、企业部署、团队 Agent 工作台、咨询与 Pro 服务。",
-      "judgment": "★★★★★。研究其开源到托管服务的商业路线。"
+      "judgment": "★★★★★。研究其开源到托管服务的商业路线。",
+      "what_it_is": "围绕 Skills、Memory、Hooks、安全和持续学习，为多种 Coding Agent 提供统一 Agent Harness。",
+      "past_solution": "过去每个开发者分别在 Claude Code、Codex、Cursor 等工具里维护自己的提示词、规则、脚本和记忆，团队之间很难共享。",
+      "how_it_works": "把规则、Skills、记忆、工具钩子和安全约束集中管理，再注入不同 Coding Agent 环境。",
+      "architecture": "可以把它看作 Coding Agent 上面的“运行时配置层”：模型可以换，但团队的 SOP、Skill、Memory 和安全策略保留。",
+      "china_opportunity": "适合做企业 Coding Agent 工作台、团队模板、私有化部署、权限和审计服务，也可扩展到非编程岗位的 Agent Harness。",
+      "use_cases": "团队编码规范、共享 Skills、项目记忆、安全策略、自动 Hook、Agent 统一配置。",
+      "risks": "Harness 很容易变成配置大杂烩；不同 Agent 的能力和接口变化快，维护成本高。",
+      "inspiration": "真正可积累的资产不是某个模型，而是团队的 Skills、Memory、工作流和规则。",
+      "full_analysis": "ECC 代表的是 Agent 基础设施从个人技巧走向团队资产。模型和 Coding Agent 产品可能频繁更换，但企业不希望每换一次工具就重新写所有规则。因此 Harness 的商业价值在于把团队 SOP、Skills、Memory、安全和自动化钩子做成一层稳定资产。未来这类产品很可能类似今天的 DevOps 平台：底层模型可替换，上层流程和治理才是企业真正愿意付费的部分。"
     },
     {
       "rank": 5,
@@ -80,7 +116,16 @@
       "why_hot": "企业知识库正在从“问答工具”升级为 Knowledge OS。",
       "difference": "RAG + Agent + Wiki + Graph + Memory + 企业数据源 + IM 连接器。",
       "business": "企微/钉钉知识 Agent、客服、内部助手、行业知识库、私有部署。",
-      "judgment": "★★★★★+。中国企业 AI 服务值得持续跟踪。"
+      "judgment": "★★★★★+。中国企业 AI 服务值得持续跟踪。",
+      "what_it_is": "腾讯开源的企业知识平台，把 RAG、ReAct Agent、Wiki、知识图谱、长期记忆和企业数据连接器组合在一起。",
+      "past_solution": "传统企业知识库通常是上传 PDF 后做向量检索问答，信息源单一、权限粗、没有持续记忆，更无法真正执行后续任务。",
+      "how_it_works": "先把多源企业资料统一进入知识层，再通过检索、图谱和 Wiki 组织上下文；Agent 在此基础上推理和调用工具，长期记忆保存用户与任务历史。",
+      "architecture": "核心是“数据源 → 知识组织/RAG/Graph → Agent → Memory → 企业连接器”。它不再把 RAG 当完整产品，而是 Knowledge OS 的一部分。",
+      "china_opportunity": "非常适合企微、钉钉、飞书场景。可以做客服、售后、员工助手、销售知识库、行业私有知识 Agent 和私有部署服务。",
+      "use_cases": "售后客服、产品知识问答、内部制度查询、销售辅助、研发知识库、行业专家助手。",
+      "risks": "企业知识项目的难点不在模型，而在文档质量、权限、数据更新、连接器和知识治理。部署容易，长期维护才是成本。",
+      "inspiration": "知识库产品正在从“上传文件问答”升级为“知识 + 记忆 + Agent + 执行”的企业操作系统。",
+      "full_analysis": "WeKnora 值得关注，是因为它说明企业 RAG 已经进入下一阶段。单纯的向量检索问答越来越难形成产品差异，客户真正需要的是多数据源、权限、知识组织、长期记忆以及能完成任务的 Agent。对于国内服务市场，可以围绕行业模板和连接器做二次产品，例如企微客服、技术售后、销售助手。商业化重点不应放在“部署一个开源知识库”，而应该放在数据清洗、权限接入、行业工作流和持续运维。"
     },
     {
       "rank": 6,
@@ -96,7 +141,16 @@
       "why_hot": "总 Star 仍低却保持近千日增，说明“Experiment Agent”正在形成独立需求。",
       "difference": "Git worktree 并行实验、证据绑定、可复现 lineage。",
       "business": "手游买量实验 Agent、素材 Hook、落地页 CRO、定价和活动实验。",
-      "judgment": "★★★★★+。非常适合迁移成增长实验系统。"
+      "judgment": "★★★★★+。非常适合迁移成增长实验系统。",
+      "what_it_is": "让 Coding Agent 不只是回答研究问题，而是持续提出假设、修改代码、并行执行实验、记录证据，再根据结果决定下一轮。",
+      "past_solution": "传统实验通常由人提出假设、手动改代码、运行、记日志，再在文档中比较结果；流程慢且上下文容易散失。",
+      "how_it_works": "Agent 把研究问题拆成假设，使用独立 Git worktree 并行修改和运行实验，保留代码、结果和证据 lineage，再基于结果继续迭代。",
+      "architecture": "核心闭环是“假设 → 代码变更 → 实验 → 证据 → 比较 → 下一轮假设”，并通过版本控制保证可复现。",
+      "china_opportunity": "不仅适合科研，更适合增长实验：手游素材、广告 Hook、落地页 CRO、定价、活动机制、推荐算法。",
+      "use_cases": "模型实验、A/B 测试、素材实验、广告投放策略测试、定价实验、参数优化。",
+      "risks": "如果实验指标本身设计错误，Agent 会非常高效地优化错误目标；还需要控制实验成本和避免数据泄漏。",
+      "inspiration": "AI 的下一步不是帮人写分析报告，而是自动运行“假设—实验—证据”的闭环。",
+      "full_analysis": "OpenResearch 的产品启发很强，因为它把 Agent 从“建议者”升级成“实验执行者”。很多商业问题其实不是缺分析，而是缺持续实验。例如手游买量时，人每天要提出素材假设、做版本、投放、看指标、复盘。这个框架完全可以迁移成增长 Experiment Agent。真正的价值不是一次生成十个创意，而是自动管理假设、实验、证据和下一轮。"
     },
     {
       "rank": 7,
@@ -112,7 +166,16 @@
       "why_hot": "成熟老项目短期重新进入 Trending，更多是事件型热度。",
       "difference": "功能完整、长期维护、行业知名度高。",
       "business": "与当前商业主线关系较弱。",
-      "judgment": "★★★☆☆。记录热度即可。"
+      "judgment": "★★★☆☆。记录热度即可。",
+      "what_it_is": "成熟的逆向工程和反编译框架，用于分析二进制程序、理解程序结构和辅助安全研究。",
+      "past_solution": "逆向工程长期依赖 IDA、调试器和人工分析，工具学习门槛高。",
+      "how_it_works": "通过反汇编、反编译、符号分析和脚本扩展帮助研究人员理解二进制程序。",
+      "architecture": "属于成熟专业工具平台，本身不是 Agent 产品，但可作为安全 Agent 的底层工具之一。",
+      "china_opportunity": "商业机会主要在授权安全分析、培训和企业安全工具集成，与当前 AI 商业主线关联较弱。",
+      "use_cases": "漏洞研究、恶意软件分析、固件分析、二进制理解。",
+      "risks": "逆向场景存在授权与合规边界；同时专业用户对准确性要求极高。",
+      "inspiration": "专业 Agent 的价值往往来自接入成熟专业工具，而不是重新造工具。",
+      "full_analysis": "Ghidra 本身并不是新的 AI 项目，它重新进入 Trending 更像事件型热度。对你而言，真正值得记录的是它在 Agent 生态中的位置：未来安全 Agent 要想专业，必须能够调用像 Ghidra 这样的成熟工具。它更适合作为基础能力，而不是直接作为商业项目模仿。"
     },
     {
       "rank": 8,
@@ -128,7 +191,16 @@
       "why_hot": "低成本本地大模型一直是强需求，但日增相比前几天已有回落。",
       "difference": "MoE expert streaming，把存储层直接纳入推理调度。",
       "business": "本地 AI Appliance、企业私有模型部署、GPU+SSD 混合推理。",
-      "judgment": "★★★★★。基础设施方向成立，短期热度回落。"
+      "judgment": "★★★★★。基础设施方向成立，短期热度回落。",
+      "what_it_is": "通过 SSD、RAM、VRAM 分层加载和专家流式调度，让显存有限的设备运行更大的 MoE 模型。",
+      "past_solution": "运行超大模型通常依赖大显存 GPU、多卡服务器或量化后牺牲一定质量。",
+      "how_it_works": "利用 MoE 每次只激活部分专家的特点，把专家权重分层放在 SSD/RAM/VRAM 中，按需流式载入。",
+      "architecture": "核心是存储层级调度：SSD 负责容量，RAM 做中间缓存，VRAM 保留当前活跃专家。",
+      "china_opportunity": "适合私有化、本地 AI Appliance、企业推理盒子和低成本部署服务，尤其是对数据不能上云的企业。",
+      "use_cases": "本地大模型、企业私有部署、边缘 AI、低成本推理节点。",
+      "risks": "性能高度依赖 SSD 带宽、PCIe、内存和模型结构；“能跑”不等于达到云端 GPU 的吞吐。",
+      "inspiration": "随着模型越来越大，本地部署竞争不一定只发生在 GPU，也可能发生在存储调度和系统工程。",
+      "full_analysis": "Colibri 的核心价值是重新利用 MoE 的结构特点，把存储设备也纳入推理系统。它说明低成本本地 AI 的机会不只是模型量化，还包括 SSD/RAM/VRAM 的协同调度。商业上可以做成标准化本地 AI 设备或企业私有推理方案，但要谨慎区分“可以加载模型”和“实际可用性能”。真正要验证的是首 token 延迟、持续吞吐和不同硬件组合下的体验。"
     },
     {
       "rank": 9,
@@ -144,7 +216,16 @@
       "why_hot": "“低内存、无 Electron、无遥测、可跑 Raycast 扩展”很容易击中效率工具用户。",
       "difference": "原生 SwiftUI/AppKit + 低资源占用 + 扩展兼容。",
       "business": "免费基础版 + Pro + 同步 + 插件市场。",
-      "judgment": "★★★★☆。产品思路不错，但赛道拥挤。"
+      "judgment": "★★★★☆。产品思路不错，但赛道拥挤。",
+      "what_it_is": "轻量、原生的 macOS Launcher，强调低资源占用、快速启动和剪贴板等效率功能。",
+      "past_solution": "Mac 用户主要使用 Spotlight、Alfred、Raycast 等成熟产品，其中 Raycast 功能强但功能越来越重。",
+      "how_it_works": "使用原生 SwiftUI/AppKit 实现桌面启动器和扩展能力，减少 Electron 类运行时开销。",
+      "architecture": "原生 macOS 应用 + 扩展兼容路线，竞争点主要是性能、启动速度和体验。",
+      "china_opportunity": "适合借鉴“成熟品类重新做轻量版”的产品策略，但中国 Mac 用户规模和付费空间有限。",
+      "use_cases": "应用启动、快速搜索、剪贴板、快捷命令、效率插件。",
+      "risks": "赛道成熟，用户迁移成本高；如果只有“更轻”，长期壁垒有限。",
+      "inspiration": "不一定要发明新需求，把成熟强工具做得更轻、更简单、更原生，也可能形成增长。",
+      "full_analysis": "Tinycast 的启发主要是产品包装。效率工具赛道已经非常成熟，但仍有人愿意为更轻、更快、更原生的版本迁移。对小团队来说，这是值得参考的策略：寻找功能强但越来越复杂的头部工具，做一个只覆盖高频 20% 功能的轻量替代。不过这种机会的关键是体验，而不是简单复刻功能。"
     },
     {
       "rank": 10,
@@ -160,7 +241,16 @@
       "why_hot": "Skill 正在成为 Agent 专业方法的分发单位。",
       "difference": "步骤、验证 Gate、Anti-pattern、退出条件被编码进 Skill。",
       "business": "行业 Skill Pack、团队标准、工作流模板、培训内容。",
-      "judgment": "★★★★☆。长期当方法库。"
+      "judgment": "★★★★☆。长期当方法库。",
+      "what_it_is": "把生产级软件工程方法拆成 Codex、Claude Code 等 Agent 可执行的 Skills。",
+      "past_solution": "过去开发者依靠系统提示词、README 或人工口头传递工程经验，但执行一致性差。",
+      "how_it_works": "将步骤、检查项、验证 Gate、Anti-pattern 和退出条件写入 Skill，让 Agent 在任务中按流程执行。",
+      "architecture": "本质是“专家方法 → 结构化 Skill → Agent 执行”。Skill 成为模型之外的专业知识层。",
+      "china_opportunity": "可以把广告投放、SEO、客服、投标、财务、售后等岗位经验做成行业 Skill Pack。",
+      "use_cases": "Coding SOP、代码重构、测试流程、上线检查、行业工作流。",
+      "risks": "Skill 很容易沦为长 Prompt；真正有价值的 Skill 需要工具、状态、验证和明确退出条件。",
+      "inspiration": "未来专业知识的分发单位可能不再只是课程或文档，而是可直接执行的 Skill。",
+      "full_analysis": "agent-skills 再次验证一个重要趋势：专家知识正在从“人读的文档”变成“Agent 执行的流程”。这对商业化非常重要，因为企业真正愿意付费的不是几段 Prompt，而是经过验证的工作方法。未来可以出现行业 Skill 商店、企业内部 Skill 库，以及围绕 Skill 的更新、权限和评估体系。"
     }
   ]
 }
