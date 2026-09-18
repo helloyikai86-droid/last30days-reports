@@ -125,11 +125,24 @@ async function buildAppearance(){
     if(!firstSeen[p.id]&&p.first_seen)firstSeen[p.id]=p.first_seen;
   }
 }
+const NOTES_KEY_STORAGE="github-opportunity-notes-key";
+function storedPrivateKey(){
+  return localStorage.getItem(NOTES_KEY_STORAGE)||sessionStorage.getItem(NOTES_KEY_STORAGE)||"";
+}
+function rememberPrivateKey(k){
+  if(!k)return;
+  localStorage.setItem(NOTES_KEY_STORAGE,k);
+  sessionStorage.removeItem(NOTES_KEY_STORAGE);
+}
+function forgetPrivateKey(){
+  localStorage.removeItem(NOTES_KEY_STORAGE);
+  sessionStorage.removeItem(NOTES_KEY_STORAGE);
+}
 function getPrivateKey(){
-  let k=sessionStorage.getItem("github-opportunity-notes-key")||"";
+  let k=storedPrivateKey();
   if(k)return k;
-  k=prompt("请输入 NOTES_KEY")||"";
-  if(k)sessionStorage.setItem("github-opportunity-notes-key",k);
+  k=prompt("请输入 NOTES_KEY\n\n验证成功后会记住这台设备；除非你手动锁定、清除浏览器数据或更换浏览器，否则不用再次输入。")||"";
+  if(k)rememberPrivateKey(k);
   return k;
 }
 function addPrivateChips(){
@@ -147,7 +160,7 @@ async function unlockPrivate(){
   const key=getPrivateKey();if(!key)return;
   try{
     const r=await fetch(NOTES_API+"/notes",{headers:{"X-Notes-Key":key}});
-    if(r.status===401){sessionStorage.removeItem("github-opportunity-notes-key");alert("NOTES_KEY 不正确");return;}
+    if(r.status===401){forgetPrivateKey();alert("NOTES_KEY 不正确");return;}
     if(!r.ok)throw new Error("HTTP "+r.status);
     const out=await r.json();
     privateNotes=out.notes||{};privateUnlocked=true;
@@ -159,13 +172,37 @@ async function unlockPrivate(){
     addPrivateChips();
     document.getElementById("ratingSelect").style.display="";
     document.getElementById("statusSelect").style.display="";
-    document.getElementById("unlockBtn").textContent="🔓 已解锁我的数据";
+    rememberPrivateKey(key);
+    const ub=document.getElementById("unlockBtn");
+    ub.textContent="🔓 私人数据已解锁 · 点此锁定";
+    ub.title="此设备已记住 NOTES_KEY；点击可清除本机密钥并锁定私人数据";
     render();
   }catch(e){alert("读取私人数据失败："+e.message);}
 }
-document.getElementById("unlockBtn").onclick=unlockPrivate;
+function lockPrivate(){
+  forgetPrivateKey();
+  privateUnlocked=false;privateNotes={};
+  for(const p of master){delete p.rating;delete p.status;delete p.has_notes;}
+  document.getElementById("ratingSelect").style.display="none";
+  document.getElementById("statusSelect").style.display="none";
+  document.getElementById("privateChipNotes")?.remove();
+  document.getElementById("privateChipRated")?.remove();
+  if(category==="有笔记"||category==="已评分")category="全部";
+  ratingFilter="all";statusFilter="all";
+  document.getElementById("ratingSelect").value="all";
+  document.getElementById("statusSelect").value="all";
+  const ub=document.getElementById("unlockBtn");
+  ub.textContent="🔒 解锁我的数据";ub.title="";
+  [...chips.children].forEach(x=>x.classList.toggle("active",x.textContent==="全部"));
+  render();saveCatalogState();
+}
+document.getElementById("unlockBtn").onclick=()=>{
+  if(privateUnlocked){
+    if(confirm("锁定私人数据并清除这台设备保存的 NOTES_KEY？"))lockPrivate();
+  }else unlockPrivate();
+};
 async function syncSummary(){
-  const key=sessionStorage.getItem("github-opportunity-notes-key")||"";
+  const key=storedPrivateKey();
   if(key)await unlockPrivate();
 }
 function sortList(list){
