@@ -600,7 +600,9 @@
       "why": "成熟老项目短期重新进入 Trending，更多是事件型热度。",
       "has_notes": false,
       "rating": null,
-      "latest_analysis_date": "2026-09-18"
+      "latest_analysis_date": "2026-09-18",
+      "notes_issue": 26,
+      "notes_url": "https://github.com/helloyikai86-droid/last30days-reports/issues/26"
     }
   ]
 }
