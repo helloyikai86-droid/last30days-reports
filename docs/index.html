@@ -59,7 +59,36 @@
 let master=[],shown=[],dates=[],category="全部",ratingFilter="all",statusFilter="all",timeFilter="all",selectedDate="",sortMode="recent";
 const NOTES_API=(window.NOTES_API||"").replace(/\/$/,"");
 const appearance={}, firstSeen={}, lastSeen={}, latestDaily={}, dateSet=new Set();
-let privateUnlocked=false, privateNotes={};
+let privateUnlocked=false, privateNotes={},pendingRestore=null;
+const CATALOG_STATE_KEY="github-catalog-state-v2";
+function saveCatalogState(){
+  const state={
+    url:location.href,scrollY:window.scrollY,category,ratingFilter,statusFilter,timeFilter,selectedDate,sortMode,
+    search:document.getElementById("search")?.value||"",ts:Date.now()
+  };
+  sessionStorage.setItem(CATALOG_STATE_KEY,JSON.stringify(state));
+}
+function readCatalogState(){
+  try{
+    const x=JSON.parse(sessionStorage.getItem(CATALOG_STATE_KEY)||"null");
+    return x&&Date.now()-x.ts<86400000?x:null;
+  }catch{return null;}
+}
+function restoreCatalogControls(st){
+  if(!st)return;
+  category=st.category||"全部";ratingFilter=st.ratingFilter||"all";statusFilter=st.statusFilter||"all";
+  timeFilter=st.timeFilter||"all";selectedDate=st.selectedDate||"";sortMode=st.sortMode||"recent";
+  document.getElementById("search").value=st.search||"";
+  document.getElementById("ratingSelect").value=ratingFilter;
+  document.getElementById("statusSelect").value=statusFilter;
+  document.getElementById("timeSelect").value=timeFilter;
+  document.getElementById("sortSelect").value=sortMode;
+  document.getElementById("datePicker").value=selectedDate;
+}
+function restoreCatalogScroll(st){
+  if(!st)return;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>window.scrollTo(0,Number(st.scrollY)||0)));
+}
 
 const categories=["全部","AI/Agent","企业AI","AIGC","增长/内容","开发工具","基础设施"];
 const chips=document.getElementById("chips");
@@ -182,7 +211,8 @@ function render(){
     const rating=privateUnlocked&&p.rating?'<span class="tag hot">我的评分 '+"★".repeat(p.rating)+"☆".repeat(5-p.rating)+'</span>':"";
     const note=privateUnlocked&&p.has_notes?'<span class="tag">已做笔记</span>':"";
     el.innerHTML='<div class="name">'+p.name+'</div>'+daily+'<div class="desc">'+(p.description||"")+'</div><div class="tags">'+rating+note+tags+'</div><div class="actions"><a class="btn detail" href="'+detailUrl(p)+'">详细分析</a><a class="btn notes '+(privateUnlocked&&p.has_notes?"has":"")+'" href="'+noteUrl(p)+'">'+(privateUnlocked&&p.has_notes?"笔记 ✓":"笔记")+'</a><a class="btn" href="'+p.url+'" target="_blank" rel="noopener">GitHub</a></div>';
-    el.onclick=e=>{if(e.target.closest("a,button,input,select,textarea"))return;location.href=detailUrl(p);};
+    el.onclick=e=>{if(e.target.closest("a,button,input,select,textarea"))return;saveCatalogState();location.href=detailUrl(p);};
+    el.querySelectorAll('a[href*="detail.html"],a[href*="notes.html"]').forEach(a=>a.addEventListener("click",saveCatalogState));
     grid.appendChild(el);
   }
 }
@@ -196,14 +226,14 @@ async function loadExactDate(date){
   document.getElementById("modeLabel").textContent=fmtDate(date)+" 当日 Top 10";render();
 }
 
-document.getElementById("search").oninput=render;
-document.getElementById("ratingSelect").onchange=e=>{ratingFilter=e.target.value;render();};
-document.getElementById("statusSelect").onchange=e=>{statusFilter=e.target.value;render();};
-document.getElementById("sortSelect").onchange=e=>{sortMode=e.target.value;render();};
-document.getElementById("datePicker").onchange=e=>loadExactDate(e.target.value);
+document.getElementById("search").oninput=()=>{render();saveCatalogState();};
+document.getElementById("ratingSelect").onchange=e=>{ratingFilter=e.target.value;render();saveCatalogState();};
+document.getElementById("statusSelect").onchange=e=>{statusFilter=e.target.value;render();saveCatalogState();};
+document.getElementById("sortSelect").onchange=e=>{sortMode=e.target.value;render();saveCatalogState();};
+document.getElementById("datePicker").onchange=async e=>{await loadExactDate(e.target.value);saveCatalogState();};
 document.getElementById("timeSelect").onchange=e=>{
   timeFilter=e.target.value;selectedDate="";document.getElementById("datePicker").value="";shown=master;
-  document.getElementById("modeLabel").textContent=timeFilter==="all"?"全部历史项目":timeFilter==="30"?"近1个月":"近"+timeFilter+"天";render();
+  document.getElementById("modeLabel").textContent=timeFilter==="all"?"全部历史项目":timeFilter==="30"?"近1个月":"近"+timeFilter+"天";render();saveCatalogState();
 };
 document.addEventListener("click",e=>{
   const a=e.target.closest('a[href*="notes.html"]');
@@ -217,13 +247,30 @@ function restoreNotesPosition(){
   sessionStorage.removeItem("notes-return-scroll");
   setTimeout(()=>window.scrollTo(0,Number(y)||0),80);
 }
-window.addEventListener("scroll",()=>{document.getElementById("toTop").style.display=scrollY>600?"block":"none";});
+let scrollSaveTimer=null;
+window.addEventListener("scroll",()=>{
+  document.getElementById("toTop").style.display=scrollY>600?"block":"none";
+  clearTimeout(scrollSaveTimer);scrollSaveTimer=setTimeout(saveCatalogState,120);
+},{passive:true});
+window.addEventListener("pagehide",saveCatalogState);
 document.getElementById("toTop").onclick=()=>window.scrollTo({top:0,behavior:"smooth"});
 
 Promise.all([fetch("./projects.json?v="+Date.now()).then(r=>r.json()),fetch("./daily/index.json?v="+Date.now()).then(r=>r.json())]).then(async([p,d])=>{
   master=p.projects||[];shown=master;dates=d.dates||[];
+  pendingRestore=readCatalogState();restoreCatalogControls(pendingRestore);
   const max=dates[0]?.date||new Date().toISOString().slice(0,10);document.getElementById("datePicker").max=max;
-  await buildAppearance();render();restoreNotesPosition();syncSummary();
+  await buildAppearance();
+  if(selectedDate&&dateSet.has(selectedDate)){
+    const data=await fetch("./daily/"+selectedDate+".json?v="+Date.now()).then(r=>r.json()).catch(()=>null);
+    if(data){
+      const by=Object.fromEntries(master.map(p=>[p.id,p]));
+      shown=(data.projects||[]).map(p=>({...p,tags:by[p.id]?.tags||[],has_notes:by[p.id]?.has_notes||false,rating:by[p.id]?.rating||null,status:by[p.id]?.status||"👀 观察"}));
+      document.getElementById("modeLabel").textContent=fmtDate(selectedDate)+" 当日 Top 10";
+    }
+  }else if(timeFilter!=="all"){
+    document.getElementById("modeLabel").textContent=timeFilter==="30"?"近1个月":"近"+timeFilter+"天";
+  }
+  render();restoreCatalogScroll(pendingRestore);restoreNotesPosition();syncSummary();
 }).catch(()=>{document.getElementById("count").textContent="加载失败";});
 </script>
 </body></html>
