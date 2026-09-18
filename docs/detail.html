@@ -27,4 +27,12 @@ Promise.all([fetch("./projects.json?v="+Date.now()).then(r=>r.json()),date?fetch
   if(!html)html=section("项目说明",x.description||"暂无详细分析。");
   document.getElementById("sections").innerHTML=html;
 }).catch(()=>{document.getElementById("name").textContent="项目加载失败";});
+document.addEventListener("click",e=>{
+  const a=e.target.closest('a[href*="notes.html"]');
+  if(!a)return;
+  sessionStorage.setItem("notes-return-url",location.href);
+  sessionStorage.setItem("notes-return-scroll",String(window.scrollY));
+});
+const __restoreY=sessionStorage.getItem("notes-return-scroll");
+if(__restoreY!==null){sessionStorage.removeItem("notes-return-scroll");setTimeout(()=>window.scrollTo(0,Number(__restoreY)||0),120);}
 </script></body></html>
