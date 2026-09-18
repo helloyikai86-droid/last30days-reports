@@ -26,6 +26,7 @@ Promise.all([fetch("./projects.json?v="+Date.now()).then(r=>r.json()),date?fetch
   for(const [t,k] of defs)html+=section(t,x[k]||fallback[k]);
   if(!html)html=section("项目说明",x.description||"暂无详细分析。");
   document.getElementById("sections").innerHTML=html;
+  restoreDetailPosition();
 }).catch(()=>{document.getElementById("name").textContent="项目加载失败";});
 document.addEventListener("click",e=>{
   const a=e.target.closest('a[href*="notes.html"]');
@@ -33,6 +34,10 @@ document.addEventListener("click",e=>{
   sessionStorage.setItem("notes-return-url",location.href);
   sessionStorage.setItem("notes-return-scroll",String(window.scrollY));
 });
-const __restoreY=sessionStorage.getItem("notes-return-scroll");
-if(__restoreY!==null){sessionStorage.removeItem("notes-return-scroll");setTimeout(()=>window.scrollTo(0,Number(__restoreY)||0),120);}
+function restoreDetailPosition(){
+  const y=sessionStorage.getItem("notes-return-scroll");
+  if(y===null)return;
+  sessionStorage.removeItem("notes-return-scroll");
+  requestAnimationFrame(()=>requestAnimationFrame(()=>window.scrollTo(0,Number(y)||0)));
+}
 </script></body></html>
