@@ -4,11 +4,16 @@
 :root{--bg:#f6f7fb;--card:#fff;--text:#15171c;--muted:#667085;--line:#e5e8ee;--shadow:0 8px 28px rgba(15,23,42,.07)}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}.wrap{max-width:860px;margin:auto;padding:18px 14px 70px}.back{display:inline-block;margin-bottom:14px;color:#374151;text-decoration:none}.hero,.section{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow);margin-bottom:12px}.hero h1{margin:0 0 8px;font-size:28px}.meta{font-size:13px;color:#475467;margin:5px 0}.desc{font-size:16px;line-height:1.8;color:#344054}.section h2{margin:0 0 10px;font-size:18px}.section div{white-space:pre-wrap;font-size:15px;line-height:1.85;color:#344054}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{display:inline-flex;text-decoration:none;border:1px solid var(--line);border-radius:10px;padding:10px 13px;color:#111827;background:#fff}.btn.primary{background:#111827;color:#fff;border-color:#111827}.hidden{display:none}@media(max-width:700px){.wrap{padding:12px 12px 64px}.hero,.section{padding:16px}.hero h1{font-size:24px}}
 </style></head><body><main class="wrap">
-<a class="back" href="./">← 返回项目目录</a>
+<a id="backCatalog" class="back" href="./">← 返回项目目录</a>
 <section class="hero"><h1 id="name">加载中…</h1><div id="meta" class="meta"></div><div id="desc" class="desc"></div><div class="actions" style="margin-top:14px"><a id="notes" class="btn primary">打开笔记</a><a id="github" class="btn" target="_blank">GitHub</a></div></section>
 <div id="sections"></div>
 </main><script>
 const qs=new URLSearchParams(location.search),id=qs.get("id"),date=qs.get("date");
+document.getElementById("backCatalog").onclick=e=>{
+  e.preventDefault();
+  const sameOrigin=document.referrer&&new URL(document.referrer).origin===location.origin;
+  if(sameOrigin&&history.length>1)history.back();else location.href="./";
+};
 const defs=[
 ["一句话看懂","overview"],["项目具体做什么","what_it_is"],["目标用户","target_users"],["核心问题与旧方案","problem"],["过去通常怎么解决","past_solution"],["核心机制 / 工作流程","how_it_works"],["技术架构 / 关键实现","architecture"],["为什么近期爆火","why_hot"],["核心差异化","difference"],["商业化路径","business"],["中国市场机会","china_opportunity"],["可借鉴场景","use_cases"],["风险与限制","risks"],["对我的启发","inspiration"],["明确判断","judgment"],["完整深度分析","full_analysis"]
 ];
