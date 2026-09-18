@@ -1,0 +1,312 @@
+{
+  "updated_at": "2026-09-18",
+  "projects": [
+    {
+      "id": "browser-skill",
+      "name": "BrowserSkill",
+      "url": "https://github.com/Tencent/BrowserSkill",
+      "description": "让 Codex、Claude Code 等 Agent 直接使用你已经登录的真实浏览器。",
+      "tags": [
+        "AI/Agent",
+        "开发工具",
+        "重点",
+        "新项目"
+      ],
+      "why": "补齐 Agent 的真实登录态、Cookie、人工接管和网页操作能力。",
+      "business": "企业后台 Agent、运营自动化、订单/客服流程、内容发布与 AI RPA 2.0。"
+    },
+    {
+      "id": "security-audit-skill",
+      "name": "security-audit-skill",
+      "url": "https://github.com/cloudflare/security-audit-skill",
+      "description": "Cloudflare 的结构化安全审计 Skill，让 Agent 的结论可验证、可复核。",
+      "tags": [
+        "AI/Agent",
+        "开发工具",
+        "重点"
+      ],
+      "why": "采用发现者/验证者分离、证据台账和程序校验，是高可靠 Agent 的典型架构。",
+      "business": "可审计的广告投放、财务审核、客服质检、代码安全与企业 OA Agent。"
+    },
+    {
+      "id": "openresearch",
+      "name": "OpenResearch",
+      "url": "https://github.com/alphaXiv/OpenResearch",
+      "description": "让 Coding Agent 自动提出假设、并行跑实验、保存证据并决定下一轮。",
+      "tags": [
+        "AI/Agent",
+        "开发工具",
+        "重点"
+      ],
+      "why": "把 AI 从“分析工具”升级成持续实验系统。",
+      "business": "手游买量实验 Agent、素材 Hook 测试、落地页 CRO、定价与活动实验。"
+    },
+    {
+      "id": "weknora",
+      "name": "WeKnora",
+      "url": "https://github.com/Tencent/WeKnora",
+      "description": "腾讯开源的企业知识平台：RAG、Agent、Wiki、知识图谱和长期记忆一体化。",
+      "tags": [
+        "企业AI",
+        "AI/Agent",
+        "重点"
+      ],
+      "why": "从“上传 PDF 问答”升级为完整企业 Knowledge OS。",
+      "business": "企微/钉钉知识 Agent、客服、内部助手、行业知识库和私有部署。"
+    },
+    {
+      "id": "open-code-review",
+      "name": "OpenCodeReview",
+      "url": "https://github.com/alibaba/open-code-review",
+      "description": "阿里开源的 AI 代码审查系统，把确定性工程与 LLM Agent 混合使用。",
+      "tags": [
+        "AI/Agent",
+        "开发工具",
+        "重点"
+      ],
+      "why": "能写死的流程不用 AI 猜，只让 Agent 做真正需要推理的部分。",
+      "business": "企业私有 Code Review、CI 插件、公司规则库、高可靠 Agent 工作流。"
+    },
+    {
+      "id": "voice-studio",
+      "name": "VoiceStudio",
+      "url": "https://github.com/debpalash/VoiceStudio",
+      "description": "本地声音克隆、TTS、ASR、视频配音和批处理的一体化声音工作台。",
+      "tags": [
+        "AIGC",
+        "重点"
+      ],
+      "why": "不是单模型 Demo，而是接近完整内容生产流水线。",
+      "business": "漫剧多角色配音、游戏角色声库、企业私有语音和批量短视频配音。"
+    },
+    {
+      "id": "colibri",
+      "name": "Colibri",
+      "url": "https://github.com/JustVugg/colibri",
+      "description": "用 SSD、RAM 和 VRAM 分层加载，让普通硬件运行超大 MoE 模型。",
+      "tags": [
+        "基础设施",
+        "AI/Agent",
+        "重点"
+      ],
+      "why": "可能改变本地超大模型部署的硬件成本结构。",
+      "business": "本地 AI Appliance、企业私有模型部署、GPU+SSD 混合推理方案。"
+    },
+    {
+      "id": "mirofish",
+      "name": "MiroFish",
+      "url": "https://github.com/666ghj/MiroFish",
+      "description": "用大量有记忆和身份的 Agent 构建虚拟社会，模拟群体反应和事件演化。",
+      "tags": [
+        "AI/Agent",
+        "增长/内容",
+        "重点"
+      ],
+      "why": "把问卷和焦点小组的一部分变成可低成本反复运行的虚拟人群实验。",
+      "business": "广告概念测试、虚拟消费者、舆情推演、游戏经济和活动模拟。"
+    },
+    {
+      "id": "agent-reach",
+      "name": "Agent-Reach",
+      "url": "https://github.com/Panniantong/Agent-Reach",
+      "description": "让 Agent 统一读取 Twitter、Reddit、YouTube、GitHub、B站、小红书等公开内容。",
+      "tags": [
+        "AI/Agent",
+        "增长/内容",
+        "重点"
+      ],
+      "why": "内容和研究 Agent 真正缺的往往不是模型，而是稳定跨平台读取能力。",
+      "business": "竞品素材雷达、品牌舆情、选题 Agent、跨平台内容情报系统。"
+    },
+    {
+      "id": "ruview",
+      "name": "RuView",
+      "url": "https://github.com/ruvnet/RuView",
+      "description": "利用普通 Wi‑Fi 信号感知人员存在、移动、呼吸等，不依赖摄像头。",
+      "tags": [
+        "基础设施",
+        "重点"
+      ],
+      "why": "把现有 Wi‑Fi 变成无摄像头空间感知基础设施。",
+      "business": "养老看护、智能家居、办公室 occupancy、酒店和 IoT 软硬件服务。"
+    },
+    {
+      "id": "deskcommcrm",
+      "name": "DeskcommCRM",
+      "url": "https://github.com/melgarafael/DeskcommCRM",
+      "description": "CRM + WhatsApp + AI 销售 Agent，把接待、跟进和销售漏斗放进一个系统。",
+      "tags": [
+        "企业AI",
+        "AI/Agent",
+        "重点"
+      ],
+      "why": "AI 不只是聊天，而是真正操作 CRM 并推进销售流程。",
+      "business": "企微私域 AI 销售 OS、部署费、托管费、行业模板和 AI 用量收费。"
+    },
+    {
+      "id": "mathmodelagent",
+      "name": "MathModelAgent",
+      "url": "https://github.com/jihe520/MathModelAgent",
+      "description": "把数学建模、代码实验和论文输出拆成可复用的专业 Agent Skills。",
+      "tags": [
+        "AI/Agent",
+        "开发工具"
+      ],
+      "why": "验证“专业岗位知识直接 Skill 化”而不是重造 Agent 平台。",
+      "business": "投放、SEO、投标、财务等行业 Skill Pack。"
+    },
+    {
+      "id": "omniget",
+      "name": "OmniGet",
+      "url": "https://github.com/tonhowtf/omniget",
+      "description": "把复杂下载、转码和学习工具封装成普通用户可用的跨平台桌面应用。",
+      "tags": [
+        "开发工具",
+        "增长/内容"
+      ],
+      "why": "典型的“强 CLI/开源能力 → 消费级 GUI”产品化案例。",
+      "business": "个人资料归档、课程学习库、本地内容管理；需遵守版权和平台条款。"
+    },
+    {
+      "id": "yue2",
+      "name": "YuE2",
+      "url": "https://github.com/multimodal-art-projection/YuE",
+      "description": "先生成可编辑旋律/和弦规划，再渲染完整歌曲的 AI 音乐系统。",
+      "tags": [
+        "AIGC",
+        "增长/内容"
+      ],
+      "why": "从黑盒文生音乐升级到可编辑、可迭代的音乐工程。",
+      "business": "游戏 BGM、短视频配乐、广告音乐模板、角色主题曲。"
+    },
+    {
+      "id": "claude-red",
+      "name": "Claude-Red",
+      "url": "https://github.com/SnailSploit/Claude-Red",
+      "description": "把大量安全专家方法封装成 Claude 可直接加载的结构化 Skills。",
+      "tags": [
+        "AI/Agent",
+        "开发工具"
+      ],
+      "why": "再次验证“专家经验 → Skill Library”的产品路线。",
+      "business": "可迁移成广告、SEO、客服、运营等行业 Skills。"
+    },
+    {
+      "id": "ever-gauzy",
+      "name": "Ever Gauzy",
+      "url": "https://github.com/ever-co/ever-gauzy",
+      "description": "开源 ERP、CRM、HRM、项目和工时管理一体化企业业务底座。",
+      "tags": [
+        "企业AI",
+        "开发工具"
+      ],
+      "why": "为企业 Agent 提供真实业务数据和可操作系统，不必从零重造 ERP/CRM。",
+      "business": "开源业务底座 + 企微/钉钉 + 行业 Agent + 私有部署。"
+    },
+    {
+      "id": "ecc",
+      "name": "ECC",
+      "url": "https://github.com/affaan-m/everything-claude-code",
+      "description": "围绕 Skills、Memory、安全和工作流增强多种 Coding Agent 的 Agent Harness。",
+      "tags": [
+        "AI/Agent",
+        "开发工具"
+      ],
+      "why": "展示 Agent 基础设施从开源工具走向托管和企业服务的路径。",
+      "business": "团队 Agent 工作台、Hosted Service、企业配置和咨询。"
+    },
+    {
+      "id": "agent-skills",
+      "name": "agent-skills",
+      "url": "https://github.com/addyosmani/agent-skills",
+      "description": "把生产级软件工程方法封装成 Codex、Claude Code 可执行的 Agent Skills。",
+      "tags": [
+        "AI/Agent",
+        "开发工具"
+      ],
+      "why": "Skill 正逐渐成为专家知识的软件分发单位。",
+      "business": "行业 Skill Pack、团队标准、工作流模板和培训内容。"
+    },
+    {
+      "id": "gods-eye-view",
+      "name": "God’s Eye View",
+      "url": "https://github.com/bilawalsidhu/gods-eye-view",
+      "description": "把航班、船舶、卫星、地震等公开实时数据放进可交互 3D 地球。",
+      "tags": [
+        "增长/内容",
+        "开发工具"
+      ],
+      "why": "证明公开数据经过强视觉包装和 AI 交互后可以变成高传播产品。",
+      "business": "商业情报地图、国际新闻可视化、航运/港口监控、数据型内容。"
+    },
+    {
+      "id": "tinycast",
+      "name": "Tinycast",
+      "url": "https://github.com/abue-ammar/tinycast",
+      "description": "轻量原生 macOS Launcher，主打低内存、快捷启动和剪贴板效率。",
+      "tags": [
+        "开发工具"
+      ],
+      "why": "用更轻、更原生的体验重新包装成熟效率工具需求。",
+      "business": "免费基础版 + Pro + 云同步 + 插件生态。"
+    },
+    {
+      "id": "brewui",
+      "name": "BrewUI",
+      "url": "https://github.com/Homebrew/BrewUI",
+      "description": "Homebrew 的原生 macOS GUI，让普通用户不用终端也能安装和管理软件。",
+      "tags": [
+        "开发工具"
+      ],
+      "why": "再次验证“开发者工具 + GUI + 安装/更新体验”可以扩大用户群。",
+      "business": "一键安装器、开源工具桌面化、技术服务和 Pro 体验。"
+    },
+    {
+      "id": "system-prompts-leaks",
+      "name": "system_prompts_leaks",
+      "url": "https://github.com/asgeirtj/system_prompts_leaks",
+      "description": "收集主流 AI 产品的系统提示词、工具配置和 Agent 行为规则。",
+      "tags": [
+        "AI/Agent",
+        "开发工具"
+      ],
+      "why": "适合横向研究不同 Agent 的规划、Tool Call、Context 和失败恢复方式。",
+      "business": "Agent Benchmark、产品拆解和企业 Agent 规范库。"
+    },
+    {
+      "id": "trading-agents",
+      "name": "TradingAgents",
+      "url": "https://github.com/TauricResearch/TradingAgents",
+      "description": "用分析师、研究员、交易员和风控等多个 Agent 模拟金融决策团队。",
+      "tags": [
+        "AI/Agent"
+      ],
+      "why": "其多角色制衡结构值得迁移到其他需要风险控制的决策场景。",
+      "business": "研究其“分析→策略→风控→执行”架构，不建议直接复制自动交易。"
+    },
+    {
+      "id": "pentagi",
+      "name": "Pentagi",
+      "url": "https://github.com/vxcontrol/pentagi",
+      "description": "面向授权安全测试的多 Agent 渗透测试编排系统。",
+      "tags": [
+        "AI/Agent",
+        "开发工具"
+      ],
+      "why": "展示专业复杂任务如何拆成多个 Agent 协作流程。",
+      "business": "企业私有安全 Agent、授权评估、合规检查与自动报告。"
+    },
+    {
+      "id": "douyin-downloader",
+      "name": "douyin-downloader",
+      "url": "https://github.com/jiji262/douyin-downloader",
+      "description": "抖音批量归档工具，支持增量下载、历史去重、转写、重试和通知。",
+      "tags": [
+        "增长/内容",
+        "开发工具"
+      ],
+      "why": "工程价值在长期稳定归档，而不只是单条解析。",
+      "business": "自有内容资产库、公开竞品素材研究、ASR/OCR/标签分析；需遵守平台和版权规则。"
+    }
+  ]
+}
