@@ -59,7 +59,7 @@
 let master=[],shown=[],dates=[],category="全部",ratingFilter="all",statusFilter="all",timeFilter="all",selectedDate="",sortMode="recent";
 const NOTES_API=(window.NOTES_API||"").replace(/\/$/,"");
 const appearance={}, firstSeen={}, lastSeen={}, latestDaily={}, dateSet=new Set();
-let privateUnlocked=false, privateNotes={},pendingRestore=null;
+let privateUnlocked=false, privateNotes={},privateStarred=new Set(),pendingRestore=null;
 const CATALOG_STATE_KEY="github-catalog-state-v2";
 function saveCatalogState(){
   const state={
@@ -99,6 +99,10 @@ categories.forEach((c,i)=>{
 });
 
 function detailUrl(p){return "./detail.html?id="+encodeURIComponent(p.id)+(selectedDate?"&date="+selectedDate:"");}
+function repoFullName(url){
+  const m=String(url||"").match(/^https:\/\/github\.com\/([^/?#]+)\/([^/?#]+?)(?:\.git)?(?:[/?#]|$)/i);
+  return m?(m[1]+"/"+m[2]).toLowerCase():"";
+}
 function noteUrl(p){return "./notes.html?id="+encodeURIComponent(p.id);}
 function parseStars(v){if(!v)return 0;const m=String(v).replace(/,/g,"").match(/([+-]?\d+(?:\.\d+)?)(k)?/i);if(!m)return 0;return Number(m[1])*(m[2]?1000:1);}
 function fmtDate(s){if(!s||s==="历史项目")return "更早项目";const d=new Date(s+"T00:00:00");return isNaN(d)?s:(d.getMonth()+1)+"月"+d.getDate()+"日";}
@@ -147,7 +151,7 @@ function getPrivateKey(){
 }
 function addPrivateChips(){
   if(document.getElementById("privateChipNotes"))return;
-  const defs=[["有笔记","privateChipNotes"],["已评分","privateChipRated"]];
+  const defs=[["有笔记","privateChipNotes"],["已评分","privateChipRated"],["已 Star","privateChipStarred"]];
   defs.forEach((it,idx)=>{
     const b=document.createElement("button");
     b.className="chip";b.id=it[1];b.textContent=it[0];
@@ -159,15 +163,23 @@ async function unlockPrivate(){
   if(!NOTES_API)return;
   const key=getPrivateKey();if(!key)return;
   try{
-    const r=await fetch(NOTES_API+"/notes",{headers:{"X-Notes-Key":key}});
-    if(r.status===401){forgetPrivateKey();alert("NOTES_KEY 不正确");return;}
-    if(!r.ok)throw new Error("HTTP "+r.status);
-    const out=await r.json();
-    privateNotes=out.notes||{};privateUnlocked=true;
+    const headers={"X-Notes-Key":key};
+    const [nr,sr]=await Promise.all([
+      fetch(NOTES_API+"/notes",{headers}),
+      fetch(NOTES_API+"/starred",{headers})
+    ]);
+    if(nr.status===401||sr.status===401){forgetPrivateKey();alert("NOTES_KEY 不正确");return;}
+    if(!nr.ok)throw new Error("笔记 HTTP "+nr.status);
+    if(!sr.ok)throw new Error("Star 状态 HTTP "+sr.status);
+    const out=await nr.json(),starOut=await sr.json();
+    privateNotes=out.notes||{};
+    privateStarred=new Set((starOut.starred||[]).map(x=>String(x).toLowerCase()));
+    privateUnlocked=true;
     for(const p of master){
       const n=privateNotes[p.id];
       if(n)Object.assign(p,{rating:n.rating,status:n.status,has_notes:n.has_notes});
       else Object.assign(p,{rating:null,status:"👀 观察",has_notes:false});
+      p.starred=privateStarred.has(repoFullName(p.url));
     }
     addPrivateChips();
     document.getElementById("ratingSelect").style.display="";
@@ -181,13 +193,14 @@ async function unlockPrivate(){
 }
 function lockPrivate(){
   forgetPrivateKey();
-  privateUnlocked=false;privateNotes={};
-  for(const p of master){delete p.rating;delete p.status;delete p.has_notes;}
+  privateUnlocked=false;privateNotes={};privateStarred=new Set();
+  for(const p of master){delete p.rating;delete p.status;delete p.has_notes;delete p.starred;}
   document.getElementById("ratingSelect").style.display="none";
   document.getElementById("statusSelect").style.display="none";
   document.getElementById("privateChipNotes")?.remove();
   document.getElementById("privateChipRated")?.remove();
-  if(category==="有笔记"||category==="已评分")category="全部";
+  document.getElementById("privateChipStarred")?.remove();
+  if(category==="有笔记"||category==="已评分"||category==="已 Star")category="全部";
   ratingFilter="all";statusFilter="all";
   document.getElementById("ratingSelect").value="all";
   document.getElementById("statusSelect").value="all";
@@ -218,7 +231,7 @@ function render(){
   const q=document.getElementById("search").value.trim().toLowerCase();
   let list=shown.filter(p=>{
     const hay=[p.name,p.description,(p.tags||[]).join(" "),p.target_users,p.problem,p.why_hot,p.why,p.difference,p.business,p.judgment,p.full_analysis].join(" ").toLowerCase();
-    const cat=category==="全部"||(category==="有笔记"?privateUnlocked&&!!p.has_notes:category==="已评分"?privateUnlocked&&!!p.rating:(p.tags||[]).includes(category));
+    const cat=category==="全部"||(category==="有笔记"?privateUnlocked&&!!p.has_notes:category==="已评分"?privateUnlocked&&!!p.rating:category==="已 Star"?privateUnlocked&&!!p.starred:(p.tags||[]).includes(category));
     const rate=ratingFilter==="all"||(privateUnlocked&&(ratingFilter==="rated"?!!p.rating:ratingFilter==="unrated"?!p.rating:String(p.rating)===ratingFilter));
     const stat=statusFilter==="all"||(privateUnlocked&&p.status===statusFilter);
     const last=lastSeen[p.id]||p.latest_analysis_date||"";
@@ -247,7 +260,8 @@ function render(){
     const daily=dailyData.stars_today?'<div class="daily">'+rank+dailyData.stars_today+'　总 Star '+(dailyData.total_stars||p.total_stars||"—")+'　'+(dailyData.language||p.language||"")+'</div>':"";
     const rating=privateUnlocked&&p.rating?'<span class="tag hot">我的评分 '+"★".repeat(p.rating)+"☆".repeat(5-p.rating)+'</span>':"";
     const note=privateUnlocked&&p.has_notes?'<span class="tag">已做笔记</span>':"";
-    el.innerHTML='<div class="name">'+p.name+'</div>'+daily+'<div class="desc">'+(p.description||"")+'</div><div class="tags">'+rating+note+tags+'</div><div class="actions"><a class="btn detail" href="'+detailUrl(p)+'">详细分析</a><a class="btn notes '+(privateUnlocked&&p.has_notes?"has":"")+'" href="'+noteUrl(p)+'">'+(privateUnlocked&&p.has_notes?"笔记 ✓":"笔记")+'</a><a class="btn" href="'+p.url+'" target="_blank" rel="noopener">GitHub</a></div>';
+    const starred=privateUnlocked&&p.starred?'<span class="tag hot">★ 已 Star</span>':"";
+    el.innerHTML='<div class="name">'+p.name+'</div>'+daily+'<div class="desc">'+(p.description||"")+'</div><div class="tags">'+starred+rating+note+tags+'</div><div class="actions"><a class="btn detail" href="'+detailUrl(p)+'">详细分析</a><a class="btn notes '+(privateUnlocked&&p.has_notes?"has":"")+'" href="'+noteUrl(p)+'">'+(privateUnlocked&&p.has_notes?"笔记 ✓":"笔记")+'</a><a class="btn" href="'+p.url+'" target="_blank" rel="noopener">GitHub</a></div>';
     el.onclick=e=>{if(e.target.closest("a,button,input,select,textarea"))return;saveCatalogState();location.href=detailUrl(p);};
     el.querySelectorAll('a[href*="detail.html"],a[href*="notes.html"]').forEach(a=>a.addEventListener("click",saveCatalogState));
     grid.appendChild(el);
