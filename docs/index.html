@@ -168,10 +168,11 @@ async function unlockPrivate(){
       fetch(NOTES_API+"/notes",{headers}),
       fetch(NOTES_API+"/starred",{headers})
     ]);
-    if(nr.status===401||sr.status===401){forgetPrivateKey();alert("NOTES_KEY 不正确");return;}
+    if(nr.status===401){forgetPrivateKey();alert("NOTES_KEY 不正确");return;}
     if(!nr.ok)throw new Error("笔记 HTTP "+nr.status);
-    if(!sr.ok)throw new Error("Star 状态 HTTP "+sr.status);
-    const out=await nr.json(),starOut=await sr.json();
+    const out=await nr.json();
+    let starOut={starred:[]};
+    if(sr.ok)starOut=await sr.json();
     privateNotes=out.notes||{};
     privateStarred=new Set((starOut.starred||[]).map(x=>String(x).toLowerCase()));
     privateUnlocked=true;
