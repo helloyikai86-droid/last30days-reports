@@ -24,7 +24,8 @@ Promise.all([fetch("./projects.json?v="+Date.now()).then(r=>r.json()),date?fetch
   const x={...base};
   if(day){
     for(const [k,v] of Object.entries(day)){
-      const empty=v===null||v===undefined||v===""||(Array.isArray(v)&&v.length===0);
+      const placeholder=typeof v==="string"&&(v.startsWith("该项目曾出现在")||v.startsWith("历史日报恢复：")||v.startsWith("历史日报恢复记录："));
+      const empty=v===null||v===undefined||v===""||placeholder||(Array.isArray(v)&&v.length===0);
       if(!empty)x[k]=v;
     }
   }
