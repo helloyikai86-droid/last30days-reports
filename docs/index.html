@@ -1,256 +1,136 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<meta name="theme-color" content="#f6f7fb"/>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>GitHub 机会目录</title>
 <style>
-:root{--bg:#f6f7fb;--card:#fff;--text:#16181d;--muted:#6b7280;--line:#e6e9ef;--blue:#2563eb;--blueSoft:#eaf2ff;--shadow:0 6px 22px rgba(15,23,42,.06)}
+:root{--bg:#f6f7fb;--card:#fff;--text:#15171c;--muted:#687080;--line:#e5e8ee;--blue:#2563eb;--blueSoft:#eaf2ff;--green:#087f5b;--greenSoft:#e9fbf4;--shadow:0 7px 24px rgba(15,23,42,.06)}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
-.wrap{max-width:1020px;margin:auto;padding:16px 14px 80px}.hero h1{margin:2px 0 6px;font-size:28px}.hero p{margin:0;color:var(--muted);font-size:14px;line-height:1.65}
-.toolbar{position:sticky;top:0;z-index:20;background:rgba(246,247,251,.94);backdrop-filter:blur(14px);padding:12px 0}
-.row{display:grid;grid-template-columns:1fr 180px;gap:10px}.search,.date{height:46px;border:1px solid var(--line);background:#fff;border-radius:14px;padding:0 14px;font-size:15px;box-shadow:var(--shadow);outline:none}
-.chips{display:flex;gap:8px;overflow:auto;padding-top:10px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;white-space:nowrap;font-size:13px;color:#4b5563}.chip.active{background:#111827;color:#fff;border-color:#111827}
-.meta{display:flex;justify-content:space-between;margin:13px 2px 10px;color:var(--muted);font-size:13px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow);display:flex;flex-direction:column}.top{display:flex;gap:10px;align-items:flex-start}.name{font-weight:760;font-size:18px;line-height:1.3;flex:1}.follow{border:0;background:var(--blueSoft);color:var(--blue);border-radius:10px;padding:7px 10px;font-size:12px}.follow.on{background:#111827;color:#fff}
-.daily{font-size:12px;color:#374151;margin:6px 0 0;font-weight:650}.desc{font-size:14px;line-height:1.65;color:#374151;margin:9px 0 12px}.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}.tag{font-size:11px;padding:5px 8px;border-radius:999px;background:#f1f3f6;color:#596273}.tag.hot{background:#fff0f0;color:#b42318}
-.actions{display:flex;gap:8px;margin-top:12px}.btn{border:1px solid var(--line);background:#fff;color:#111827;border-radius:10px;padding:9px 11px;font-size:13px;text-decoration:none;cursor:pointer}.btn.primary{background:#111827;color:#fff;border-color:#111827}
-.empty{text-align:center;color:var(--muted);padding:46px}
-dialog{border:0;border-radius:20px;padding:0;width:min(760px,calc(100% - 24px));max-height:88vh;box-shadow:0 24px 80px rgba(0,0,0,.25)}dialog::backdrop{background:rgba(15,23,42,.5);backdrop-filter:blur(2px)}
-.modal{padding:22px;overflow:auto;max-height:88vh}.modal h2{margin:0 0 7px;font-size:25px}.summary{color:#374151;font-size:14px;line-height:1.7}.kv{background:#f7f8fa;border:1px solid var(--line);border-radius:14px;padding:13px 14px;margin:10px 0}.kv b{display:block;margin-bottom:5px}
-.ratingBox{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin:10px 0}.ratingTitle{font-weight:700;margin-bottom:8px}.stars{display:flex;gap:6px;flex-wrap:wrap}.starBtn{font-size:26px;line-height:1;border:0;background:transparent;color:#c7ccd6;cursor:pointer;padding:2px}.starBtn.on{color:#f59e0b}.mineHint{font-size:12px;color:var(--muted);margin-top:8px}.editor{display:grid;gap:10px;margin-top:10px}.editor select,.editor textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:10px 12px;font:inherit;background:#fff}.editor textarea{min-height:90px;resize:vertical}.saveBtn{width:100%}.modalActions{display:flex;gap:8px;position:sticky;bottom:-22px;background:linear-gradient(transparent,#fff 26%);padding:22px 0 2px}.modalActions .btn{flex:1;text-align:center}
-.note{background:#fff8e6;border:1px solid #f3e3b5;border-radius:13px;padding:10px 12px;font-size:13px;color:#6b5a20;margin:10px 0}.footer{margin-top:30px;text-align:center;color:var(--muted);font-size:12px;line-height:1.7}
-@media(max-width:700px){.wrap{padding:12px 12px 72px}.hero h1{font-size:24px}.row{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.date{width:100%}.modal{padding:18px}}
+.wrap{max-width:1060px;margin:auto;padding:18px 14px 80px}.hero h1{margin:0 0 7px;font-size:29px}.hero p{margin:0;color:var(--muted);font-size:14px;line-height:1.65}
+.toolbar{position:sticky;top:0;z-index:10;background:rgba(246,247,251,.94);backdrop-filter:blur(14px);padding:12px 0}
+.filters{display:grid;grid-template-columns:1fr 180px 180px;gap:10px}.control{height:46px;border:1px solid var(--line);background:#fff;border-radius:14px;padding:0 13px;font-size:14px;box-shadow:var(--shadow);outline:none}
+.chips{display:flex;gap:8px;overflow:auto;padding:10px 0 1px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;white-space:nowrap;color:#4b5563;cursor:pointer}.chip.active{background:#111827;color:#fff;border-color:#111827}
+.meta{display:flex;justify-content:space-between;color:var(--muted);font-size:13px;margin:14px 2px 10px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow);cursor:pointer;transition:.15s;display:flex;flex-direction:column;min-height:190px}.card:hover{transform:translateY(-1px);box-shadow:0 10px 28px rgba(15,23,42,.09)}
+.name{font-size:18px;font-weight:760;line-height:1.3}.daily{font-size:12px;font-weight:650;color:#374151;margin-top:7px}.desc{font-size:14px;line-height:1.65;color:#374151;margin:10px 0 12px}.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto}.tag{font-size:11px;padding:5px 8px;border-radius:999px;background:#f1f3f6;color:#596273}.tag.hot{background:#fff0f0;color:#b42318}.actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:#fff;color:#111827;border-radius:10px;padding:9px 11px;font-size:13px;text-decoration:none;cursor:pointer}.btn.detail{background:#111827;color:#fff;border-color:#111827}.btn.notes.has{background:var(--greenSoft);color:var(--green);border-color:#b7ead7;font-weight:700}.empty{text-align:center;color:var(--muted);padding:46px}.footer{text-align:center;color:var(--muted);font-size:12px;margin-top:28px}
+@media(max-width:760px){.wrap{padding:12px 12px 70px}.hero h1{font-size:24px}.filters{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.card{min-height:auto}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="hero">
+  <header class="hero">
     <h1>GitHub 机会目录</h1>
-    <p>可以按日期回看当天 Top 10，也可以看长期项目库。点“详细分析 / 笔记”即可在网页内查看、打分和写备注，手机与电脑自动同步。</p>
-  </div>
+    <p>以后这里作为主要阅读入口：项目卡片看摘要，详细分析与个人笔记分开；支持按日期、时间范围、评分和分类筛选。</p>
+  </header>
   <div class="toolbar">
-    <div class="row">
-      <input id="search" class="search" placeholder="搜索项目、关键词，例如：浏览器 / Agent / 配音"/>
-      <select id="dateSelect" class="date"><option value="all">全部历史项目</option></select>
+    <div class="filters">
+      <input id="search" class="control" placeholder="搜索项目、关键词，例如：Agent / 配音 / 浏览器">
+      <select id="dateSelect" class="control"><option value="all">全部历史项目</option></select>
+      <select id="timeSelect" class="control">
+        <option value="all">全部时间</option><option value="3">近3天</option><option value="7">近7天</option><option value="15">近15天</option><option value="30">近1个月</option>
+      </select>
     </div>
-    <div class="row" style="margin-top:10px;grid-template-columns:1fr 180px">
+    <div class="filters" style="margin-top:10px;grid-template-columns:1fr 180px 180px">
       <div></div>
-      <select id="ratingSelect" class="date">
-        <option value="all">全部评分</option>
-        <option value="5">★★★★★ 5分</option>
-        <option value="4">★★★★☆ 4分</option>
-        <option value="3">★★★☆☆ 3分</option>
-        <option value="2">★★☆☆☆ 2分</option>
-        <option value="1">★☆☆☆☆ 1分</option>
-        <option value="unrated">未评分</option>
+      <select id="ratingSelect" class="control">
+        <option value="all">全部评分</option><option value="5">★★★★★ 5分</option><option value="4">★★★★☆ 4分</option><option value="3">★★★☆☆ 3分</option><option value="2">★★☆☆☆ 2分</option><option value="1">★☆☆☆☆ 1分</option><option value="unrated">未评分</option>
+      </select>
+      <select id="statusSelect" class="control">
+        <option value="all">全部状态</option><option value="👀 观察">👀 观察</option><option value="💡 有启发">💡 有启发</option><option value="🧪 想验证">🧪 想验证</option><option value="🚀 准备做">🚀 准备做</option><option value="✅ 已研究">✅ 已研究</option><option value="⏸ 暂缓">⏸ 暂缓</option>
       </select>
     </div>
     <div id="chips" class="chips"></div>
   </div>
-  <div id="dayNote" class="note" hidden></div>
   <div class="meta"><span id="count">加载中…</span><span id="modeLabel">全部历史项目</span></div>
-  <div id="grid" class="grid"></div>
-  <div id="empty" class="empty" hidden>没有符合条件的项目。</div>
-  <div class="footer">评分和笔记通过云端接口同步到长期存储，手机和电脑看到同一份内容。历史日报和项目目录由每日任务持续更新。</div>
+  <div id="grid" class="grid"></div><div id="empty" class="empty" hidden>没有符合条件的项目。</div>
+  <div class="footer">点击卡片空白区域直接进入详细分析；按钮区域保持各自功能。</div>
 </div>
-
-<dialog id="dialog">
-  <div class="modal">
-    <h2 id="mName"></h2>
-    <div id="mDaily" class="daily"></div>
-    <p id="mDesc" class="summary"></p>
-    <div class="kv"><b>目标用户</b><span id="mUsers"></span></div>
-    <div class="kv"><b>它解决什么问题</b><span id="mProblem"></span></div>
-    <div class="kv"><b>为什么近期增长</b><span id="mHot"></span></div>
-    <div class="kv"><b>核心差异化</b><span id="mDiff"></span></div>
-    <div class="kv"><b>商业机会 / 中国市场</b><span id="mBiz"></span></div>
-    <div class="kv"><b>明确判断</b><span id="mJudge"></span></div>
-    <div class="kv"><b>我的记录</b><span id="mMine"></span></div>
-    <div class="ratingBox">
-      <div class="ratingTitle">我的评分</div>
-      <div id="mStars" class="stars"></div>
-      <div class="mineHint">评分会保存到你的项目笔记，并用于首页 1～5 分筛选。</div>
-      <div class="editor">
-        <select id="mStatus">
-          <option value="👀 观察">👀 观察</option>
-          <option value="💡 有启发">💡 有启发</option>
-          <option value="🧪 想验证">🧪 想验证</option>
-          <option value="🚀 准备做">🚀 准备做</option>
-          <option value="✅ 已研究">✅ 已研究</option>
-          <option value="⏸ 暂缓">⏸ 暂缓</option>
-        </select>
-        <textarea id="mNote" placeholder="我的备注：这个项目给我的启发、可借鉴点、风险……"></textarea>
-        <textarea id="mNext" placeholder="下一步行动：例如让 Codex 跑一下、研究竞品、做 Demo……"></textarea>
-        <button id="mSave" class="btn primary saveBtn" type="button">保存到云端</button>
-        <div id="mSaveMsg" class="mineHint"></div>
-      </div>
-    </div>
-    <div class="modalActions">
-      <a id="mGitHub" class="btn" target="_blank" rel="noopener">打开 GitHub</a>
-      <button class="btn" onclick="document.getElementById('dialog').close()">关闭</button>
-    </div>
-  </div>
-</dialog>
-
 <script src="./config.js"></script>
 <script>
-let master=[],shown=[],category="全部",ratingFilter="all",currentProject=null;
+let master=[],shown=[],dates=[],category="全部",ratingFilter="all",statusFilter="all",timeFilter="all",selectedDate="all";
 const NOTES_API=(window.NOTES_API||"").replace(/\/$/,"");
 let notesKey=sessionStorage.getItem("github-opportunity-notes-key")||"";
-function ensureNotesKey(){
-  if(notesKey) return notesKey;
-  const v=prompt("请输入项目笔记访问密钥（每台设备本次会话输入一次）")||"";
-  if(v){notesKey=v;sessionStorage.setItem("github-opportunity-notes-key",v);}
-  return notesKey;
-}
-async function notesFetch(path, options={}){
-  if(!NOTES_API) throw new Error("云端接口尚未部署");
-  const key=ensureNotesKey(); if(!key) throw new Error("未输入访问密钥");
-  const r=await fetch(NOTES_API+path,{...options,headers:{"Content-Type":"application/json","X-Notes-Key":key,...(options.headers||{})}});
-  if(r.status===401){sessionStorage.removeItem("github-opportunity-notes-key");notesKey="";throw new Error("访问密钥不正确");}
-  if(!r.ok) throw new Error("HTTP "+r.status);
-  return r.json();
-}
+const recentSets={};
+
 const categories=["全部","有笔记","AI/Agent","企业AI","AIGC","增长/内容","开发工具","基础设施"];
 const chips=document.getElementById("chips");
-categories.forEach((c,i)=>{
-  const b=document.createElement("button");b.className="chip"+(i===0?" active":"");b.textContent=c;
-  b.onclick=()=>{category=c;[...chips.children].forEach(x=>x.classList.toggle("active",x===b));render();};
-  chips.appendChild(b);
-});
-async function syncAllNotes(){
-  if(!NOTES_API) return;
+categories.forEach((c,i)=>{const b=document.createElement("button");b.className="chip"+(i===0?" active":"");b.textContent=c;b.onclick=()=>{category=c;[...chips.children].forEach(x=>x.classList.toggle("active",x===b));render();};chips.appendChild(b);});
+
+function detailUrl(p){return "./detail.html?id="+encodeURIComponent(p.id)+(selectedDate!=="all"?"&date="+selectedDate:"");}
+function noteUrl(p){return "./notes.html?id="+encodeURIComponent(p.id);}
+function daysAgo(dateStr){const d=new Date(dateStr+"T00:00:00");const n=new Date();n.setHours(0,0,0,0);return Math.floor((n-d)/86400000);}
+async function buildRecentSets(){
+  for(const n of [3,7,15,30]) recentSets[n]=new Set();
+  const usable=dates.filter(d=>daysAgo(d.date)>=0&&daysAgo(d.date)<30);
+  await Promise.all(usable.map(async d=>{
+    try{
+      const data=await fetch("./daily/"+d.date+".json?v="+Date.now()).then(r=>r.json());
+      for(const p of (data.projects||[])){
+        const age=daysAgo(d.date);
+        for(const n of [3,7,15,30]) if(age<n) recentSets[n].add(p.id);
+      }
+    }catch(e){}
+  }));
+}
+async function syncSummary(){
+  if(!NOTES_API)return;
   try{
-    const out=await notesFetch("/notes");
-    const byIssue=out.notes||{};
-    for(const p of master){
-      const n=byIssue[p.notes_issue];
-      if(n) Object.assign(p,{rating:n.rating,has_notes:n.has_notes,status:n.status,user_note:n.note||"",next_action:n.next_action||""});
+    let r=await fetch(NOTES_API+"/summary");
+    let out;
+    if(r.ok) out=await r.json();
+    else if(notesKey){
+      r=await fetch(NOTES_API+"/notes",{headers:{"X-Notes-Key":notesKey}});
+      if(r.ok) out=await r.json();
     }
-    if(document.getElementById("dateSelect").value==="all") shown=master;
+    const by=(out&&out.notes)||{};
+    for(const p of master){const n=by[p.notes_issue];if(n)Object.assign(p,{rating:n.rating,status:n.status,has_notes:n.has_notes});}
     render();
-  }catch(e){
-    // Do not block public catalog reading if auth/API is unavailable.
-  }
-}
-function val(v){return v||"—";}
-function drawStars(p){
-  const box=document.getElementById("mStars"); box.innerHTML="";
-  for(let i=1;i<=5;i++){
-    const b=document.createElement("button");
-    b.type="button"; b.className="starBtn"+((p.rating||0)>=i?" on":""); b.textContent="★"; b.title=i+" 分";
-    b.onclick=()=>saveProjectData({rating:i});
-    box.appendChild(b);
-  }
-}
-async function saveProjectData(patch){
-  if(!currentProject) return;
-  const msg=document.getElementById("mSaveMsg");
-  if(!currentProject.notes_issue){msg.textContent="这个项目还没有笔记记录。";return;}
-  const payload={
-    rating:patch.rating ?? currentProject.rating ?? null,
-    status:patch.status ?? document.getElementById("mStatus").value,
-    note:patch.note ?? document.getElementById("mNote").value.trim(),
-    next_action:patch.next_action ?? document.getElementById("mNext").value.trim()
-  };
-  msg.textContent="保存中…";
-  try{
-    const out=await notesFetch("/notes/"+currentProject.notes_issue,{method:"POST",body:JSON.stringify(payload)});
-    currentProject.rating=out.rating;
-    currentProject.has_notes=out.has_notes;
-    currentProject.status=out.status;
-    currentProject.user_note=out.note||"";
-    currentProject.next_action=out.next_action||"";
-    const base=master.find(x=>x.id===currentProject.id);
-    if(base) Object.assign(base,{rating:out.rating,has_notes:out.has_notes,status:out.status,user_note:out.note||"",next_action:out.next_action||""});
-    drawStars(currentProject);
-    document.getElementById("mMine").textContent=(out.rating?("评分："+"★".repeat(out.rating)+"☆".repeat(5-out.rating)):"未评分")+(out.has_notes?" ｜ 已做笔记":"");
-    msg.textContent="已保存到云端，手机和电脑会同步。";
-    render();
-  }catch(e){msg.textContent="保存失败："+e.message;}
-}
-function openDetail(p){
-  currentProject=p;
-  document.getElementById("mName").textContent=(p.rank?("#"+p.rank+" "):"")+p.name;
-  document.getElementById("mDaily").textContent=p.stars_today?`${p.stars_today}｜总 Star ${p.total_stars||"—"}｜${p.language||"—"}`:"";
-  document.getElementById("mDesc").textContent=val(p.description);
-  document.getElementById("mUsers").textContent=val(p.target_users);
-  document.getElementById("mProblem").textContent=val(p.problem);
-  document.getElementById("mHot").textContent=val(p.why_hot||p.why);
-  document.getElementById("mDiff").textContent=val(p.difference);
-  document.getElementById("mBiz").textContent=val(p.business);
-  document.getElementById("mJudge").textContent=val(p.judgment);
-  const mine=[]; if(p.rating) mine.push("评分："+"★".repeat(p.rating)+"☆".repeat(5-p.rating)); if(p.has_notes) mine.push("已做笔记"); document.getElementById("mMine").textContent=mine.length?mine.join(" ｜ "):"未评分 / 暂无笔记";
-  drawStars(p);
-  document.getElementById("mStatus").value=p.status||"👀 观察";
-  document.getElementById("mNote").value=p.user_note||"";
-  document.getElementById("mNext").value=p.next_action||"";
-  document.getElementById("mSaveMsg").textContent=NOTES_API?"正在读取云端笔记…":"云端保存接口尚未部署。";
-  if(NOTES_API && p.notes_issue){
-    notesFetch("/notes/"+p.notes_issue).then(out=>{
-      if(currentProject!==p) return;
-      p.rating=out.rating;p.has_notes=out.has_notes;p.status=out.status;p.user_note=out.note||"";p.next_action=out.next_action||"";
-      const base=master.find(x=>x.id===p.id); if(base) Object.assign(base,{rating:p.rating,has_notes:p.has_notes,status:p.status,user_note:p.user_note,next_action:p.next_action});
-      drawStars(p);
-      document.getElementById("mStatus").value=p.status||"👀 观察";
-      document.getElementById("mNote").value=p.user_note||"";
-      document.getElementById("mNext").value=p.next_action||"";
-      const mine=[];if(p.rating)mine.push("评分："+"★".repeat(p.rating)+"☆".repeat(5-p.rating));if(p.has_notes)mine.push("已做笔记");
-      document.getElementById("mMine").textContent=mine.length?mine.join(" ｜ "):"未评分 / 暂无笔记";
-      document.getElementById("mSaveMsg").textContent="云端笔记已同步。";
-      render();
-    }).catch(e=>{document.getElementById("mSaveMsg").textContent="读取云端笔记失败："+e.message;});
-  }
-  document.getElementById("mGitHub").href=p.url;
-  document.getElementById("dialog").showModal();
+  }catch(e){}
 }
 function render(){
   const q=document.getElementById("search").value.trim().toLowerCase();
   const list=shown.filter(p=>{
-    const hay=[p.name,p.description,(p.tags||[]).join(" "),p.target_users,p.problem,p.why_hot,p.why,p.difference,p.business,p.judgment].join(" ").toLowerCase();
-    const categoryOk=category==="全部" || (category==="有笔记" ? !!p.has_notes : (p.tags||[]).includes(category));
-    const ratingOk=ratingFilter==="all" || (ratingFilter==="unrated" ? !p.rating : String(p.rating)===ratingFilter);
-    return (!q||hay.includes(q))&&categoryOk&&ratingOk;
+    const hay=[p.name,p.description,(p.tags||[]).join(" "),p.target_users,p.problem,p.why_hot,p.why,p.difference,p.business,p.judgment,p.full_analysis].join(" ").toLowerCase();
+    const cat=category==="全部"||(category==="有笔记"?!!p.has_notes:(p.tags||[]).includes(category));
+    const rate=ratingFilter==="all"||(ratingFilter==="unrated"?!p.rating:String(p.rating)===ratingFilter);
+    const stat=statusFilter==="all"||p.status===statusFilter;
+    const time=timeFilter==="all"||recentSets[timeFilter]?.has(p.id);
+    return (!q||hay.includes(q))&&cat&&rate&&stat&&time;
   });
-  document.getElementById("count").textContent=`${list.length} 个项目`;
-  const grid=document.getElementById("grid");grid.innerHTML="";document.getElementById("empty").hidden=list.length>0;
-  list.forEach(p=>{
+  document.getElementById("count").textContent=list.length+" 个项目";
+  document.getElementById("empty").hidden=list.length>0;
+  const grid=document.getElementById("grid");grid.innerHTML="";
+  for(const p of list){
     const el=document.createElement("article");el.className="card";
-    const tags=(p.tags||[]).map(t=>`<span class="tag ${t==="重点"?"hot":""}">${t}</span>`).join("");
-    const daily=p.stars_today?`<div class="daily">#${p.rank}　${p.stars_today}　总 Star ${p.total_stars||"—"}　${p.language||""}</div>`:"";
-    const rating=p.rating?`<span class="tag hot">我的评分 ${"★".repeat(p.rating)}${"☆".repeat(5-p.rating)}</span>`:"";
-    const noteTag=p.has_notes?`<span class="tag">已做笔记</span>`:"";
-    el.innerHTML=`<div class="top"><div class="name">${p.name}</div></div>${daily}<div class="desc">${p.description||""}</div><div class="tags">${rating}${noteTag}${tags}</div><div class="actions"><button class="btn detail">详细分析 / 笔记</button><a class="btn" href="${p.url}" target="_blank" rel="noopener">GitHub</a></div>`;
-    el.querySelector(".detail").onclick=()=>openDetail(p);grid.appendChild(el);
-  });
-}
-async function loadAll(){
-  shown=master;document.getElementById("modeLabel").textContent="全部历史项目";
-  document.getElementById("dayNote").hidden=true;render();
+    const tags=(p.tags||[]).map(t=>'<span class="tag '+(t==="重点"?"hot":"")+'">'+t+'</span>').join("");
+    const rank=p.rank?"#"+p.rank+"　":"";
+    const daily=p.stars_today?'<div class="daily">'+rank+p.stars_today+'　总 Star '+(p.total_stars||"—")+'　'+(p.language||"")+'</div>':"";
+    const rating=p.rating?'<span class="tag hot">我的评分 '+"★".repeat(p.rating)+"☆".repeat(5-p.rating)+'</span>':"";
+    const note=p.has_notes?'<span class="tag">已做笔记</span>':"";
+    el.innerHTML='<div class="name">'+p.name+'</div>'+daily+'<div class="desc">'+(p.description||"")+'</div><div class="tags">'+rating+note+tags+'</div><div class="actions"><a class="btn detail" href="'+detailUrl(p)+'">详细分析</a><a class="btn notes '+(p.has_notes?"has":"")+'" href="'+noteUrl(p)+'">'+(p.has_notes?"笔记 ✓":"笔记")+'</a><a class="btn" href="'+p.url+'" target="_blank" rel="noopener">GitHub</a></div>';
+    el.onclick=e=>{if(e.target.closest("a,button,input,select,textarea"))return;location.href=detailUrl(p);};
+    grid.appendChild(el);
+  }
 }
 async function loadDate(date){
+  selectedDate=date;timeFilter="all";document.getElementById("timeSelect").value="all";
+  if(date==="all"){shown=master;document.getElementById("modeLabel").textContent="全部历史项目";render();return;}
   const data=await fetch("./daily/"+date+".json?v="+Date.now()).then(r=>r.json());
-  const masterById=Object.fromEntries(master.map(p=>[p.id,p]));
-  shown=(data.projects||[]).map(p=>({...p,tags:(masterById[p.id]?.tags)||[],notes_url:masterById[p.id]?.notes_url,notes_issue:masterById[p.id]?.notes_issue,has_notes:masterById[p.id]?.has_notes||false,rating:masterById[p.id]?.rating||null}));
-  document.getElementById("modeLabel").textContent=data.date+" 当日 Top 10";
-  const n=document.getElementById("dayNote");n.textContent=data.note||"";n.hidden=!data.note;render();
+  const by=Object.fromEntries(master.map(p=>[p.id,p]));
+  shown=(data.projects||[]).map(p=>({...p,tags:by[p.id]?.tags||[],notes_issue:by[p.id]?.notes_issue,has_notes:by[p.id]?.has_notes||false,rating:by[p.id]?.rating||null,status:by[p.id]?.status||"👀 观察"}));
+  document.getElementById("modeLabel").textContent=date+" 当日 Top 10";render();
 }
-document.getElementById("search").addEventListener("input",render);
-document.getElementById("dateSelect").addEventListener("change",e=>e.target.value==="all"?loadAll():loadDate(e.target.value));
-document.getElementById("ratingSelect").addEventListener("change",e=>{ratingFilter=e.target.value;render();});
-document.getElementById("mSave").addEventListener("click",()=>saveProjectData({}));
-Promise.all([
-  fetch("./projects.json?v="+Date.now()).then(r=>r.json()),
-  fetch("./daily/index.json?v="+Date.now()).then(r=>r.json())
-]).then(([pData,dData])=>{
-  master=pData.projects||[];shown=master;
-  const sel=document.getElementById("dateSelect");
-  (dData.dates||[]).forEach(d=>{const o=document.createElement("option");o.value=d.date;o.textContent=d.label||d.date;sel.appendChild(o);});
-  render();
-  if(NOTES_API && notesKey) syncAllNotes();
-}).catch(()=>{document.getElementById("count").textContent="加载失败";document.getElementById("empty").hidden=false;});
+document.getElementById("search").oninput=render;
+document.getElementById("ratingSelect").onchange=e=>{ratingFilter=e.target.value;render();};
+document.getElementById("statusSelect").onchange=e=>{statusFilter=e.target.value;render();};
+document.getElementById("dateSelect").onchange=e=>loadDate(e.target.value);
+document.getElementById("timeSelect").onchange=e=>{timeFilter=e.target.value;selectedDate="all";document.getElementById("dateSelect").value="all";shown=master;document.getElementById("modeLabel").textContent=timeFilter==="all"?"全部历史项目":"近"+timeFilter+(timeFilter==="30"?"天（约1个月）":"天");render();};
+
+Promise.all([fetch("./projects.json?v="+Date.now()).then(r=>r.json()),fetch("./daily/index.json?v="+Date.now()).then(r=>r.json())]).then(async([p,d])=>{
+  master=p.projects||[];shown=master;dates=d.dates||[];
+  const sel=document.getElementById("dateSelect");dates.forEach(x=>{const o=document.createElement("option");o.value=x.date;o.textContent=x.label||x.date;sel.appendChild(o);});
+  await buildRecentSets();render();syncSummary();
+}).catch(()=>{document.getElementById("count").textContent="加载失败";});
 </script>
-</body>
-</html>
+</body></html>
