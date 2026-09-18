@@ -88,7 +88,7 @@ export default {
     if(req.method==="OPTIONS") return new Response(null,{status:204,headers:ch});
     try {
       const u=new URL(req.url);
-      if(u.pathname==="/health") return json({ok:true},{},ch);
+      if(u.pathname==="/health") return json({ok:true},200,ch);
       if(!authed(req,env)) return json({error:"unauthorized"},401,ch);
 
       if(u.pathname==="/notes" && req.method==="GET"){
