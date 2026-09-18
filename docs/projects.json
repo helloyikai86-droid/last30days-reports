@@ -23,10 +23,6 @@
       "total_stars": "约4,012",
       "language": "TypeScript + Rust",
       "latest_analysis_date": "2026-09-18",
-      "notes_issue": 1,
-      "notes_url": "https://github.com/helloyikai86-droid/last30days-reports/issues/1",
-      "has_notes": false,
-      "rating": null,
       "what_it_is": "Tencent BrowserSkill 是一套 CLI + 浏览器扩展方案，让 Agent 在独立、可见的浏览器窗口中工作，并在需要时显式借用用户当前标签页。",
       "past_solution": "过去常用 Playwright、Puppeteer 或 BrowserUse，通常需要单独浏览器 Profile、重新登录账号，遇到验证码、二次确认和复杂登录态时容易卡住。",
       "how_it_works": "Agent 通过 BrowserSkill CLI 发出操作，扩展负责连接真实浏览器环境；默认在独立 Agent Window 中运行，只有明确 Borrow Tab 时才操作用户现有标签页；需要验证码或人工确认时交还给用户。",
@@ -59,10 +55,6 @@
       "total_stars": "10.2k",
       "language": "JavaScript / Skill",
       "latest_analysis_date": "2026-09-18",
-      "notes_issue": 2,
-      "notes_url": "https://github.com/helloyikai86-droid/last30days-reports/issues/2",
-      "has_notes": false,
-      "rating": null,
       "what_it_is": "这是一个面向安全审计的结构化 Agent Skill。重点不只是让模型找漏洞，而是规定审计范围、记录覆盖情况、输出结构化 findings，再让独立验证步骤和程序校验器复核结果。",
       "past_solution": "传统做法通常是人工安全评审、静态扫描器、SAST/DAST，再由工程师手工汇总；如果直接换成单 Agent，容易出现漏查、幻觉和“自己证明自己正确”的问题。",
       "how_it_works": "先定义审计范围和 coverage ledger，再由发现阶段逐项检查并记录证据；输出结构化 findings 后，交给独立 reviewer/validator 复核，最后再通过程序约束检查格式、覆盖率和关键字段。",
@@ -95,10 +87,6 @@
       "total_stars": "4.8k",
       "language": "Rust",
       "latest_analysis_date": "2026-09-18",
-      "notes_issue": 3,
-      "notes_url": "https://github.com/helloyikai86-droid/last30days-reports/issues/3",
-      "has_notes": false,
-      "rating": null,
       "what_it_is": "OpenResearch 是偏实验闭环的 Research Agent。它可以生成研究假设、并行创建 Git worktree 跑实验、记录结果和证据，再根据结果规划下一轮。",
       "past_solution": "过去实验主要靠人工提出假设、写脚本、跑测试、记录表格，再人工比较结果。即使有 AI，也通常停留在建议阶段。",
       "how_it_works": "提出假设 → 为不同实验创建隔离 worktree → 并行执行 → 收集日志/指标/证据 → 比较结果 → 生成下一轮实验。",
@@ -131,10 +119,6 @@
       "total_stars": "26.1k",
       "language": "Go",
       "latest_analysis_date": "2026-09-18",
-      "notes_issue": 4,
-      "notes_url": "https://github.com/helloyikai86-droid/last30days-reports/issues/4",
-      "has_notes": false,
-      "rating": null,
       "what_it_is": "腾讯开源的企业知识平台，除了检索问答，还包含 ReAct Agent、Wiki、Graph、Memory 和多种企业数据连接能力。",
       "past_solution": "过去企业知识库多为文档上传 + 向量检索 + 问答，常见问题是资料孤岛、权限分散、答案缺少上下文以及无法执行后续动作。",
       "how_it_works": "先统一接入文档和数据源，再通过 RAG/Graph 提供知识检索；Agent 负责多步推理和工具调用；Wiki 和 Memory 用于知识沉淀与长期上下文。",
@@ -167,10 +151,6 @@
       "total_stars": "34.4k",
       "language": "Go",
       "latest_analysis_date": "2026-09-18",
-      "notes_issue": 5,
-      "notes_url": "https://github.com/helloyikai86-droid/last30days-reports/issues/5",
-      "has_notes": false,
-      "rating": null,
       "what_it_is": "阿里的开源 AI 代码审查项目，目标是把文件覆盖、规则、定位等可确定的工作交给程序，把跨文件语义理解、风险判断等模糊部分交给 Agent。",
       "past_solution": "过去主要依赖人工 Review、Lint、静态扫描、规则引擎；纯 LLM Review 则常见漏文件、行号漂移、重复意见和结果不稳定。",
       "how_it_works": "程序先确定改动范围和上下文，规则引擎做基础过滤，再把真正需要理解语义的片段交给 LLM/Agent。结果再映射回具体文件和代码位置。",
@@ -192,11 +172,7 @@
         "重点"
       ],
       "why": "不是单模型 Demo，而是接近完整内容生产流水线。",
-      "business": "漫剧多角色配音、游戏角色声库、企业私有语音和批量短视频配音。",
-      "notes_issue": 6,
-      "notes_url": "https://github.com/helloyikai86-droid/last30days-reports/issues/6",
-      "has_notes": false,
-      "rating": null
+      "business": "漫剧多角色配音、游戏角色声库、企业私有语音和批量短视频配音。"
     },
     {
       "id": "colibri",
@@ -219,10 +195,6 @@
       "total_stars": "35.7k",
       "language": "C",
       "latest_analysis_date": "2026-09-18",
-      "notes_issue": 7,
-      "notes_url": "https://github.com/helloyikai86-droid/last30days-reports/issues/7",
-      "has_notes": false,
-      "rating": null,
       "what_it_is": "Colibri 试图把存储层纳入 MoE 推理调度，通过 expert streaming 让大量参数不必同时驻留 GPU。",
       "past_solution": "传统大模型推理主要依赖大显存 GPU；显存不足时常用量化、CPU offload 或多 GPU。",
       "how_it_works": "根据当前 token/路由需要，只把相关 MoE experts 从 SSD/RAM 调入更快层级，而不是让所有专家一直占据 VRAM。",
@@ -245,11 +217,7 @@
         "重点"
       ],
       "why": "把问卷和焦点小组的一部分变成可低成本反复运行的虚拟人群实验。",
-      "business": "广告概念测试、虚拟消费者、舆情推演、游戏经济和活动模拟。",
-      "notes_issue": 8,
-      "notes_url": "https://github.com/helloyikai86-droid/last30days-reports/issues/8",
-      "has_notes": false,
-      "rating": null
+      "business": "广告概念测试、虚拟消费者、舆情推演、游戏经济和活动模拟。"
     },
     {
       "id": "agent-reach",
@@ -262,11 +230,7 @@
         "重点"
       ],
       "why": "内容和研究 Agent 真正缺的往往不是模型，而是稳定跨平台读取能力。",
-      "business": "竞品素材雷达、品牌舆情、选题 Agent、跨平台内容情报系统。",
-      "notes_issue": 9,
-      "notes_url": "https://github.com/helloyikai86-droid/last30days-reports/issues/9",
-      "has_notes": false,
-      "rating": null
+      "business": "竞品素材雷达、品牌舆情、选题 Agent、跨平台内容情报系统。"
     },
     {
       "id": "ruview",
@@ -278,11 +242,7 @@
         "重点"
       ],
       "why": "把现有 Wi‑Fi 变成无摄像头空间感知基础设施。",
-      "business": "养老看护、智能家居、办公室 occupancy、酒店和 IoT 软硬件服务。",
-      "notes_issue": 10,
-      "notes_url": "https://github.com/helloyikai86-droid/last30days-reports/issues/10",
-      "has_notes": false,
-      "rating": null
+      "business": "养老看护、智能家居、办公室 occupancy、酒店和 IoT 软硬件服务。"
     },
     {
       "id": "deskcommcrm",
@@ -295,11 +255,7 @@
         "重点"
       ],
       "why": "AI 不只是聊天，而是真正操作 CRM 并推进销售流程。",
-      "business": "企微私域 AI 销售 OS、部署费、托管费、行业模板和 AI 用量收费。",
-      "notes_issue": 11,
-      "notes_url": "https://github.com/helloyikai86-droid/last30days-reports/issues/11",
-      "has_notes": false,
-      "rating": null
+      "business": "企微私域 AI 销售 OS、部署费、托管费、行业模板和 AI 用量收费。"
     },
     {
       "id": "mathmodelagent",
@@ -311,11 +267,7 @@
         "开发工具"
       ],
       "why": "验证“专业岗位知识直接 Skill 化”而不是重造 Agent 平台。",
-      "business": "投放、SEO、投标、财务等行业 Skill Pack。",
-      "notes_issue": 12,
-      "notes_url": "https://github.com/helloyikai86-droid/last30days-reports/issues/12",
-      "has_notes": false,
-      "rating": null
+      "business": "投放、SEO、投标、财务等行业 Skill Pack。"
     },
     {
       "id": "omniget",
@@ -327,11 +279,7 @@
         "增长/内容"
       ],
       "why": "典型的“强 CLI/开源能力 → 消费级 GUI”产品化案例。",
-      "business": "个人资料归档、课程学习库、本地内容管理；需遵守版权和平台条款。",
-      "notes_issue": 13,
-      "notes_url": "https://github.com/helloyikai86-droid/last30days-reports/issues/13",
-      "has_notes": false,
-      "rating": null
+      "business": "个人资料归档、课程学习库、本地内容管理；需遵守版权和平台条款。"
     },
     {
       "id": "yue2",
@@ -343,11 +291,7 @@
         "增长/内容"
       ],
       "why": "从黑盒文生音乐升级到可编辑、可迭代的音乐工程。",
-      "business": "游戏 BGM、短视频配乐、广告音乐模板、角色主题曲。",
-      "notes_issue": 14,
-      "notes_url": "https://github.com/helloyikai86-droid/last30days-reports/issues/14",
-      "has_notes": false,
-      "rating": null
+      "business": "游戏 BGM、短视频配乐、广告音乐模板、角色主题曲。"
     },
     {
       "id": "claude-red",
@@ -359,11 +303,7 @@
         "开发工具"
       ],
       "why": "再次验证“专家经验 → Skill Library”的产品路线。",
-      "business": "可迁移成广告、SEO、客服、运营等行业 Skills。",
-      "notes_issue": 15,
-      "notes_url": "https://github.com/helloyikai86-droid/last30days-reports/issues/15",
-      "has_notes": false,
-      "rating": null
+      "business": "可迁移成广告、SEO、客服、运营等行业 Skills。"
     },
     {
       "id": "ever-gauzy",
@@ -375,11 +315,7 @@
         "开发工具"
       ],
       "why": "为企业 Agent 提供真实业务数据和可操作系统，不必从零重造 ERP/CRM。",
-      "business": "开源业务底座 + 企微/钉钉 + 行业 Agent + 私有部署。",
-      "notes_issue": 16,
-      "notes_url": "https://github.com/helloyikai86-droid/last30days-reports/issues/16",
-      "has_notes": false,
-      "rating": null
+      "business": "开源业务底座 + 企微/钉钉 + 行业 Agent + 私有部署。"
     },
     {
       "id": "ecc",
@@ -401,10 +337,6 @@
       "total_stars": "261k",
       "language": "JavaScript",
       "latest_analysis_date": "2026-09-18",
-      "notes_issue": 17,
-      "notes_url": "https://github.com/helloyikai86-droid/last30days-reports/issues/17",
-      "has_notes": false,
-      "rating": null,
       "what_it_is": "Everything Claude Code / ECC 更像一套 Agent 运行框架和最佳实践集合，目标不是替代 Codex/Claude Code，而是让不同 Coding Agent 共享规则、记忆和工作流。",
       "past_solution": "过去每个开发者会在不同 IDE/Agent 里单独维护 prompt、rules、memory、hooks 和脚本，迁移成本高，团队标准也很难统一。",
       "how_it_works": "通过 Skills、规则、Memory、Hooks 和工作流模板，为不同 Coding Agent 提供统一的行为约束和任务方法。",
@@ -436,10 +368,6 @@
       "total_stars": "95.8k",
       "language": "JavaScript",
       "latest_analysis_date": "2026-09-18",
-      "notes_issue": 18,
-      "notes_url": "https://github.com/helloyikai86-droid/last30days-reports/issues/18",
-      "has_notes": false,
-      "rating": null,
       "what_it_is": "这是面向 Codex、Claude Code 等 Coding Agent 的 Skill 集合，重点是把工程步骤、验证门槛和反模式写成可执行工作流。",
       "past_solution": "过去团队主要依赖 README、Confluence、代码规范和口头经验；Prompt 往往只能表达原则，难保证每次都按同样步骤执行。",
       "how_it_works": "将一个专业任务拆成步骤、前置条件、验证 Gate、Anti-pattern 和退出条件，让 Agent 按结构化 Skill 执行。",
@@ -461,11 +389,7 @@
         "开发工具"
       ],
       "why": "证明公开数据经过强视觉包装和 AI 交互后可以变成高传播产品。",
-      "business": "商业情报地图、国际新闻可视化、航运/港口监控、数据型内容。",
-      "notes_issue": 19,
-      "notes_url": "https://github.com/helloyikai86-droid/last30days-reports/issues/19",
-      "has_notes": false,
-      "rating": null
+      "business": "商业情报地图、国际新闻可视化、航运/港口监控、数据型内容。"
     },
     {
       "id": "tinycast",
@@ -486,10 +410,6 @@
       "total_stars": "6.1k",
       "language": "Swift",
       "latest_analysis_date": "2026-09-18",
-      "notes_issue": 20,
-      "notes_url": "https://github.com/helloyikai86-droid/last30days-reports/issues/20",
-      "has_notes": false,
-      "rating": null,
       "what_it_is": "Tinycast 聚焦快速启动、剪贴板和效率操作，强调原生、低资源占用和简洁体验。",
       "past_solution": "用户通常用 Spotlight、Alfred、Raycast 等成熟工具；其中一部分功能丰富，但占用和复杂度更高。",
       "how_it_works": "通过原生 SwiftUI/AppKit 提供启动器、搜索和快捷操作，并尽量兼容现有效率工具生态。",
@@ -510,11 +430,7 @@
         "开发工具"
       ],
       "why": "再次验证“开发者工具 + GUI + 安装/更新体验”可以扩大用户群。",
-      "business": "一键安装器、开源工具桌面化、技术服务和 Pro 体验。",
-      "notes_issue": 21,
-      "notes_url": "https://github.com/helloyikai86-droid/last30days-reports/issues/21",
-      "has_notes": false,
-      "rating": null
+      "business": "一键安装器、开源工具桌面化、技术服务和 Pro 体验。"
     },
     {
       "id": "system-prompts-leaks",
@@ -526,11 +442,7 @@
         "开发工具"
       ],
       "why": "适合横向研究不同 Agent 的规划、Tool Call、Context 和失败恢复方式。",
-      "business": "Agent Benchmark、产品拆解和企业 Agent 规范库。",
-      "notes_issue": 22,
-      "notes_url": "https://github.com/helloyikai86-droid/last30days-reports/issues/22",
-      "has_notes": false,
-      "rating": null
+      "business": "Agent Benchmark、产品拆解和企业 Agent 规范库。"
     },
     {
       "id": "trading-agents",
@@ -541,11 +453,7 @@
         "AI/Agent"
       ],
       "why": "其多角色制衡结构值得迁移到其他需要风险控制的决策场景。",
-      "business": "研究其“分析→策略→风控→执行”架构，不建议直接复制自动交易。",
-      "notes_issue": 23,
-      "notes_url": "https://github.com/helloyikai86-droid/last30days-reports/issues/23",
-      "has_notes": false,
-      "rating": null
+      "business": "研究其“分析→策略→风控→执行”架构，不建议直接复制自动交易。"
     },
     {
       "id": "pentagi",
@@ -557,11 +465,7 @@
         "开发工具"
       ],
       "why": "展示专业复杂任务如何拆成多个 Agent 协作流程。",
-      "business": "企业私有安全 Agent、授权评估、合规检查与自动报告。",
-      "notes_issue": 24,
-      "notes_url": "https://github.com/helloyikai86-droid/last30days-reports/issues/24",
-      "has_notes": false,
-      "rating": null
+      "business": "企业私有安全 Agent、授权评估、合规检查与自动报告。"
     },
     {
       "id": "douyin-downloader",
@@ -573,11 +477,7 @@
         "开发工具"
       ],
       "why": "工程价值在长期稳定归档，而不只是单条解析。",
-      "business": "自有内容资产库、公开竞品素材研究、ASR/OCR/标签分析；需遵守平台和版权规则。",
-      "notes_issue": 25,
-      "notes_url": "https://github.com/helloyikai86-droid/last30days-reports/issues/25",
-      "has_notes": false,
-      "rating": null
+      "business": "自有内容资产库、公开竞品素材研究、ASR/OCR/标签分析；需遵守平台和版权规则。"
     },
     {
       "rank": 7,
@@ -607,11 +507,7 @@
         "开发工具"
       ],
       "why": "成熟老项目短期重新进入 Trending，更多是事件型热度。",
-      "has_notes": false,
-      "rating": null,
       "latest_analysis_date": "2026-09-18",
-      "notes_issue": 26,
-      "notes_url": "https://github.com/helloyikai86-droid/last30days-reports/issues/26",
       "overview": "成熟的逆向工程平台，适合分析二进制、固件和恶意软件。"
     }
   ]
