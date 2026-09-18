@@ -28,7 +28,7 @@ dialog{border:0;border-radius:20px;padding:0;width:min(760px,calc(100% - 24px));
 <div class="wrap">
   <div class="hero">
     <h1>GitHub 机会目录</h1>
-    <p>可以按日期回看当天 Top 10，也可以看长期项目库。点“详细分析”看完整分析；点“我的笔记”进入 GitHub Issues，手机和电脑自动同步。</p>
+    <p>可以按日期回看当天 Top 10，也可以看长期项目库。点“详细分析 / 笔记”即可在网页内查看、打分和写备注，手机与电脑自动同步。</p>
   </div>
   <div class="toolbar">
     <div class="row">
@@ -53,7 +53,7 @@ dialog{border:0;border-radius:20px;padding:0;width:min(760px,calc(100% - 24px));
   <div class="meta"><span id="count">加载中…</span><span id="modeLabel">全部历史项目</span></div>
   <div id="grid" class="grid"></div>
   <div id="empty" class="empty" hidden>没有符合条件的项目。</div>
-  <div class="footer">个人备注保存在 GitHub Issues，可跨手机、电脑同步。历史日报数据和项目目录由每日任务持续更新。</div>
+  <div class="footer">评分和笔记通过云端接口同步到长期存储，手机和电脑看到同一份内容。历史日报和项目目录由每日任务持续更新。</div>
 </div>
 
 <dialog id="dialog">
@@ -88,16 +88,31 @@ dialog{border:0;border-radius:20px;padding:0;width:min(760px,calc(100% - 24px));
       </div>
     </div>
     <div class="modalActions">
-      <a id="mNotes" class="btn primary" target="_blank" rel="noopener">我的笔记</a>
       <a id="mGitHub" class="btn" target="_blank" rel="noopener">打开 GitHub</a>
       <button class="btn" onclick="document.getElementById('dialog').close()">关闭</button>
     </div>
   </div>
 </dialog>
 
+<script src="./config.js"></script>
 <script>
 let master=[],shown=[],category="全部",ratingFilter="all",currentProject=null;
-const NOTES_API=window.NOTES_API||"";
+const NOTES_API=(window.NOTES_API||"").replace(/\/$/,"");
+let notesKey=sessionStorage.getItem("github-opportunity-notes-key")||"";
+function ensureNotesKey(){
+  if(notesKey) return notesKey;
+  const v=prompt("请输入项目笔记访问密钥（每台设备本次会话输入一次）")||"";
+  if(v){notesKey=v;sessionStorage.setItem("github-opportunity-notes-key",v);}
+  return notesKey;
+}
+async function notesFetch(path, options={}){
+  if(!NOTES_API) throw new Error("云端接口尚未部署");
+  const key=ensureNotesKey(); if(!key) throw new Error("未输入访问密钥");
+  const r=await fetch(NOTES_API+path,{...options,headers:{"Content-Type":"application/json","X-Notes-Key":key,...(options.headers||{})}});
+  if(r.status===401){sessionStorage.removeItem("github-opportunity-notes-key");notesKey="";throw new Error("访问密钥不正确");}
+  if(!r.ok) throw new Error("HTTP "+r.status);
+  return r.json();
+}
 const categories=["全部","有笔记","AI/Agent","企业AI","AIGC","增长/内容","开发工具","基础设施"];
 const chips=document.getElementById("chips");
 categories.forEach((c,i)=>{
@@ -118,34 +133,28 @@ function drawStars(p){
 async function saveProjectData(patch){
   if(!currentProject) return;
   const msg=document.getElementById("mSaveMsg");
+  if(!currentProject.notes_issue){msg.textContent="这个项目还没有笔记记录。";return;}
   const payload={
-    id:currentProject.id,
-    name:currentProject.name,
-    notes_issue:currentProject.notes_issue,
     rating:patch.rating ?? currentProject.rating ?? null,
     status:patch.status ?? document.getElementById("mStatus").value,
     note:patch.note ?? document.getElementById("mNote").value.trim(),
     next_action:patch.next_action ?? document.getElementById("mNext").value.trim()
   };
-  if(!NOTES_API){
-    msg.textContent="云端写入接口尚未配置；当前先显示评分入口，配置后即可在网页内直接保存并跨设备同步。";
-    return;
-  }
   msg.textContent="保存中…";
   try{
-    const r=await fetch(NOTES_API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
-    if(!r.ok) throw new Error("HTTP "+r.status);
-    const out=await r.json();
-    currentProject.rating=payload.rating;
-    currentProject.has_notes=!!(payload.note||payload.next_action);
-    currentProject.status=payload.status;
-    currentProject.user_note=payload.note;
-    currentProject.next_action=payload.next_action;
+    const out=await notesFetch("/notes/"+currentProject.notes_issue,{method:"POST",body:JSON.stringify(payload)});
+    currentProject.rating=out.rating;
+    currentProject.has_notes=out.has_notes;
+    currentProject.status=out.status;
+    currentProject.user_note=out.note||"";
+    currentProject.next_action=out.next_action||"";
+    const base=master.find(x=>x.id===currentProject.id);
+    if(base) Object.assign(base,{rating:out.rating,has_notes:out.has_notes,status:out.status,user_note:out.note||"",next_action:out.next_action||""});
     drawStars(currentProject);
-    document.getElementById("mMine").textContent=(currentProject.rating?("评分："+"★".repeat(currentProject.rating)+"☆".repeat(5-currentProject.rating)):"未评分")+(currentProject.has_notes?" ｜ 已做笔记":"");
-    msg.textContent="已保存并同步。";
+    document.getElementById("mMine").textContent=(out.rating?("评分："+"★".repeat(out.rating)+"☆".repeat(5-out.rating)):"未评分")+(out.has_notes?" ｜ 已做笔记":"");
+    msg.textContent="已保存到云端，手机和电脑会同步。";
     render();
-  }catch(e){ msg.textContent="保存失败："+e.message; }
+  }catch(e){msg.textContent="保存失败："+e.message;}
 }
 function openDetail(p){
   currentProject=p;
@@ -163,9 +172,23 @@ function openDetail(p){
   document.getElementById("mStatus").value=p.status||"👀 观察";
   document.getElementById("mNote").value=p.user_note||"";
   document.getElementById("mNext").value=p.next_action||"";
-  document.getElementById("mSaveMsg").textContent=NOTES_API?"":"云端保存接口配置后，这里可直接保存并跨设备同步。";
+  document.getElementById("mSaveMsg").textContent=NOTES_API?"正在读取云端笔记…":"云端保存接口尚未部署。";
+  if(NOTES_API && p.notes_issue){
+    notesFetch("/notes/"+p.notes_issue).then(out=>{
+      if(currentProject!==p) return;
+      p.rating=out.rating;p.has_notes=out.has_notes;p.status=out.status;p.user_note=out.note||"";p.next_action=out.next_action||"";
+      const base=master.find(x=>x.id===p.id); if(base) Object.assign(base,{rating:p.rating,has_notes:p.has_notes,status:p.status,user_note:p.user_note,next_action:p.next_action});
+      drawStars(p);
+      document.getElementById("mStatus").value=p.status||"👀 观察";
+      document.getElementById("mNote").value=p.user_note||"";
+      document.getElementById("mNext").value=p.next_action||"";
+      const mine=[];if(p.rating)mine.push("评分："+"★".repeat(p.rating)+"☆".repeat(5-p.rating));if(p.has_notes)mine.push("已做笔记");
+      document.getElementById("mMine").textContent=mine.length?mine.join(" ｜ "):"未评分 / 暂无笔记";
+      document.getElementById("mSaveMsg").textContent="云端笔记已同步。";
+      render();
+    }).catch(e=>{document.getElementById("mSaveMsg").textContent="读取云端笔记失败："+e.message;});
+  }
   document.getElementById("mGitHub").href=p.url;
-  const notes=document.getElementById("mNotes"); notes.href=p.notes_url||p.url; notes.style.display=p.notes_url?"inline-flex":"none";
   document.getElementById("dialog").showModal();
 }
 function render(){
@@ -184,8 +207,7 @@ function render(){
     const daily=p.stars_today?`<div class="daily">#${p.rank}　${p.stars_today}　总 Star ${p.total_stars||"—"}　${p.language||""}</div>`:"";
     const rating=p.rating?`<span class="tag hot">我的评分 ${"★".repeat(p.rating)}${"☆".repeat(5-p.rating)}</span>`:"";
     const noteTag=p.has_notes?`<span class="tag">已做笔记</span>`:"";
-    const notesBtn=p.notes_url?`<a class="btn" href="${p.notes_url}" target="_blank" rel="noopener">我的笔记</a>`:"";
-    el.innerHTML=`<div class="top"><div class="name">${p.name}</div></div>${daily}<div class="desc">${p.description||""}</div><div class="tags">${rating}${noteTag}${tags}</div><div class="actions"><button class="btn detail">详细分析</button>${notesBtn}<a class="btn" href="${p.url}" target="_blank" rel="noopener">GitHub</a></div>`;
+    el.innerHTML=`<div class="top"><div class="name">${p.name}</div></div>${daily}<div class="desc">${p.description||""}</div><div class="tags">${rating}${noteTag}${tags}</div><div class="actions"><button class="btn detail">详细分析 / 笔记</button><a class="btn" href="${p.url}" target="_blank" rel="noopener">GitHub</a></div>`;
     el.querySelector(".detail").onclick=()=>openDetail(p);grid.appendChild(el);
   });
 }
