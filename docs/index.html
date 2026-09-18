@@ -205,13 +205,25 @@ document.getElementById("timeSelect").onchange=e=>{
   timeFilter=e.target.value;selectedDate="";document.getElementById("datePicker").value="";shown=master;
   document.getElementById("modeLabel").textContent=timeFilter==="all"?"全部历史项目":timeFilter==="30"?"近1个月":"近"+timeFilter+"天";render();
 };
+document.addEventListener("click",e=>{
+  const a=e.target.closest('a[href*="notes.html"]');
+  if(!a)return;
+  sessionStorage.setItem("notes-return-url",location.href);
+  sessionStorage.setItem("notes-return-scroll",String(window.scrollY));
+});
+function restoreNotesPosition(){
+  const y=sessionStorage.getItem("notes-return-scroll");
+  if(y===null)return;
+  sessionStorage.removeItem("notes-return-scroll");
+  setTimeout(()=>window.scrollTo(0,Number(y)||0),80);
+}
 window.addEventListener("scroll",()=>{document.getElementById("toTop").style.display=scrollY>600?"block":"none";});
 document.getElementById("toTop").onclick=()=>window.scrollTo({top:0,behavior:"smooth"});
 
 Promise.all([fetch("./projects.json?v="+Date.now()).then(r=>r.json()),fetch("./daily/index.json?v="+Date.now()).then(r=>r.json())]).then(async([p,d])=>{
   master=p.projects||[];shown=master;dates=d.dates||[];
   const max=dates[0]?.date||new Date().toISOString().slice(0,10);document.getElementById("datePicker").max=max;
-  await buildAppearance();render();syncSummary();
+  await buildAppearance();render();restoreNotesPosition();syncSummary();
 }).catch(()=>{document.getElementById("count").textContent="加载失败";});
 </script>
 </body></html>
