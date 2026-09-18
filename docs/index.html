@@ -120,6 +120,21 @@ categories.forEach((c,i)=>{
   b.onclick=()=>{category=c;[...chips.children].forEach(x=>x.classList.toggle("active",x===b));render();};
   chips.appendChild(b);
 });
+async function syncAllNotes(){
+  if(!NOTES_API) return;
+  try{
+    const out=await notesFetch("/notes");
+    const byIssue=out.notes||{};
+    for(const p of master){
+      const n=byIssue[p.notes_issue];
+      if(n) Object.assign(p,{rating:n.rating,has_notes:n.has_notes,status:n.status,user_note:n.note||"",next_action:n.next_action||""});
+    }
+    if(document.getElementById("dateSelect").value==="all") shown=master;
+    render();
+  }catch(e){
+    // Do not block public catalog reading if auth/API is unavailable.
+  }
+}
 function val(v){return v||"—";}
 function drawStars(p){
   const box=document.getElementById("mStars"); box.innerHTML="";
@@ -234,6 +249,7 @@ Promise.all([
   const sel=document.getElementById("dateSelect");
   (dData.dates||[]).forEach(d=>{const o=document.createElement("option");o.value=d.date;o.textContent=d.label||d.date;sel.appendChild(o);});
   render();
+  if(NOTES_API && notesKey) syncAllNotes();
 }).catch(()=>{document.getElementById("count").textContent="加载失败";document.getElementById("empty").hidden=false;});
 </script>
 </body>
