@@ -21,7 +21,13 @@ function section(title,text){if(!text)return"";return '<section class="section">
 Promise.all([fetch("./projects.json?v="+Date.now()).then(r=>r.json()),date?fetch("./daily/"+date+".json?v="+Date.now()).then(r=>r.json()).catch(()=>null):Promise.resolve(null)]).then(([p,d])=>{
   const base=(p.projects||[]).find(x=>x.id===id)||{};
   const day=d?(d.projects||[]).find(x=>x.id===id):null;
-  const x={...base,...(day||{})};
+  const x={...base};
+  if(day){
+    for(const [k,v] of Object.entries(day)){
+      const empty=v===null||v===undefined||v===""||(Array.isArray(v)&&v.length===0);
+      if(!empty)x[k]=v;
+    }
+  }
   document.title=x.name+"｜详细分析";document.getElementById("name").textContent=(x.rank?"#"+x.rank+" ":"")+x.name;
   const bits=[];if(date)bits.push(date);if(x.stars_today)bits.push(x.stars_today);if(x.total_stars)bits.push("总 Star "+x.total_stars);if(x.language)bits.push(x.language);document.getElementById("meta").textContent=bits.join(" ｜ ");
   document.getElementById("desc").textContent=x.description||"";
