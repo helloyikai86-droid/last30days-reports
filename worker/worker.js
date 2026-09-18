@@ -89,6 +89,16 @@ export default {
     try {
       const u=new URL(req.url);
       if(u.pathname==="/health") return json({ok:true},200,ch);
+      if(u.pathname==="/summary" && req.method==="GET"){
+        const issues=await gh(`/repos/${OWNER}/${REPO}/issues?state=open&per_page=100`,env);
+        const out={};
+        for(const it of issues){
+          if(it.pull_request || !/^\[项目笔记\]/.test(it.title)) continue;
+          const p=parse(it.body||"");
+          out[it.number]={issue_number:it.number,rating:p.rating,status:p.status,has_notes:p.has_notes};
+        }
+        return json({notes:out},200,ch);
+      }
       if(!authed(req,env)) return json({error:"unauthorized"},401,ch);
 
       if(u.pathname==="/notes" && req.method==="GET"){
