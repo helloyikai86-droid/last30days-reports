@@ -23,7 +23,7 @@
 <div class="wrap">
   <header class="hero">
     <h1>GitHub 机会目录</h1>
-    <p>默认按最近一次上榜时间从近到远；同一天按 Star 增量从高到低。项目卡片看摘要，详细分析和个人笔记独立。</p>
+    <p>默认按最近一次上榜时间从近到远；同一天按 Star 增量从高到低。公开访客只看项目分析；评分、状态和笔记只有输入 NOTES_KEY 后才加载。</p>
   </header>
 
   <div class="filtersArea">
@@ -35,10 +35,10 @@
       </select>
     </div>
     <div class="filters" style="margin-top:10px">
-      <select id="ratingSelect" class="control">
+      <select id="ratingSelect" class="control" style="display:none">
         <option value="all">全部评分</option><option value="rated">已评分</option><option value="5">★★★★★ 5分</option><option value="4">★★★★☆ 4分</option><option value="3">★★★☆☆ 3分</option><option value="2">★★☆☆☆ 2分</option><option value="1">★☆☆☆☆ 1分</option><option value="unrated">未评分</option>
       </select>
-      <select id="statusSelect" class="control">
+      <select id="statusSelect" class="control" style="display:none">
         <option value="all">全部状态</option><option value="👀 观察">👀 观察</option><option value="💡 有启发">💡 有启发</option><option value="🧪 想验证">🧪 想验证</option><option value="🚀 准备做">🚀 准备做</option><option value="✅ 已研究">✅ 已研究</option><option value="⏸ 暂缓">⏸ 暂缓</option>
       </select>
       <select id="sortSelect" class="control">
@@ -47,7 +47,7 @@
     </div>
   </div>
 
-  <div class="stickyBar"><div id="chips" class="chips"></div></div>
+  <div class="stickyBar"><div id="chips" class="chips"></div><button id="unlockBtn" class="chip" style="margin-top:8px">🔒 解锁我的数据</button></div>
   <div class="meta"><span id="count">加载中…</span><span id="modeLabel">全部历史项目</span></div>
   <div id="grid" class="grid"></div><div id="empty" class="empty" hidden>没有符合条件的项目。</div>
   <div class="footer">点击卡片非按钮区域，直接进入详细分析；“笔记”有内容时会高亮。</div>
@@ -59,8 +59,9 @@
 let master=[],shown=[],dates=[],category="全部",ratingFilter="all",statusFilter="all",timeFilter="all",selectedDate="",sortMode="recent";
 const NOTES_API=(window.NOTES_API||"").replace(/\/$/,"");
 const appearance={}, firstSeen={}, lastSeen={}, latestDaily={}, dateSet=new Set();
+let privateUnlocked=false, privateNotes={};
 
-const categories=["全部","有笔记","已评分","AI/Agent","企业AI","AIGC","增长/内容","开发工具","基础设施"];
+const categories=["全部","AI/Agent","企业AI","AIGC","增长/内容","开发工具","基础设施"];
 const chips=document.getElementById("chips");
 categories.forEach((c,i)=>{
   const b=document.createElement("button");b.className="chip"+(i===0?" active":"");b.textContent=c;
@@ -95,15 +96,48 @@ async function buildAppearance(){
     if(!firstSeen[p.id]&&p.first_seen)firstSeen[p.id]=p.first_seen;
   }
 }
-async function syncSummary(){
+function getPrivateKey(){
+  let k=sessionStorage.getItem("github-opportunity-notes-key")||"";
+  if(k)return k;
+  k=prompt("请输入 NOTES_KEY")||"";
+  if(k)sessionStorage.setItem("github-opportunity-notes-key",k);
+  return k;
+}
+function addPrivateChips(){
+  if(document.getElementById("privateChipNotes"))return;
+  const defs=[["有笔记","privateChipNotes"],["已评分","privateChipRated"]];
+  defs.forEach((it,idx)=>{
+    const b=document.createElement("button");
+    b.className="chip";b.id=it[1];b.textContent=it[0];
+    b.onclick=()=>{category=it[0];[...chips.children].forEach(x=>x.classList.toggle("active",x===b));render();};
+    chips.insertBefore(b,chips.children[idx+1]||null);
+  });
+}
+async function unlockPrivate(){
   if(!NOTES_API)return;
+  const key=getPrivateKey();if(!key)return;
   try{
-    const r=await fetch(NOTES_API+"/summary");
-    if(!r.ok)return;
-    const out=await r.json(),by=out.notes||{};
-    for(const p of master){const n=by[p.notes_issue];if(n)Object.assign(p,{rating:n.rating,status:n.status,has_notes:n.has_notes});}
+    const r=await fetch(NOTES_API+"/notes",{headers:{"X-Notes-Key":key}});
+    if(r.status===401){sessionStorage.removeItem("github-opportunity-notes-key");alert("NOTES_KEY 不正确");return;}
+    if(!r.ok)throw new Error("HTTP "+r.status);
+    const out=await r.json();
+    privateNotes=out.notes||{};privateUnlocked=true;
+    for(const p of master){
+      const n=privateNotes[p.id];
+      if(n)Object.assign(p,{rating:n.rating,status:n.status,has_notes:n.has_notes});
+      else Object.assign(p,{rating:null,status:"👀 观察",has_notes:false});
+    }
+    addPrivateChips();
+    document.getElementById("ratingSelect").style.display="";
+    document.getElementById("statusSelect").style.display="";
+    document.getElementById("unlockBtn").textContent="🔓 已解锁我的数据";
     render();
-  }catch(e){}
+  }catch(e){alert("读取私人数据失败："+e.message);}
+}
+document.getElementById("unlockBtn").onclick=unlockPrivate;
+async function syncSummary(){
+  const key=sessionStorage.getItem("github-opportunity-notes-key")||"";
+  if(key)await unlockPrivate();
 }
 function sortList(list){
   return list.sort((a,b)=>{
@@ -118,9 +152,9 @@ function render(){
   const q=document.getElementById("search").value.trim().toLowerCase();
   let list=shown.filter(p=>{
     const hay=[p.name,p.description,(p.tags||[]).join(" "),p.target_users,p.problem,p.why_hot,p.why,p.difference,p.business,p.judgment,p.full_analysis].join(" ").toLowerCase();
-    const cat=category==="全部"||(category==="有笔记"?!!p.has_notes:category==="已评分"?!!p.rating:(p.tags||[]).includes(category));
-    const rate=ratingFilter==="all"||(ratingFilter==="rated"?!!p.rating:ratingFilter==="unrated"?!p.rating:String(p.rating)===ratingFilter);
-    const stat=statusFilter==="all"||p.status===statusFilter;
+    const cat=category==="全部"||(category==="有笔记"?privateUnlocked&&!!p.has_notes:category==="已评分"?privateUnlocked&&!!p.rating:(p.tags||[]).includes(category));
+    const rate=ratingFilter==="all"||(privateUnlocked&&(ratingFilter==="rated"?!!p.rating:ratingFilter==="unrated"?!p.rating:String(p.rating)===ratingFilter));
+    const stat=statusFilter==="all"||(privateUnlocked&&p.status===statusFilter);
     const last=lastSeen[p.id]||p.latest_analysis_date||"";
     const time=timeFilter==="all"||(!selectedDate&&last&&daysAgo(last)>=0&&daysAgo(last)<Number(timeFilter));
     return (!q||hay.includes(q))&&cat&&rate&&stat&&time;
@@ -145,9 +179,9 @@ function render(){
     const tags=(p.tags||[]).map(t=>'<span class="tag '+(t==="重点"?"hot":"")+'">'+t+'</span>').join("");
     const rank=dailyData.rank?"#"+dailyData.rank+"　":"";
     const daily=dailyData.stars_today?'<div class="daily">'+rank+dailyData.stars_today+'　总 Star '+(dailyData.total_stars||p.total_stars||"—")+'　'+(dailyData.language||p.language||"")+'</div>':"";
-    const rating=p.rating?'<span class="tag hot">我的评分 '+"★".repeat(p.rating)+"☆".repeat(5-p.rating)+'</span>':"";
-    const note=p.has_notes?'<span class="tag">已做笔记</span>':"";
-    el.innerHTML='<div class="name">'+p.name+'</div>'+daily+'<div class="desc">'+(p.description||"")+'</div><div class="tags">'+rating+note+tags+'</div><div class="actions"><a class="btn detail" href="'+detailUrl(p)+'">详细分析</a><a class="btn notes '+(p.has_notes?"has":"")+'" href="'+noteUrl(p)+'">'+(p.has_notes?"笔记 ✓":"笔记")+'</a><a class="btn" href="'+p.url+'" target="_blank" rel="noopener">GitHub</a></div>';
+    const rating=privateUnlocked&&p.rating?'<span class="tag hot">我的评分 '+"★".repeat(p.rating)+"☆".repeat(5-p.rating)+'</span>':"";
+    const note=privateUnlocked&&p.has_notes?'<span class="tag">已做笔记</span>':"";
+    el.innerHTML='<div class="name">'+p.name+'</div>'+daily+'<div class="desc">'+(p.description||"")+'</div><div class="tags">'+rating+note+tags+'</div><div class="actions"><a class="btn detail" href="'+detailUrl(p)+'">详细分析</a><a class="btn notes '+(privateUnlocked&&p.has_notes?"has":"")+'" href="'+noteUrl(p)+'">'+(privateUnlocked&&p.has_notes?"笔记 ✓":"笔记")+'</a><a class="btn" href="'+p.url+'" target="_blank" rel="noopener">GitHub</a></div>';
     el.onclick=e=>{if(e.target.closest("a,button,input,select,textarea"))return;location.href=detailUrl(p);};
     grid.appendChild(el);
   }
@@ -158,7 +192,7 @@ async function loadExactDate(date){
   if(!dateSet.has(date)){shown=[];document.getElementById("modeLabel").textContent=fmtDate(date)+" 暂无归档";render();return;}
   const data=await fetch("./daily/"+date+".json?v="+Date.now()).then(r=>r.json());
   const by=Object.fromEntries(master.map(p=>[p.id,p]));
-  shown=(data.projects||[]).map(p=>({...p,tags:by[p.id]?.tags||[],notes_issue:by[p.id]?.notes_issue,has_notes:by[p.id]?.has_notes||false,rating:by[p.id]?.rating||null,status:by[p.id]?.status||"👀 观察"}));
+  shown=(data.projects||[]).map(p=>({...p,tags:by[p.id]?.tags||[],has_notes:by[p.id]?.has_notes||false,rating:by[p.id]?.rating||null,status:by[p.id]?.status||"👀 观察"}));
   document.getElementById("modeLabel").textContent=fmtDate(date)+" 当日 Top 10";render();
 }
 
