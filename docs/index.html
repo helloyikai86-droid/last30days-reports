@@ -28,7 +28,7 @@ dialog{border:0;border-radius:20px;padding:0;width:min(760px,calc(100% - 24px));
 <div class="wrap">
   <div class="hero">
     <h1>GitHub 机会目录</h1>
-    <p>可以按日期回看当天 Top 10，也可以看长期项目库。点“详细分析”会显示当天完整分析，不再只有两句摘要。</p>
+    <p>可以按日期回看当天 Top 10，也可以看长期项目库。点“详细分析”看完整分析；点“我的笔记”进入 GitHub Issues，手机和电脑自动同步。</p>
   </div>
   <div class="toolbar">
     <div class="row">
@@ -41,7 +41,7 @@ dialog{border:0;border-radius:20px;padding:0;width:min(760px,calc(100% - 24px));
   <div class="meta"><span id="count">加载中…</span><span id="modeLabel">全部历史项目</span></div>
   <div id="grid" class="grid"></div>
   <div id="empty" class="empty" hidden>没有符合条件的项目。</div>
-  <div class="footer">“关注”只保存在当前浏览器。历史日报数据和项目目录由每日任务持续更新。</div>
+  <div class="footer">个人备注保存在 GitHub Issues，可跨手机、电脑同步。历史日报数据和项目目录由每日任务持续更新。</div>
 </div>
 
 <dialog id="dialog">
@@ -56,7 +56,8 @@ dialog{border:0;border-radius:20px;padding:0;width:min(760px,calc(100% - 24px));
     <div class="kv"><b>商业机会 / 中国市场</b><span id="mBiz"></span></div>
     <div class="kv"><b>明确判断</b><span id="mJudge"></span></div>
     <div class="modalActions">
-      <a id="mGitHub" class="btn primary" target="_blank" rel="noopener">打开 GitHub</a>
+      <a id="mNotes" class="btn primary" target="_blank" rel="noopener">我的笔记</a>
+      <a id="mGitHub" class="btn" target="_blank" rel="noopener">打开 GitHub</a>
       <button class="btn" onclick="document.getElementById('dialog').close()">关闭</button>
     </div>
   </div>
@@ -64,16 +65,13 @@ dialog{border:0;border-radius:20px;padding:0;width:min(760px,calc(100% - 24px));
 
 <script>
 let master=[],shown=[],category="全部";
-const favKey="github-opportunity-favorites-v1";
-const favorites=new Set(JSON.parse(localStorage.getItem(favKey)||"[]"));
-const categories=["全部","我关注","AI/Agent","企业AI","AIGC","增长/内容","开发工具","基础设施"];
+const categories=["全部","AI/Agent","企业AI","AIGC","增长/内容","开发工具","基础设施"];
 const chips=document.getElementById("chips");
 categories.forEach((c,i)=>{
   const b=document.createElement("button");b.className="chip"+(i===0?" active":"");b.textContent=c;
   b.onclick=()=>{category=c;[...chips.children].forEach(x=>x.classList.toggle("active",x===b));render();};
   chips.appendChild(b);
 });
-function saveFav(){localStorage.setItem(favKey,JSON.stringify([...favorites]));}
 function val(v){return v||"—";}
 function openDetail(p){
   document.getElementById("mName").textContent=(p.rank?("#"+p.rank+" "):"")+p.name;
@@ -86,23 +84,23 @@ function openDetail(p){
   document.getElementById("mBiz").textContent=val(p.business);
   document.getElementById("mJudge").textContent=val(p.judgment);
   document.getElementById("mGitHub").href=p.url;
+  const notes=document.getElementById("mNotes"); notes.href=p.notes_url||p.url; notes.style.display=p.notes_url?"inline-flex":"none";
   document.getElementById("dialog").showModal();
 }
 function render(){
   const q=document.getElementById("search").value.trim().toLowerCase();
   const list=shown.filter(p=>{
     const hay=[p.name,p.description,(p.tags||[]).join(" "),p.target_users,p.problem,p.why_hot,p.why,p.difference,p.business,p.judgment].join(" ").toLowerCase();
-    return (!q||hay.includes(q))&&(category==="全部"||(category==="我关注"?favorites.has(p.id):(p.tags||[]).includes(category)));
+    return (!q||hay.includes(q))&&(category==="全部"||(p.tags||[]).includes(category));
   });
   document.getElementById("count").textContent=`${list.length} 个项目`;
   const grid=document.getElementById("grid");grid.innerHTML="";document.getElementById("empty").hidden=list.length>0;
   list.forEach(p=>{
     const el=document.createElement("article");el.className="card";
-    const isFav=favorites.has(p.id);
     const tags=(p.tags||[]).map(t=>`<span class="tag ${t==="重点"?"hot":""}">${t}</span>`).join("");
     const daily=p.stars_today?`<div class="daily">#${p.rank}　${p.stars_today}　总 Star ${p.total_stars||"—"}　${p.language||""}</div>`:"";
-    el.innerHTML=`<div class="top"><div class="name">${p.name}</div><button class="follow ${isFav?"on":""}">${isFav?"已关注":"关注"}</button></div>${daily}<div class="desc">${p.description||""}</div><div class="tags">${tags}</div><div class="actions"><button class="btn detail">详细分析</button><a class="btn" href="${p.url}" target="_blank" rel="noopener">GitHub</a></div>`;
-    el.querySelector(".follow").onclick=()=>{favorites.has(p.id)?favorites.delete(p.id):favorites.add(p.id);saveFav();render();};
+    const notesBtn=p.notes_url?`<a class="btn" href="${p.notes_url}" target="_blank" rel="noopener">我的笔记</a>`:"";
+    el.innerHTML=`<div class="top"><div class="name">${p.name}</div></div>${daily}<div class="desc">${p.description||""}</div><div class="tags">${tags}</div><div class="actions"><button class="btn detail">详细分析</button>${notesBtn}<a class="btn" href="${p.url}" target="_blank" rel="noopener">GitHub</a></div>`;
     el.querySelector(".detail").onclick=()=>openDetail(p);grid.appendChild(el);
   });
 }
@@ -112,8 +110,8 @@ async function loadAll(){
 }
 async function loadDate(date){
   const data=await fetch("./daily/"+date+".json?v="+Date.now()).then(r=>r.json());
-  const tagsById=Object.fromEntries(master.map(p=>[p.id,p.tags||[]]));
-  shown=(data.projects||[]).map(p=>({...p,tags:tagsById[p.id]||[]}));
+  const masterById=Object.fromEntries(master.map(p=>[p.id,p]));
+  shown=(data.projects||[]).map(p=>({...p,tags:(masterById[p.id]?.tags)||[],notes_url:masterById[p.id]?.notes_url,notes_issue:masterById[p.id]?.notes_issue}));
   document.getElementById("modeLabel").textContent=data.date+" 当日 Top 10";
   const n=document.getElementById("dayNote");n.textContent=data.note||"";n.hidden=!data.note;render();
 }
