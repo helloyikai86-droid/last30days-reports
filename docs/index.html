@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f6f7fb" />
+  <title>GitHub 机会目录</title>
+  <style>
+    :root{
+      --bg:#f6f7fb; --card:#fff; --text:#16181d; --muted:#6b7280; --line:#e7e9ee;
+      --accent:#2563eb; --accent-soft:#eaf2ff; --hot:#ef4444; --green:#059669;
+      --shadow:0 6px 24px rgba(15,23,42,.06);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+    .wrap{max-width:980px;margin:0 auto;padding:18px 14px 80px}
+    .hero{padding:10px 2px 14px}
+    h1{font-size:28px;line-height:1.2;margin:0 0 7px;letter-spacing:-.4px}
+    .sub{color:var(--muted);font-size:14px;line-height:1.6}
+    .toolbar{position:sticky;top:0;z-index:20;background:rgba(246,247,251,.94);backdrop-filter:blur(14px);padding:10px 0 12px}
+    .search{width:100%;height:46px;border:1px solid var(--line);border-radius:14px;background:#fff;padding:0 14px;font-size:16px;outline:none;box-shadow:var(--shadow)}
+    .chips{display:flex;gap:8px;overflow:auto;padding:10px 0 2px;scrollbar-width:none}
+    .chips::-webkit-scrollbar{display:none}
+    .chip{border:1px solid var(--line);background:#fff;color:#4b5563;border-radius:999px;padding:8px 12px;white-space:nowrap;font-size:13px;cursor:pointer}
+    .chip.active{background:#111827;color:#fff;border-color:#111827}
+    .meta{display:flex;justify-content:space-between;align-items:center;margin:14px 2px 10px;color:var(--muted);font-size:13px}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow);display:flex;flex-direction:column;min-height:166px}
+    .top{display:flex;gap:10px;align-items:flex-start}
+    .name{font-size:18px;font-weight:750;line-height:1.3;word-break:break-word;flex:1}
+    .follow{border:0;background:var(--accent-soft);color:var(--accent);padding:7px 10px;border-radius:10px;font-size:12px;cursor:pointer;white-space:nowrap}
+    .follow.on{background:#111827;color:#fff}
+    .desc{font-size:14px;line-height:1.6;color:#374151;margin:10px 0 12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+    .tag{font-size:11px;color:#596273;background:#f1f3f6;border-radius:999px;padding:5px 8px}
+    .tag.hot{background:#fff0f0;color:#c24141}
+    .tag.new{background:#ecfdf5;color:#047857}
+    .actions{display:flex;gap:8px;margin-top:12px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border-radius:10px;padding:9px 11px;font-size:13px;border:1px solid var(--line);background:#fff;color:#111827;cursor:pointer}
+    .btn.primary{background:#111827;color:white;border-color:#111827}
+    .empty{padding:42px 14px;text-align:center;color:var(--muted)}
+    dialog{border:0;border-radius:20px;padding:0;max-width:620px;width:calc(100% - 26px);box-shadow:0 24px 80px rgba(0,0,0,.22)}
+    dialog::backdrop{background:rgba(15,23,42,.45);backdrop-filter:blur(2px)}
+    .modal{padding:20px}
+    .modal h2{margin:0 0 8px;font-size:24px}
+    .modal p{font-size:14px;line-height:1.75;color:#374151}
+    .kv{background:#f7f8fa;border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:12px 0}
+    .kv b{display:block;margin-bottom:4px}
+    .close{width:100%;margin-top:12px}
+    .footer{margin-top:28px;color:var(--muted);font-size:12px;line-height:1.7;text-align:center}
+    @media(max-width:700px){
+      .wrap{padding:12px 12px 72px}
+      h1{font-size:24px}
+      .grid{grid-template-columns:1fr}
+      .card{min-height:auto}
+      .desc{-webkit-line-clamp:3}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <h1>GitHub 机会目录</h1>
+      <div class="sub">不看长日报，先看项目名 + 一句话说明。感兴趣就点“关注”，以后可以只筛你选中的项目。</div>
+    </div>
+
+    <div class="toolbar">
+      <input id="search" class="search" placeholder="搜索项目、关键词，例如：浏览器 / Agent / 配音" />
+      <div id="chips" class="chips"></div>
+    </div>
+
+    <div class="meta">
+      <span id="count">加载中…</span>
+      <span>每日自动更新</span>
+    </div>
+    <div id="grid" class="grid"></div>
+    <div id="empty" class="empty" hidden>没有符合条件的项目。</div>
+
+    <div class="footer">GitHub 只负责存档，这个页面负责阅读。你的“关注”状态只保存在当前浏览器，不会上传到 GitHub。</div>
+  </div>
+
+  <dialog id="dialog">
+    <div class="modal">
+      <h2 id="mName"></h2>
+      <p id="mDesc"></p>
+      <div class="kv"><b>为什么值得看</b><span id="mWhy"></span></div>
+      <div class="kv"><b>可借鉴的商业方向</b><span id="mBiz"></span></div>
+      <div class="actions">
+        <a id="mGitHub" class="btn primary" target="_blank" rel="noopener">打开 GitHub</a>
+        <button class="btn close" onclick="document.getElementById('dialog').close()">关闭</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    let projects = [];
+    let category = "全部";
+    const favKey = "github-opportunity-favorites-v1";
+    const favorites = new Set(JSON.parse(localStorage.getItem(favKey) || "[]"));
+
+    const categories = ["全部","我关注","AI/Agent","企业AI","AIGC","增长/内容","开发工具","基础设施"];
+    const chips = document.getElementById("chips");
+    categories.forEach((c,i)=>{
+      const b=document.createElement("button");
+      b.className="chip"+(i===0?" active":"");
+      b.textContent=c;
+      b.onclick=()=>{
+        category=c;
+        [...chips.children].forEach(x=>x.classList.toggle("active",x===b));
+        render();
+      };
+      chips.appendChild(b);
+    });
+
+    function saveFav(){ localStorage.setItem(favKey, JSON.stringify([...favorites])); }
+
+    function openDetail(p){
+      document.getElementById("mName").textContent=p.name;
+      document.getElementById("mDesc").textContent=p.description;
+      document.getElementById("mWhy").textContent=p.why || "—";
+      document.getElementById("mBiz").textContent=p.business || "—";
+      const a=document.getElementById("mGitHub");
+      a.href=p.url; a.textContent="打开 GitHub";
+      document.getElementById("dialog").showModal();
+    }
+
+    function render(){
+      const q=document.getElementById("search").value.trim().toLowerCase();
+      const list=projects.filter(p=>{
+        const text=[p.name,p.description,(p.tags||[]).join(" "),p.why,p.business].join(" ").toLowerCase();
+        const qok=!q || text.includes(q);
+        const cok=category==="全部" || (category==="我关注" ? favorites.has(p.id) : (p.tags||[]).includes(category));
+        return qok && cok;
+      });
+      document.getElementById("count").textContent=`${list.length} 个项目`;
+      const grid=document.getElementById("grid"); grid.innerHTML="";
+      document.getElementById("empty").hidden=list.length>0;
+      list.forEach(p=>{
+        const el=document.createElement("article");
+        el.className="card";
+        const isFav=favorites.has(p.id);
+        const tags=(p.tags||[]).map(t=>`<span class="tag ${t==="重点"?"hot":t==="新项目"?"new":""}">${t}</span>`).join("");
+        el.innerHTML=`
+          <div class="top">
+            <div class="name">${p.name}</div>
+            <button class="follow ${isFav?"on":""}">${isFav?"已关注":"关注"}</button>
+          </div>
+          <div class="desc">${p.description}</div>
+          <div class="tags">${tags}</div>
+          <div class="actions">
+            <button class="btn detail">详情</button>
+            <a class="btn" href="${p.url}" target="_blank" rel="noopener">GitHub</a>
+          </div>`;
+        el.querySelector(".follow").onclick=(e)=>{
+          if(favorites.has(p.id)) favorites.delete(p.id); else favorites.add(p.id);
+          saveFav(); render();
+        };
+        el.querySelector(".detail").onclick=()=>openDetail(p);
+        grid.appendChild(el);
+      });
+    }
+
+    document.getElementById("search").addEventListener("input",render);
+
+    fetch("./projects.json?v="+Date.now())
+      .then(r=>r.json())
+      .then(data=>{projects=data.projects||[]; render();})
+      .catch(()=>{document.getElementById("count").textContent="加载失败"; document.getElementById("empty").hidden=false;});
+  </script>
+</body>
+</html>
