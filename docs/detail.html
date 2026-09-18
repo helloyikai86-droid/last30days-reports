@@ -5,10 +5,23 @@
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}.wrap{max-width:860px;margin:auto;padding:18px 14px 70px}.back{display:inline-block;margin-bottom:14px;color:#374151;text-decoration:none}.hero,.section{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow);margin-bottom:12px}.hero h1{margin:0 0 8px;font-size:28px}.meta{font-size:13px;color:#475467;margin:5px 0}.desc{font-size:16px;line-height:1.8;color:#344054}.section h2{margin:0 0 10px;font-size:18px}.section div{white-space:pre-wrap;font-size:15px;line-height:1.85;color:#344054}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{display:inline-flex;text-decoration:none;border:1px solid var(--line);border-radius:10px;padding:10px 13px;color:#111827;background:#fff}.btn.primary{background:#111827;color:#fff;border-color:#111827}.hidden{display:none}@media(max-width:700px){.wrap{padding:12px 12px 64px}.hero,.section{padding:16px}.hero h1{font-size:24px}}
 </style></head><body><main class="wrap">
 <a id="backCatalog" class="back" href="./">← 返回项目目录</a>
-<section class="hero"><h1 id="name">加载中…</h1><div id="meta" class="meta"></div><div id="desc" class="desc"></div><div class="actions" style="margin-top:14px"><a id="notes" class="btn primary">打开笔记</a><a id="github" class="btn" target="_blank">GitHub</a></div></section>
+<section class="hero"><h1 id="name">加载中…</h1><div id="meta" class="meta"></div><div id="starState" class="meta hidden" style="font-weight:700;color:#b45309">★ 你已 Star 这个项目</div><div id="desc" class="desc"></div><div class="actions" style="margin-top:14px"><a id="notes" class="btn primary">打开笔记</a><a id="github" class="btn" target="_blank">GitHub</a></div></section>
 <div id="sections"></div>
-</main><script>
+</main><script src="./config.js"></script><script>
 const qs=new URLSearchParams(location.search),id=qs.get("id"),date=qs.get("date");
+const NOTES_API=(window.NOTES_API||"").replace(/\/$/,""),KEY_STORE="github-opportunity-notes-key";
+function repoFullName(url){const m=String(url||"").match(/^https:\/\/github\.com\/([^/?#]+)\/([^/?#]+?)(?:\.git)?(?:[/?#]|$)/i);return m?(m[1]+"/"+m[2]).toLowerCase():"";}
+async function showStarState(url){
+  const key=localStorage.getItem(KEY_STORE)||sessionStorage.getItem(KEY_STORE)||"";
+  if(!key||!NOTES_API)return;
+  try{
+    const r=await fetch(NOTES_API+"/starred",{headers:{"X-Notes-Key":key}});
+    if(r.status===401){localStorage.removeItem(KEY_STORE);sessionStorage.removeItem(KEY_STORE);return;}
+    if(!r.ok)return;
+    const out=await r.json(),set=new Set((out.starred||[]).map(x=>String(x).toLowerCase()));
+    document.getElementById("starState").classList.toggle("hidden",!set.has(repoFullName(url)));
+  }catch{}
+}
 document.getElementById("backCatalog").onclick=e=>{
   e.preventDefault();
   const sameOrigin=document.referrer&&new URL(document.referrer).origin===location.origin;
@@ -32,7 +45,7 @@ Promise.all([fetch("./projects.json?v="+Date.now()).then(r=>r.json()),date?fetch
   document.title=x.name+"｜详细分析";document.getElementById("name").textContent=(x.rank?"#"+x.rank+" ":"")+x.name;
   const bits=[];if(date)bits.push(date);if(x.stars_today)bits.push(x.stars_today);if(x.total_stars)bits.push("总 Star "+x.total_stars);if(x.language)bits.push(x.language);document.getElementById("meta").textContent=bits.join(" ｜ ");
   document.getElementById("desc").textContent=x.description||"";
-  document.getElementById("github").href=x.url||"#";document.getElementById("notes").href="./notes.html?id="+encodeURIComponent(id);
+  document.getElementById("github").href=x.url||"#";document.getElementById("notes").href="./notes.html?id="+encodeURIComponent(id);showStarState(x.url);
   let html="";
   const fallback={overview:x.description,problem:x.problem,why_hot:x.why_hot||x.why,difference:x.difference,business:x.business,judgment:x.judgment};
   for(const [t,k] of defs)html+=section(t,x[k]||fallback[k]);
