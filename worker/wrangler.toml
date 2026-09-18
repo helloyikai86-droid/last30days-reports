@@ -1,0 +1,10 @@
+name = "github-opportunity-notes"
+main = "worker.js"
+compatibility_date = "2026-09-18"
+
+[vars]
+ALLOWED_ORIGIN = "https://helloyikai86-droid.github.io"
+
+# Secrets (do not commit values):
+# npx wrangler secret put GITHUB_TOKEN
+# npx wrangler secret put NOTES_KEY
