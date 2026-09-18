@@ -19,7 +19,7 @@
 .empty{text-align:center;color:var(--muted);padding:46px}
 dialog{border:0;border-radius:20px;padding:0;width:min(760px,calc(100% - 24px));max-height:88vh;box-shadow:0 24px 80px rgba(0,0,0,.25)}dialog::backdrop{background:rgba(15,23,42,.5);backdrop-filter:blur(2px)}
 .modal{padding:22px;overflow:auto;max-height:88vh}.modal h2{margin:0 0 7px;font-size:25px}.summary{color:#374151;font-size:14px;line-height:1.7}.kv{background:#f7f8fa;border:1px solid var(--line);border-radius:14px;padding:13px 14px;margin:10px 0}.kv b{display:block;margin-bottom:5px}
-.modalActions{display:flex;gap:8px;position:sticky;bottom:-22px;background:linear-gradient(transparent,#fff 26%);padding:22px 0 2px}.modalActions .btn{flex:1;text-align:center}
+.ratingBox{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin:10px 0}.ratingTitle{font-weight:700;margin-bottom:8px}.stars{display:flex;gap:6px;flex-wrap:wrap}.starBtn{font-size:26px;line-height:1;border:0;background:transparent;color:#c7ccd6;cursor:pointer;padding:2px}.starBtn.on{color:#f59e0b}.mineHint{font-size:12px;color:var(--muted);margin-top:8px}.editor{display:grid;gap:10px;margin-top:10px}.editor select,.editor textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:10px 12px;font:inherit;background:#fff}.editor textarea{min-height:90px;resize:vertical}.saveBtn{width:100%}.modalActions{display:flex;gap:8px;position:sticky;bottom:-22px;background:linear-gradient(transparent,#fff 26%);padding:22px 0 2px}.modalActions .btn{flex:1;text-align:center}
 .note{background:#fff8e6;border:1px solid #f3e3b5;border-radius:13px;padding:10px 12px;font-size:13px;color:#6b5a20;margin:10px 0}.footer{margin-top:30px;text-align:center;color:var(--muted);font-size:12px;line-height:1.7}
 @media(max-width:700px){.wrap{padding:12px 12px 72px}.hero h1{font-size:24px}.row{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.date{width:100%}.modal{padding:18px}}
 </style>
@@ -68,6 +68,25 @@ dialog{border:0;border-radius:20px;padding:0;width:min(760px,calc(100% - 24px));
     <div class="kv"><b>商业机会 / 中国市场</b><span id="mBiz"></span></div>
     <div class="kv"><b>明确判断</b><span id="mJudge"></span></div>
     <div class="kv"><b>我的记录</b><span id="mMine"></span></div>
+    <div class="ratingBox">
+      <div class="ratingTitle">我的评分</div>
+      <div id="mStars" class="stars"></div>
+      <div class="mineHint">评分会保存到你的项目笔记，并用于首页 1～5 分筛选。</div>
+      <div class="editor">
+        <select id="mStatus">
+          <option value="👀 观察">👀 观察</option>
+          <option value="💡 有启发">💡 有启发</option>
+          <option value="🧪 想验证">🧪 想验证</option>
+          <option value="🚀 准备做">🚀 准备做</option>
+          <option value="✅ 已研究">✅ 已研究</option>
+          <option value="⏸ 暂缓">⏸ 暂缓</option>
+        </select>
+        <textarea id="mNote" placeholder="我的备注：这个项目给我的启发、可借鉴点、风险……"></textarea>
+        <textarea id="mNext" placeholder="下一步行动：例如让 Codex 跑一下、研究竞品、做 Demo……"></textarea>
+        <button id="mSave" class="btn primary saveBtn" type="button">保存到云端</button>
+        <div id="mSaveMsg" class="mineHint"></div>
+      </div>
+    </div>
     <div class="modalActions">
       <a id="mNotes" class="btn primary" target="_blank" rel="noopener">我的笔记</a>
       <a id="mGitHub" class="btn" target="_blank" rel="noopener">打开 GitHub</a>
@@ -77,7 +96,8 @@ dialog{border:0;border-radius:20px;padding:0;width:min(760px,calc(100% - 24px));
 </dialog>
 
 <script>
-let master=[],shown=[],category="全部",ratingFilter="all";
+let master=[],shown=[],category="全部",ratingFilter="all",currentProject=null;
+const NOTES_API=window.NOTES_API||"";
 const categories=["全部","有笔记","AI/Agent","企业AI","AIGC","增长/内容","开发工具","基础设施"];
 const chips=document.getElementById("chips");
 categories.forEach((c,i)=>{
@@ -86,7 +106,49 @@ categories.forEach((c,i)=>{
   chips.appendChild(b);
 });
 function val(v){return v||"—";}
+function drawStars(p){
+  const box=document.getElementById("mStars"); box.innerHTML="";
+  for(let i=1;i<=5;i++){
+    const b=document.createElement("button");
+    b.type="button"; b.className="starBtn"+((p.rating||0)>=i?" on":""); b.textContent="★"; b.title=i+" 分";
+    b.onclick=()=>saveProjectData({rating:i});
+    box.appendChild(b);
+  }
+}
+async function saveProjectData(patch){
+  if(!currentProject) return;
+  const msg=document.getElementById("mSaveMsg");
+  const payload={
+    id:currentProject.id,
+    name:currentProject.name,
+    notes_issue:currentProject.notes_issue,
+    rating:patch.rating ?? currentProject.rating ?? null,
+    status:patch.status ?? document.getElementById("mStatus").value,
+    note:patch.note ?? document.getElementById("mNote").value.trim(),
+    next_action:patch.next_action ?? document.getElementById("mNext").value.trim()
+  };
+  if(!NOTES_API){
+    msg.textContent="云端写入接口尚未配置；当前先显示评分入口，配置后即可在网页内直接保存并跨设备同步。";
+    return;
+  }
+  msg.textContent="保存中…";
+  try{
+    const r=await fetch(NOTES_API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    const out=await r.json();
+    currentProject.rating=payload.rating;
+    currentProject.has_notes=!!(payload.note||payload.next_action);
+    currentProject.status=payload.status;
+    currentProject.user_note=payload.note;
+    currentProject.next_action=payload.next_action;
+    drawStars(currentProject);
+    document.getElementById("mMine").textContent=(currentProject.rating?("评分："+"★".repeat(currentProject.rating)+"☆".repeat(5-currentProject.rating)):"未评分")+(currentProject.has_notes?" ｜ 已做笔记":"");
+    msg.textContent="已保存并同步。";
+    render();
+  }catch(e){ msg.textContent="保存失败："+e.message; }
+}
 function openDetail(p){
+  currentProject=p;
   document.getElementById("mName").textContent=(p.rank?("#"+p.rank+" "):"")+p.name;
   document.getElementById("mDaily").textContent=p.stars_today?`${p.stars_today}｜总 Star ${p.total_stars||"—"}｜${p.language||"—"}`:"";
   document.getElementById("mDesc").textContent=val(p.description);
@@ -97,6 +159,11 @@ function openDetail(p){
   document.getElementById("mBiz").textContent=val(p.business);
   document.getElementById("mJudge").textContent=val(p.judgment);
   const mine=[]; if(p.rating) mine.push("评分："+"★".repeat(p.rating)+"☆".repeat(5-p.rating)); if(p.has_notes) mine.push("已做笔记"); document.getElementById("mMine").textContent=mine.length?mine.join(" ｜ "):"未评分 / 暂无笔记";
+  drawStars(p);
+  document.getElementById("mStatus").value=p.status||"👀 观察";
+  document.getElementById("mNote").value=p.user_note||"";
+  document.getElementById("mNext").value=p.next_action||"";
+  document.getElementById("mSaveMsg").textContent=NOTES_API?"":"云端保存接口配置后，这里可直接保存并跨设备同步。";
   document.getElementById("mGitHub").href=p.url;
   const notes=document.getElementById("mNotes"); notes.href=p.notes_url||p.url; notes.style.display=p.notes_url?"inline-flex":"none";
   document.getElementById("dialog").showModal();
@@ -136,6 +203,7 @@ async function loadDate(date){
 document.getElementById("search").addEventListener("input",render);
 document.getElementById("dateSelect").addEventListener("change",e=>e.target.value==="all"?loadAll():loadDate(e.target.value));
 document.getElementById("ratingSelect").addEventListener("change",e=>{ratingFilter=e.target.value;render();});
+document.getElementById("mSave").addEventListener("click",()=>saveProjectData({}));
 Promise.all([
   fetch("./projects.json?v="+Date.now()).then(r=>r.json()),
   fetch("./daily/index.json?v="+Date.now()).then(r=>r.json())
