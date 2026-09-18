@@ -109,7 +109,7 @@ function sortList(list){
   return list.sort((a,b)=>{
     if(sortMode==="rating")return (b.rating||0)-(a.rating||0)||String(lastSeen[b.id]||"").localeCompare(String(lastSeen[a.id]||""));
     if(sortMode==="stars")return parseStars((latestDaily[b.id]||b).stars_today)-parseStars((latestDaily[a.id]||a).stars_today);
-    if(sortMode==="first")return String(firstSeen[b.id]||"").localeCompare(String(firstSeen[a.id]||"");
+    if(sortMode==="first")return String(firstSeen[b.id]||"").localeCompare(String(firstSeen[a.id]||""));
     const ad=selectedDate||lastSeen[a.id]||a.latest_analysis_date||"",bd=selectedDate||lastSeen[b.id]||b.latest_analysis_date||"";
     return String(bd).localeCompare(String(ad))||parseStars((latestDaily[b.id]||b).stars_today)-parseStars((latestDaily[a.id]||a).stars_today);
   });
