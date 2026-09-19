@@ -17,17 +17,20 @@
       "problem": "Coding Agent 容易过度设计、堆抽象、写大量不必要代码。",
       "past_solution": "靠人工 code review、AGENTS.md/CLAUDE.md 约束或事后重构。",
       "what_it_is": "一套可跨 Claude Code、Codex、Cursor、OpenClaw 等使用的工程规则与审查技能。",
-      "how_it_works": "",
-      "architecture": "",
-      "why_hot": "",
-      "difference": "",
+      "how_it_works": "面向 AI coding agent 的工程规则/skills，让 Agent 更像资深工程师一样优先删复杂度、少写不必要代码。 项目把相关步骤组织成可重复使用的工作流，并通过其开源实现连接所需工具与数据。具体执行组件以仓库当前 README 和代码为准。",
+      "architecture": "整体由用户入口、核心工作流/服务层、外部工具或数据连接层组成；部署方式和依赖应以项目仓库当前版本为准。",
+      "why_hot": "项目把一个高频但分散的流程做成了更易使用和复用的开源产品。",
+      "difference": "面向 AI coding agent 的工程规则/skills，让 Agent 更像资深工程师一样优先删复杂度、少写不必要代码。",
       "business": "可借鉴为企业 AI 编程规范包、团队代码治理 skill、代码审查服务。",
       "china_opportunity": "国内企业采用 Coding Agent 后，同样需要统一工程规范和降低 AI 生成代码债务。",
-      "use_cases": "",
+      "use_cases": "可借鉴为企业 AI 编程规范包、团队代码治理 skill、代码审查服务。",
       "risks": "效果高度依赖项目上下文，规则过强可能压制必要架构。",
-      "inspiration": "",
+      "inspiration": "可以借鉴其将“面向 AI coding agent 的工程规则/skills，让 Agent 更像资深工程师一样优先删复杂度、少写不必要代码。”产品化的方式，并优先寻找有明确数据、流程和付费主体的垂直场景。",
       "judgment": "产品本身偏工具/规范，但“企业 Coding Agent 治理层”值得关注。",
-      "full_analysis": "历史日报恢复：该项目曾在 2026-09-07 上榜。已恢复可可靠确认的榜单资料；无法从原对话可靠恢复的原始长文不补写。"
+      "full_analysis": "面向 AI coding agent 的工程规则/skills，让 Agent 更像资深工程师一样优先删复杂度、少写不必要代码。\n\n目标用户：Codex、Claude Code、Cursor 等 AI 编程用户和软件团队。\n\n核心问题：Coding Agent 容易过度设计、堆抽象、写大量不必要代码。\n\n过去方案：靠人工 code review、AGENTS.md/CLAUDE.md 约束或事后重构。\n\n工作机制：面向 AI coding agent 的工程规则/skills，让 Agent 更像资深工程师一样优先删复杂度、少写不必要代码。 项目把相关步骤组织成可重复使用的工作流，并通过其开源实现连接所需工具与数据。具体执行组件以仓库当前 README 和代码为准。\n\n技术与产品形态：整体由用户入口、核心工作流/服务层、外部工具或数据连接层组成；部署方式和依赖应以项目仓库当前版本为准。\n\n近期受到关注的原因：项目把一个高频但分散的流程做成了更易使用和复用的开源产品。\n\n核心差异化：面向 AI coding agent 的工程规则/skills，让 Agent 更像资深工程师一样优先删复杂度、少写不必要代码。\n\n商业化路径：可借鉴为企业 AI 编程规范包、团队代码治理 skill、代码审查服务。\n\n中国市场机会：国内企业采用 Coding Agent 后，同样需要统一工程规范和降低 AI 生成代码债务。\n\n可借鉴场景：可借鉴为企业 AI 编程规范包、团队代码治理 skill、代码审查服务。\n\n风险与限制：效果高度依赖项目上下文，规则过强可能压制必要架构。\n\n对我的启发：可以借鉴其将“面向 AI coding agent 的工程规则/skills，让 Agent 更像资深工程师一样优先删复杂度、少写不必要代码。”产品化的方式，并优先寻找有明确数据、流程和付费主体的垂直场景。\n\n明确判断：产品本身偏工具/规范，但“企业 Coding Agent 治理层”值得关注。",
+      "overview": "面向 AI coding agent 的工程规则/skills，让 Agent 更像资深工程师一样优先删复杂度、少写不必要代码。",
+      "analysis_scope": "canonical",
+      "analysis_updated_at": "2026-09-19"
     },
     {
       "rank": 2,
@@ -52,7 +55,10 @@
       "risks": "开源热度不等于商业需求，真正落地仍需验证稳定性、维护成本、授权和目标用户付费意愿。",
       "inspiration": "重点观察其可否替换为国内模型、数据源、消息渠道或企业 SOP，并以更低人工成本包装成垂直产品。",
       "judgment": "保留在机会库中持续观察；若与现有业务或流量场景匹配，再进入 Demo 验证。",
-      "full_analysis": "Matt Pocock 的 AI coding skills 集合，把实现规格、TDD、调试、代码库设计、复盘、教学等软件工程流程封装给 Agent。\n\n目标用户：Claude Code、Codex 等 AI 编程用户和软件团队。\n核心问题：Coding Agent 会写代码，但缺少稳定的软件工程方法和团队一致流程。\n商业/中国机会：可借鉴为企业 AI 研发 SOP、岗位 Skills 包和团队最佳实践库。\n判断：保留在机会库中持续观察，优先验证与现有业务的结合点。"
+      "full_analysis": "Matt Pocock 的 AI coding skills 集合，把实现规格、TDD、调试、代码库设计、复盘、教学等软件工程流程封装给 Agent。\n\n目标用户：Claude Code、Codex 等 AI 编程用户和软件团队。\n核心问题：Coding Agent 会写代码，但缺少稳定的软件工程方法和团队一致流程。\n商业/中国机会：可借鉴为企业 AI 研发 SOP、岗位 Skills 包和团队最佳实践库。\n判断：保留在机会库中持续观察，优先验证与现有业务的结合点。",
+      "overview": "Matt Pocock 的 AI coding skills 集合，把实现规格、TDD、调试、代码库设计、复盘、教学等软件工程流程封装给 Agent。",
+      "analysis_scope": "canonical",
+      "analysis_updated_at": "2026-09-19"
     },
     {
       "rank": 3,
@@ -78,7 +84,10 @@
       "risks": "过多规则会让 Agent 上下文变重；不同 Agent 的能力和配置格式不统一；长期维护成本不低。",
       "inspiration": "未来企业买的可能不是某一个 Coding Agent，而是一层可跨模型复用的 Harness 和 SOP。",
       "judgment": "★★★★★。研究其开源到托管服务的商业路线。",
-      "full_analysis": "ECC 的启发在于：Coding Agent 的竞争正在从“谁模型更强”转向“谁能把团队工作方法沉淀下来”。单个开发者可以靠 prompt 解决问题，但企业需要统一规则、记忆、权限和流程。Harness 层因此有独立商业价值：下层可以是 Codex、Claude Code 或其他 Agent，上层保持企业自己的 SOP。最有潜力的产品形态是团队级 Agent OS、托管服务、行业模板和私有部署。"
+      "full_analysis": "ECC 的启发在于：Coding Agent 的竞争正在从“谁模型更强”转向“谁能把团队工作方法沉淀下来”。单个开发者可以靠 prompt 解决问题，但企业需要统一规则、记忆、权限和流程。Harness 层因此有独立商业价值：下层可以是 Codex、Claude Code 或其他 Agent，上层保持企业自己的 SOP。最有潜力的产品形态是团队级 Agent OS、托管服务、行业模板和私有部署。",
+      "overview": "把 Skills、Memory、Rules、Hooks、安全和持续学习整合成 Coding Agent 的通用 Harness。",
+      "analysis_scope": "canonical",
+      "analysis_updated_at": "2026-09-19"
     },
     {
       "rank": 4,
@@ -103,7 +112,10 @@
       "risks": "规则类工具壁垒不高，而且“更像真人”不等于能绕过 AI 检测。",
       "inspiration": "重点观察它如何把专业流程封装成 Agent 可调用能力，以及是否能替换成国内数据源、模型或企业流程。",
       "judgment": "适合作为内容生产链中的最后润色环节，而不是独立大产品。",
-      "full_analysis": "把 AI 味很重的文字重写得更像真人表达，同时尽量保持原意。\n\n核心用户：内容创作者、营销人员、需要大量 AI 辅助写作的团队。\n核心问题：AI 文案容易出现固定句式、套话和机器感，人工逐篇润色成本高。\n项目形态：把写作风格规则封装成可安装 Skill，可在多种 Agent 中直接调用。\n商业/中国机会：可做品牌语气 Skill、企业内容质检/润色工作流；中文场景可进一步加入平台风格和品牌语料。\n主要风险：规则类工具壁垒不高，而且“更像真人”不等于能绕过 AI 检测。\n判断：适合作为内容生产链中的最后润色环节，而不是独立大产品。"
+      "full_analysis": "把 AI 味很重的文字重写得更像真人表达，同时尽量保持原意。\n\n核心用户：内容创作者、营销人员、需要大量 AI 辅助写作的团队。\n核心问题：AI 文案容易出现固定句式、套话和机器感，人工逐篇润色成本高。\n项目形态：把写作风格规则封装成可安装 Skill，可在多种 Agent 中直接调用。\n商业/中国机会：可做品牌语气 Skill、企业内容质检/润色工作流；中文场景可进一步加入平台风格和品牌语料。\n主要风险：规则类工具壁垒不高，而且“更像真人”不等于能绕过 AI 检测。\n判断：适合作为内容生产链中的最后润色环节，而不是独立大产品。",
+      "overview": "把 AI 味很重的文字重写得更像真人表达，同时尽量保持原意。",
+      "analysis_scope": "canonical",
+      "analysis_updated_at": "2026-09-19"
     },
     {
       "rank": 5,
@@ -118,17 +130,20 @@
       "problem": "Mermaid 等自动图表常显得模板化，复杂图可读性和视觉质量不足。",
       "past_solution": "draw.io/Figma 手工绘制，或用 Mermaid 后再人工美化。",
       "what_it_is": "带明确视觉语法、导入/重绘规则和输出规格的 Agent Skill。",
-      "how_it_works": "",
-      "architecture": "",
-      "why_hot": "",
-      "difference": "",
+      "how_it_works": "给 Claude Code、Codex、Pi 等 Agent 使用的专业图表设计 Skill，可生成架构图、流程图、时序图、ER、甘特等大量 HTML/SVG 图表。 项目把相关步骤组织成可重复使用的工作流，并通过其开源实现连接所需工具与数据。具体执行组件以仓库当前 README 和代码为准。",
+      "architecture": "整体由用户入口、核心工作流/服务层、外部工具或数据连接层组成；部署方式和依赖应以项目仓库当前版本为准。",
+      "why_hot": "项目把一个高频但分散的流程做成了更易使用和复用的开源产品。",
+      "difference": "给 Claude Code、Codex、Pi 等 Agent 使用的专业图表设计 Skill，可生成架构图、流程图、时序图、ER、甘特等大量 HTML/SVG 图表。",
       "business": "可做企业架构图/方案书自动化、咨询文档图示、品牌化图表服务。",
       "china_opportunity": "适合售前方案、技术文档、企业汇报等高频场景，可结合中文模板与企业品牌规范。",
-      "use_cases": "",
+      "use_cases": "可做企业架构图/方案书自动化、咨询文档图示、品牌化图表服务。",
       "risks": "复杂图仍需人工确认信息结构，视觉自动化不能替代业务建模。",
-      "inspiration": "",
+      "inspiration": "可以借鉴其将“给 Claude Code、Codex、Pi 等 Agent 使用的专业图表设计 Skill，可生成架构图、流程图、时序图、ER、甘特等大量 HTML/SVG 图表。”产品化的方式，并优先寻找有明确数据、流程和付费主体的垂直场景。",
       "judgment": "典型的“专业技能 + 设计规范”型 Skill，实用性强。",
-      "full_analysis": "历史日报恢复：该项目曾在 2026-09-11 上榜。已恢复可可靠确认的榜单资料；无法从原对话可靠恢复的原始长文不补写。"
+      "full_analysis": "给 Claude Code、Codex、Pi 等 Agent 使用的专业图表设计 Skill，可生成架构图、流程图、时序图、ER、甘特等大量 HTML/SVG 图表。\n\n目标用户：工程师、架构师、咨询/售前、需要快速产出专业图示的 AI 编程用户。\n\n核心问题：Mermaid 等自动图表常显得模板化，复杂图可读性和视觉质量不足。\n\n过去方案：draw.io/Figma 手工绘制，或用 Mermaid 后再人工美化。\n\n工作机制：给 Claude Code、Codex、Pi 等 Agent 使用的专业图表设计 Skill，可生成架构图、流程图、时序图、ER、甘特等大量 HTML/SVG 图表。 项目把相关步骤组织成可重复使用的工作流，并通过其开源实现连接所需工具与数据。具体执行组件以仓库当前 README 和代码为准。\n\n技术与产品形态：整体由用户入口、核心工作流/服务层、外部工具或数据连接层组成；部署方式和依赖应以项目仓库当前版本为准。\n\n近期受到关注的原因：项目把一个高频但分散的流程做成了更易使用和复用的开源产品。\n\n核心差异化：给 Claude Code、Codex、Pi 等 Agent 使用的专业图表设计 Skill，可生成架构图、流程图、时序图、ER、甘特等大量 HTML/SVG 图表。\n\n商业化路径：可做企业架构图/方案书自动化、咨询文档图示、品牌化图表服务。\n\n中国市场机会：适合售前方案、技术文档、企业汇报等高频场景，可结合中文模板与企业品牌规范。\n\n可借鉴场景：可做企业架构图/方案书自动化、咨询文档图示、品牌化图表服务。\n\n风险与限制：复杂图仍需人工确认信息结构，视觉自动化不能替代业务建模。\n\n对我的启发：可以借鉴其将“给 Claude Code、Codex、Pi 等 Agent 使用的专业图表设计 Skill，可生成架构图、流程图、时序图、ER、甘特等大量 HTML/SVG 图表。”产品化的方式，并优先寻找有明确数据、流程和付费主体的垂直场景。\n\n明确判断：典型的“专业技能 + 设计规范”型 Skill，实用性强。",
+      "overview": "给 Claude Code、Codex、Pi 等 Agent 使用的专业图表设计 Skill，可生成架构图、流程图、时序图、ER、甘特等大量 HTML/SVG 图表。",
+      "analysis_scope": "canonical",
+      "analysis_updated_at": "2026-09-19"
     },
     {
       "rank": 6,
@@ -153,7 +168,10 @@
       "risks": "开源热度不等于商业需求，真正落地仍需验证稳定性、维护成本、授权和目标用户付费意愿。",
       "inspiration": "重点观察其可否替换为国内模型、数据源、消息渠道或企业 SOP，并以更低人工成本包装成垂直产品。",
       "judgment": "保留在机会库中持续观察；若与现有业务或流量场景匹配，再进入 Demo 验证。",
-      "full_analysis": "开源 AI coding agent/终端开发助手，强调多模型、可扩展和开放工作流。\n\n目标用户：开发者、AI 编程重度用户和希望自托管/自定义的团队。\n核心问题：闭源 Coding Agent 在模型、数据、扩展和工作流上可控性有限。\n商业/中国机会：可围绕企业私有部署、模型网关、插件/Skills 和开发治理延伸。\n判断：保留在机会库中持续观察，优先验证与现有业务的结合点。"
+      "full_analysis": "开源 AI coding agent/终端开发助手，强调多模型、可扩展和开放工作流。\n\n目标用户：开发者、AI 编程重度用户和希望自托管/自定义的团队。\n核心问题：闭源 Coding Agent 在模型、数据、扩展和工作流上可控性有限。\n商业/中国机会：可围绕企业私有部署、模型网关、插件/Skills 和开发治理延伸。\n判断：保留在机会库中持续观察，优先验证与现有业务的结合点。",
+      "overview": "开源 AI coding agent/终端开发助手，强调多模型、可扩展和开放工作流。",
+      "analysis_scope": "canonical",
+      "analysis_updated_at": "2026-09-19"
     },
     {
       "rank": 7,
@@ -178,7 +196,10 @@
       "risks": "视觉模型成本、页面变化、验证码和账号风控会影响稳定性。",
       "inspiration": "重点观察它如何把专业流程封装成 Agent 可调用能力，以及是否能替换成国内数据源、模型或企业流程。",
       "judgment": "浏览器 Agent 基础设施方向值得持续关注。",
-      "full_analysis": "开源 vision-first 浏览器 Agent，用视觉模型理解界面、点击、输入、提取数据并做视觉断言。\n\n核心用户：网页自动化、RPA、测试和 Agent 平台开发者。\n核心问题：传统 DOM/选择器自动化在复杂现代网页上脆弱，通用浏览器 Agent 又不够可重复。\n项目形态：视觉模型直接理解页面并定位操作，同时提供可控动作、数据提取和测试能力。\n商业/中国机会：可做 AI RPA、网页测试、跨 SaaS 自动化；中国市场可针对企业后台和无 API 系统。\n主要风险：视觉模型成本、页面变化、验证码和账号风控会影响稳定性。\n判断：浏览器 Agent 基础设施方向值得持续关注。"
+      "full_analysis": "开源 vision-first 浏览器 Agent，用视觉模型理解界面、点击、输入、提取数据并做视觉断言。\n\n核心用户：网页自动化、RPA、测试和 Agent 平台开发者。\n核心问题：传统 DOM/选择器自动化在复杂现代网页上脆弱，通用浏览器 Agent 又不够可重复。\n项目形态：视觉模型直接理解页面并定位操作，同时提供可控动作、数据提取和测试能力。\n商业/中国机会：可做 AI RPA、网页测试、跨 SaaS 自动化；中国市场可针对企业后台和无 API 系统。\n主要风险：视觉模型成本、页面变化、验证码和账号风控会影响稳定性。\n判断：浏览器 Agent 基础设施方向值得持续关注。",
+      "overview": "开源 vision-first 浏览器 Agent，用视觉模型理解界面、点击、输入、提取数据并做视觉断言。",
+      "analysis_scope": "canonical",
+      "analysis_updated_at": "2026-09-19"
     },
     {
       "rank": 8,
@@ -193,17 +214,20 @@
       "problem": "多数 Agent 会话结束后经验丢失，且依赖本机常开或单一模型。",
       "past_solution": "本地 Agent + 手工 memory 文件、固定模型、定时脚本。",
       "what_it_is": "具备长期学习、skills、自托管和多模型切换能力的通用 Agent runtime。",
-      "how_it_works": "",
-      "architecture": "",
-      "why_hot": "",
-      "difference": "",
+      "how_it_works": "Nous Research 的自改进 AI Agent，带学习循环、技能沉淀、历史对话搜索和长期用户模型，可部署在 VPS/服务器并通过 Telegram 等远程使用。 项目把相关步骤组织成可重复使用的工作流，并通过其开源实现连接所需工具与数据。具体执行组件以仓库当前 README 和代码为准。",
+      "architecture": "整体由用户入口、核心工作流/服务层、外部工具或数据连接层组成；部署方式和依赖应以项目仓库当前版本为准。",
+      "why_hot": "项目把一个高频但分散的流程做成了更易使用和复用的开源产品。",
+      "difference": "Nous Research 的自改进 AI Agent，带学习循环、技能沉淀、历史对话搜索和长期用户模型，可部署在 VPS/服务器并通过 Telegram 等远程使用。",
       "business": "可做个人 AI 员工、企业私有 Agent、远程自动化助手。",
       "china_opportunity": "可接国内模型、企微/飞书/钉钉，形成持续在线的 AI 员工。",
-      "use_cases": "",
+      "use_cases": "可做个人 AI 员工、企业私有 Agent、远程自动化助手。",
       "risks": "长期权限、密钥、自动执行安全和维护复杂度是核心问题。",
-      "inspiration": "",
+      "inspiration": "可以借鉴其将“Nous Research 的自改进 AI Agent，带学习循环、技能沉淀、历史对话搜索和长期用户模型，可部署在 VPS/服务器并通过 Telegram 等远程使用。”产品化的方式，并优先寻找有明确数据、流程和付费主体的垂直场景。",
       "judgment": "通用 Agent runtime 里值得长期跟踪，重点看持续学习和云端常驻能力。",
-      "full_analysis": "历史日报恢复：该项目曾在 2026-09-07 上榜。已恢复可可靠确认的榜单资料；无法从原对话可靠恢复的原始长文不补写。"
+      "full_analysis": "Nous Research 的自改进 AI Agent，带学习循环、技能沉淀、历史对话搜索和长期用户模型，可部署在 VPS/服务器并通过 Telegram 等远程使用。\n\n目标用户：需要长期运行个人 Agent、自动化工作流和云端助手的高级用户/开发者。\n\n核心问题：多数 Agent 会话结束后经验丢失，且依赖本机常开或单一模型。\n\n过去方案：本地 Agent + 手工 memory 文件、固定模型、定时脚本。\n\n工作机制：Nous Research 的自改进 AI Agent，带学习循环、技能沉淀、历史对话搜索和长期用户模型，可部署在 VPS/服务器并通过 Telegram 等远程使用。 项目把相关步骤组织成可重复使用的工作流，并通过其开源实现连接所需工具与数据。具体执行组件以仓库当前 README 和代码为准。\n\n技术与产品形态：整体由用户入口、核心工作流/服务层、外部工具或数据连接层组成；部署方式和依赖应以项目仓库当前版本为准。\n\n近期受到关注的原因：项目把一个高频但分散的流程做成了更易使用和复用的开源产品。\n\n核心差异化：Nous Research 的自改进 AI Agent，带学习循环、技能沉淀、历史对话搜索和长期用户模型，可部署在 VPS/服务器并通过 Telegram 等远程使用。\n\n商业化路径：可做个人 AI 员工、企业私有 Agent、远程自动化助手。\n\n中国市场机会：可接国内模型、企微/飞书/钉钉，形成持续在线的 AI 员工。\n\n可借鉴场景：可做个人 AI 员工、企业私有 Agent、远程自动化助手。\n\n风险与限制：长期权限、密钥、自动执行安全和维护复杂度是核心问题。\n\n对我的启发：可以借鉴其将“Nous Research 的自改进 AI Agent，带学习循环、技能沉淀、历史对话搜索和长期用户模型，可部署在 VPS/服务器并通过 Telegram 等远程使用。”产品化的方式，并优先寻找有明确数据、流程和付费主体的垂直场景。\n\n明确判断：通用 Agent runtime 里值得长期跟踪，重点看持续学习和云端常驻能力。",
+      "overview": "Nous Research 的自改进 AI Agent，带学习循环、技能沉淀、历史对话搜索和长期用户模型，可部署在 VPS/服务器并通过 Telegram 等远程使用。",
+      "analysis_scope": "canonical",
+      "analysis_updated_at": "2026-09-19"
     },
     {
       "rank": 9,
@@ -228,7 +252,10 @@
       "risks": "开源热度不等于商业需求，真正落地仍需验证稳定性、维护成本、授权和目标用户付费意愿。",
       "inspiration": "重点观察其可否替换为国内模型、数据源、消息渠道或企业 SOP，并以更低人工成本包装成垂直产品。",
       "judgment": "保留在机会库中持续观察；若与现有业务或流量场景匹配，再进入 Demo 验证。",
-      "full_analysis": "Anthropic 的 Agent Skills 公开参考仓库，展示文档处理、创意、开发和企业工作流如何封装成可动态加载的 Skills。\n\n目标用户：Claude/Agent Skills 开发者、企业 AI 平台和工作流设计者。\n核心问题：仅靠 prompt 难把专业任务稳定复用和分发。\n商业/中国机会：可借鉴做企业内部 Skills 市场、行业 SOP Skill 和文档自动化能力包。\n判断：保留在机会库中持续观察，优先验证与现有业务的结合点。"
+      "full_analysis": "Anthropic 的 Agent Skills 公开参考仓库，展示文档处理、创意、开发和企业工作流如何封装成可动态加载的 Skills。\n\n目标用户：Claude/Agent Skills 开发者、企业 AI 平台和工作流设计者。\n核心问题：仅靠 prompt 难把专业任务稳定复用和分发。\n商业/中国机会：可借鉴做企业内部 Skills 市场、行业 SOP Skill 和文档自动化能力包。\n判断：保留在机会库中持续观察，优先验证与现有业务的结合点。",
+      "overview": "Anthropic 的 Agent Skills 公开参考仓库，展示文档处理、创意、开发和企业工作流如何封装成可动态加载的 Skills。",
+      "analysis_scope": "canonical",
+      "analysis_updated_at": "2026-09-19"
     },
     {
       "rank": 10,
@@ -253,7 +280,10 @@
       "risks": "开源热度不等于商业需求，真正落地仍需验证稳定性、维护成本、授权和目标用户付费意愿。",
       "inspiration": "重点观察其可否替换为国内模型、数据源、消息渠道或企业 SOP，并以更低人工成本包装成垂直产品。",
       "judgment": "保留在机会库中持续观察；若与现有业务或流量场景匹配，再进入 Demo 验证。",
-      "full_analysis": "HumanLayer 团队的 Claude Code Skills 集合，覆盖 CLAUDE.md 优化、React 类型收窄、迭代 Agent loop、control loop 设计等。\n\n目标用户：AI 编程高级用户和希望标准化 Agent 开发流程的团队。\n核心问题：Coding Agent 的规则和控制循环需要反复人工设计。\n商业/中国机会：可借鉴为企业 AI 工程 Skill 包和自动化研发流程模板。\n判断：保留在机会库中持续观察，优先验证与现有业务的结合点。"
+      "full_analysis": "HumanLayer 团队的 Claude Code Skills 集合，覆盖 CLAUDE.md 优化、React 类型收窄、迭代 Agent loop、control loop 设计等。\n\n目标用户：AI 编程高级用户和希望标准化 Agent 开发流程的团队。\n核心问题：Coding Agent 的规则和控制循环需要反复人工设计。\n商业/中国机会：可借鉴为企业 AI 工程 Skill 包和自动化研发流程模板。\n判断：保留在机会库中持续观察，优先验证与现有业务的结合点。",
+      "overview": "HumanLayer 团队的 Claude Code Skills 集合，覆盖 CLAUDE.md 优化、React 类型收窄、迭代 Agent loop、control loop 设计等。",
+      "analysis_scope": "canonical",
+      "analysis_updated_at": "2026-09-19"
     }
   ]
 }

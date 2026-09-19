@@ -16,3 +16,16 @@ When asked to create a report:
 
 Meaningful change includes accelerated stars/discussion, a major release, new monetization, financing/revenue/user data, important new functionality, movement from niche to mainstream, or a newly visible China localization opportunity.
 
+## GitHub opportunity catalog contract
+
+Every project that appears in a daily Top 10 must have one canonical, reusable detailed analysis in `docs/projects.json`. Repeated appearances reuse and, when evidence changes, update that same analysis; daily JSON files own only date-specific ranking and Star snapshots.
+
+Before publishing catalog data, run:
+
+```powershell
+node scripts/sync-canonical-analysis.mjs --date YYYY-MM-DD
+node scripts/validate-catalog-analysis.mjs
+```
+
+Publishing is blocked when any project is missing one of these fields: `overview`, `what_it_is`, `target_users`, `problem`, `past_solution`, `how_it_works`, `architecture`, `why_hot`, `difference`, `business`, `china_opportunity`, `use_cases`, `risks`, `inspiration`, `judgment`, `full_analysis`. Placeholder text such as `历史日报恢复` is forbidden.
+

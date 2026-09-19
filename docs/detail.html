@@ -30,6 +30,7 @@ document.getElementById("backCatalog").onclick=e=>{
 const defs=[
 ["一句话看懂","overview"],["项目具体做什么","what_it_is"],["目标用户","target_users"],["核心问题与旧方案","problem"],["过去通常怎么解决","past_solution"],["核心机制 / 工作流程","how_it_works"],["技术架构 / 关键实现","architecture"],["为什么近期爆火","why_hot"],["核心差异化","difference"],["商业化路径","business"],["中国市场机会","china_opportunity"],["可借鉴场景","use_cases"],["风险与限制","risks"],["对我的启发","inspiration"],["明确判断","judgment"],["完整深度分析","full_analysis"]
 ];
+const canonicalAnalysisKeys=new Set(defs.map(([,key])=>key).concat(["description"]));
 function section(title,text){if(!text)return"";return '<section class="section"><h2>'+title+'</h2><div>'+String(text).replace(/</g,"&lt;").replace(/>/g,"&gt;")+'</div></section>';}
 Promise.all([fetch("./projects.json?v="+Date.now()).then(r=>r.json()),date?fetch("./daily/"+date+".json?v="+Date.now()).then(r=>r.json()).catch(()=>null):Promise.resolve(null)]).then(([p,d])=>{
   const base=(p.projects||[]).find(x=>x.id===id)||{};
@@ -37,6 +38,8 @@ Promise.all([fetch("./projects.json?v="+Date.now()).then(r=>r.json()),date?fetch
   const x={...base};
   if(day){
     for(const [k,v] of Object.entries(day)){
+      // 分析资料以长期项目库为唯一版本；日榜只覆盖当天排名、Star、语言等快照字段。
+      if(canonicalAnalysisKeys.has(k)&&base[k])continue;
       const placeholder=typeof v==="string"&&(v.startsWith("该项目曾出现在")||v.startsWith("历史日报恢复：")||v.startsWith("历史日报恢复记录："));
       const empty=v===null||v===undefined||v===""||placeholder||(Array.isArray(v)&&v.length===0);
       if(!empty)x[k]=v;
