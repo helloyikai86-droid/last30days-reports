@@ -27,5 +27,7 @@ node scripts/sync-canonical-analysis.mjs --date YYYY-MM-DD
 node scripts/validate-catalog-analysis.mjs
 ```
 
-Publishing is blocked when any project is missing one of these fields: `overview`, `what_it_is`, `target_users`, `problem`, `past_solution`, `how_it_works`, `architecture`, `why_hot`, `difference`, `business`, `china_opportunity`, `use_cases`, `risks`, `inspiration`, `judgment`, `full_analysis`. Placeholder text such as `历史日报恢复` is forbidden.
+Publishing is blocked when any project is missing one of these fields: `overview`, `what_it_is`, `target_users`, `problem`, `past_solution`, `how_it_works`, `architecture`, `why_hot`, `difference`, `business`, `china_opportunity`, `beginner_guide`, `usage_scenarios`, `use_cases`, `risks`, `inspiration`, `judgment`, `full_analysis`. Placeholder text such as `历史日报恢复` is forbidden.
+
+Every newly discovered project must set `analysis_quality_version: 2`. Explain required background and terms for a non-expert, provide at least three concrete usage scenarios in the form “who / situation / steps / result”, describe the workflow step by step, and write at least 900 Chinese characters of full analysis. Generic fallbacks and repeated text across overview, project description, and workflow fail validation and must be replaced by project-specific research before publishing.
 

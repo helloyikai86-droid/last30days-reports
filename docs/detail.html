@@ -42,7 +42,7 @@ backCatalog.onclick=e=>{
   location.replace(catalogUrl);
 };
 const defs=[
-["一句话看懂","overview"],["项目具体做什么","what_it_is"],["目标用户","target_users"],["核心问题与旧方案","problem"],["过去通常怎么解决","past_solution"],["核心机制 / 工作流程","how_it_works"],["技术架构 / 关键实现","architecture"],["为什么近期爆火","why_hot"],["核心差异化","difference"],["商业化路径","business"],["中国市场机会","china_opportunity"],["可借鉴场景","use_cases"],["风险与限制","risks"],["对我的启发","inspiration"],["明确判断","judgment"],["完整深度分析","full_analysis"]
+["一句话看懂","overview"],["项目具体做什么","what_it_is"],["目标用户","target_users"],["核心问题与旧方案","problem"],["过去通常怎么解决","past_solution"],["核心机制 / 工作流程","how_it_works"],["技术架构 / 关键实现","architecture"],["为什么近期爆火","why_hot"],["核心差异化","difference"],["商业化路径","business"],["中国市场机会","china_opportunity"],["给没有背景的读者","beginner_guide"],["具体使用场景（谁在什么情况下怎么用）","usage_scenarios"],["可借鉴的产品场景","use_cases"],["风险与限制","risks"],["对我的启发","inspiration"],["明确判断","judgment"],["完整深度分析","full_analysis"]
 ];
 const canonicalAnalysisKeys=new Set(defs.map(([,key])=>key).concat(["description"]));
 function section(title,text){if(!text)return"";return '<section class="section"><h2>'+title+'</h2><div>'+String(text).replace(/</g,"&lt;").replace(/>/g,"&gt;")+'</div></section>';}

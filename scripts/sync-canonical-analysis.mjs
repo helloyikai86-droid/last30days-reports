@@ -12,13 +12,35 @@ const updatedAt = process.argv.includes("--date")
 const analysisKeys = [
   "overview", "what_it_is", "target_users", "problem", "past_solution",
   "how_it_works", "architecture", "why_hot", "difference", "business",
-  "china_opportunity", "use_cases", "risks", "inspiration", "judgment",
-  "full_analysis"
+  "china_opportunity", "beginner_guide", "usage_scenarios", "use_cases",
+  "risks", "inspiration", "judgment", "full_analysis"
 ];
 const placeholder = value => typeof value === "string" && /历史日报恢复|该项目曾出现在|历史日报恢复记录/.test(value);
 const usable = value => typeof value === "string" && value.trim() && !placeholder(value);
 
 const overrides = {
+  "lunatv": {
+    analysis_quality_version: 2,
+    url: "https://github.com/MoonTechLab/LunaTV",
+    description: "把多个合规视频来源汇总到一个自托管网页播放器，并同步收藏与跨设备播放进度。",
+    overview: "把多个合规视频来源汇总到一个由用户自己部署的网页播放器中，并同步收藏和播放进度。",
+    what_it_is: "LunaTV 是一个需要用户自行部署和配置内容源的跨平台影视聚合播放器。它本身不是视频网站，也不提供内置影片；管理员把自己有权使用的标准接口填入后台后，用户才能在同一个网页里搜索、查看详情、播放、收藏并继续观看。",
+    target_users: "拥有合法内容源、愿意维护家庭服务器或 NAS 的影音爱好者；需要统一管理自有培训视频、授权媒体库的家庭或小团队；以及研究跨设备播放器和自托管产品体验的开发者。",
+    problem: "当视频分散在多个合法服务、家庭存储或内部媒体接口中时，用户需要反复切换入口，搜索结果、收藏和播放进度彼此不通；在电视、电脑和手机之间继续观看也很麻烦。",
+    past_solution: "过去通常分别打开每个来源的网站或 App，用浏览器书签记录内容，或搭建 Jellyfin、Plex 等媒体库。前一种方式数据割裂，后一种方式更适合管理本地文件，对聚合外部接口仍需要额外配置。",
+    how_it_works: "管理员先用 Docker 部署 LunaTV，并连接 Kvrocks、Redis 或 Upstash 保存用户数据；然后在后台配置自己有权使用的视频接口。用户搜索时，系统向多个来源查询并合并结果，选择剧集后交给网页播放器播放，同时把收藏和进度写入存储层，让网页、移动端和电视端能够继续观看。",
+    architecture: "前端采用 Next.js、TypeScript 和 Tailwind CSS，播放层使用 ArtPlayer 与 HLS.js；服务端负责搜索、详情与来源代理，Kvrocks、Redis 或 Upstash 保存账号、收藏和进度。项目通过 Docker 部署，并可与移动端 Selene、Android TV 端 OrionTV 配合。",
+    why_hot: "它把多源搜索、网页播放、跨端进度和 Docker 部署组合成开箱即用的完整界面，降低了自托管播放器的搭建门槛；同时 PWA、电视端和移动端同步让它更接近日常消费产品，而不只是开发者演示。",
+    difference: "与单个视频网站不同，它由用户控制部署和数据；与只管理本地文件的媒体库不同，它强调通过配置接口聚合多个来源。真正的差异化是统一搜索、播放、收藏和跨设备进度，而不是某一种视频解码技术。",
+    business: "原项目采用非商业许可，并明确限制商业使用，因此不能直接拿代码收费。可借鉴的商业方向是为拥有版权的教育机构、企业培训或内部媒体库重新开发合规版本，收入来自部署、维护、权限管理和专属客户端，而不是出售影视内容。",
+    china_opportunity: "国内更可行的方向不是公开影视聚合站，而是面向企业培训、校园课程、连锁门店宣传素材或家庭合法媒体库，连接客户自有或已授权的视频源，提供私有部署、国产存储适配、电视大屏和多端进度同步。",
+    beginner_guide: "通俗理解：它像一个由你自己搭建的“统一遥控器和播放大厅”。Docker 可以理解为把程序及其运行环境装进标准箱子，方便在服务器或 NAS 上启动；HLS 是常见的分段视频播放方式；Redis/Kvrocks 是保存账号、收藏和观看进度的数据库。LunaTV 安装完成后仍是空壳，必须由管理员配置合法内容源，才会出现可搜索和播放的内容。",
+    usage_scenarios: "场景 1｜家庭合法媒体入口：家中 NAS 管理员把自有或获授权的视频接口接入，家人在电视上看到一半，之后用平板登录同一账号，从保存的进度继续播放。\n\n场景 2｜企业培训视频中心：公司把自有课程和不同部门的培训视频接口统一到内网站点，员工按关键词检索、收藏课程并同步学习进度，管理员不需要重新复制所有视频文件。\n\n场景 3｜开发者验证播放器产品：产品团队用它研究多源搜索、HLS 播放、PWA、电视端适配和跨端进度同步，再用自有内容与合规接口制作垂直播放器原型。",
+    use_cases: "可借鉴到企业学习中心、校园课程门户、连锁门店内容大屏、家庭 NAS 媒体入口和拥有版权的视频 SaaS；重点借鉴统一搜索、跨端进度、空壳加配置源的产品结构，不照搬受版权限制的内容模式。",
+    risks: "最大的风险是内容版权、接口授权和公开传播。项目要求用户自行提供来源，并采用非商业许可；公开服务、使用未经授权的接口或把代码直接商业化都可能违规。此外还要处理弱密码、公开注册、代理接口泄露、来源失效、播放兼容性和数据库持久化问题。",
+    inspiration: "这个项目说明，用户愿意为“把分散入口整合成连续体验”付出部署成本。可迁移的产品思路是：应用保持空壳，客户接入自己的合规数据源，产品负责统一搜索、展示、状态同步和多端体验。",
+    judgment: "产品体验和自托管架构值得研究，但不适合直接复制成公开影视站。若要做商业项目，应重新实现并只服务自有或授权内容，把价值放在私有部署、权限、跨端同步和行业工作流上。"
+  },
   "voice-studio": {
     target_users: "短视频与播客团队、游戏和漫剧制作方、需要私有化语音能力的企业，以及批量配音工具开发者。",
     problem: "声音克隆、TTS、ASR、翻译、视频对齐和批处理通常分散在多个模型与工具中，角色管理和重复生产成本高。",
@@ -263,6 +285,8 @@ function defaults(project) {
     difference: project.why || project.description,
     business: project.business,
     china_opportunity: project.business,
+    beginner_guide: `通俗理解：这是一个围绕“${project.description}”建立的工具。阅读时先关注它替代了哪一步人工工作、需要接入什么数据或外部服务，以及结果是否仍需人工复核；具体术语和依赖必须结合项目 README 解释。`,
+    usage_scenarios: `场景 1｜个人试用：目标用户用一份真实但低风险的任务验证核心能力，并比较使用前后的时间成本。\n\n场景 2｜团队流程：把它接入一个明确的现有工作环节，由人工检查输入、输出和异常。\n\n场景 3｜产品化验证：选择单一行业客户做小范围 Demo，记录使用频率、稳定性和付费意愿。`,
     use_cases: project.business,
     risks: risk,
     inspiration: `可以借鉴其将“${project.description}”产品化的方式，并优先寻找有明确数据、流程和付费主体的垂直场景。`,
@@ -282,7 +306,9 @@ function buildFull(project) {
     `核心差异化：${project.difference}`,
     `商业化路径：${project.business}`,
     `中国市场机会：${project.china_opportunity}`,
-    `可借鉴场景：${project.use_cases}`,
+    `给没有背景的读者：${project.beginner_guide}`,
+    `具体使用场景：${project.usage_scenarios}`,
+    `可借鉴的产品场景：${project.use_cases}`,
     `风险与限制：${project.risks}`,
     `对我的启发：${project.inspiration}`,
     `明确判断：${project.judgment}`
@@ -302,6 +328,7 @@ for (const { date, data } of dailyDocuments) {
     if (!known.has(item.id)) {
       const added = {
         ...item,
+        analysis_quality_version: 2,
         tags: item.tags || [],
         first_seen: date,
         last_seen: date,
@@ -320,10 +347,14 @@ for (const project of catalog.projects) {
   const combined = { ...defaults(project), ...(overrides[project.id] || {}) };
   for (const key of analysisKeys) {
     if (key === "full_analysis") continue;
-    if (!usable(project[key])) project[key] = combined[key];
+    if (usable(overrides[project.id]?.[key])) project[key] = overrides[project.id][key];
+    else if (!usable(project[key])) project[key] = combined[key];
   }
+  if (overrides[project.id]?.url) project.url = overrides[project.id].url;
+  if (overrides[project.id]?.description) project.description = overrides[project.id].description;
+  if (overrides[project.id]?.analysis_quality_version) project.analysis_quality_version = overrides[project.id].analysis_quality_version;
   if (!usable(project.overview)) project.overview = project.description;
-  if (!usable(project.full_analysis)) project.full_analysis = buildFull(project);
+  if (!usable(project.full_analysis) || project.analysis_quality_version >= 2) project.full_analysis = buildFull(project);
   project.analysis_scope = "canonical";
   project.analysis_updated_at = updatedAt;
 }
@@ -339,6 +370,7 @@ for (const { filename, data: daily } of dailyDocuments) {
     for (const key of analysisKeys) item[key] = canonical[key];
     item.analysis_scope = "canonical";
     item.analysis_updated_at = canonical.analysis_updated_at;
+    item.analysis_quality_version = canonical.analysis_quality_version || 1;
   }
   fs.writeFileSync(fullPath, JSON.stringify(daily, null, 2) + "\n", "utf8");
 }
