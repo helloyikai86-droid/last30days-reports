@@ -22,10 +22,24 @@ async function showStarState(url){
     document.getElementById("starState").classList.toggle("hidden",!set.has(repoFullName(url)));
   }catch{}
 }
-document.getElementById("backCatalog").onclick=e=>{
+function catalogReturnUrl(){
+  try{
+    const state=JSON.parse(sessionStorage.getItem("github-catalog-state-v2")||"null");
+    const url=new URL(state?.url||"./",location.href);
+    return url.origin===location.origin?url.href:new URL("./",location.href).href;
+  }catch{return new URL("./",location.href).href;}
+}
+const backCatalog=document.getElementById("backCatalog"),catalogUrl=catalogReturnUrl();
+backCatalog.href=catalogUrl;
+backCatalog.onclick=e=>{
   e.preventDefault();
-  const sameOrigin=document.referrer&&new URL(document.referrer).origin===location.origin;
-  if(sameOrigin&&history.length>1)history.back();else location.href="./";
+  try{
+    const ref=new URL(document.referrer);
+    const cameFromCatalog=ref.origin===location.origin&&(ref.pathname.endsWith("/")||ref.pathname.endsWith("/index.html"));
+    if(cameFromCatalog&&history.length>1){history.back();return;}
+  }catch{}
+  // 如果详情页来自笔记页或被直接打开，明确回目录，避免详情与笔记互相后退。
+  location.replace(catalogUrl);
 };
 const defs=[
 ["一句话看懂","overview"],["项目具体做什么","what_it_is"],["目标用户","target_users"],["核心问题与旧方案","problem"],["过去通常怎么解决","past_solution"],["核心机制 / 工作流程","how_it_works"],["技术架构 / 关键实现","architecture"],["为什么近期爆火","why_hot"],["核心差异化","difference"],["商业化路径","business"],["中国市场机会","china_opportunity"],["可借鉴场景","use_cases"],["风险与限制","risks"],["对我的启发","inspiration"],["明确判断","judgment"],["完整深度分析","full_analysis"]
