@@ -1,55 +1,29 @@
-# GitHub 近 24 小时热度飙升 Top 10｜2026-09-18
+# GitHub 热度机会日报｜2026-09-19
 
-> 口径：优先使用 GitHub Trending 的 `stars today` 公开指标；重复项目按“新项目 > 老项目突然加速 > 老项目重大更新 > 普通重复项目”处理。
+> 数据口径：截至 2026-09-19 08:22（中国时间），GitTrend 的全量 Today 页面仍显示 Updated September 17, 2026。因此本期排名使用**最新可验证的 9/17 daily delta**作为替代指标，并用 9/19 可见的总 Star/7 日动量二次核验；不把替代指标冒充今天严格 24h 数据。
 
-## Top 10
-
-| # | 项目 | 今日新增 | 总 Star | 技术栈 | 机会判断 |
+| # | 项目 | 可验证增量替代指标 | 总 Star | 技术栈 | 判断 |
 |---|---|---:|---:|---|---|
-| 1 | [security-audit-skill](https://github.com/cloudflare/security-audit-skill) | +3,606 | 10.2k | JavaScript / Skill | ★★★★★+ |
-| 2 | [OpenCodeReview](https://github.com/alibaba/open-code-review) | +3,290 | 34.4k | Go | ★★★★★+ |
-| 3 | [BrowserSkill](https://github.com/Tencent/BrowserSkill) | +1,350 | 4.0k | TypeScript / Rust | ★★★★★+ |
-| 4 | ECC | +1,173 | 261k | JavaScript | ★★★★★ |
-| 5 | [WeKnora](https://github.com/Tencent/WeKnora) | +1,123 | 26.1k | Go | ★★★★★+ |
-| 6 | [OpenResearch](https://github.com/alphaXiv/OpenResearch) | +940 | 4.8k | Rust | ★★★★★+ |
-| 7 | Ghidra | +912 | 78.4k | Java | ★★★☆☆ |
-| 8 | [Colibri](https://github.com/JustVugg/colibri) | +872 | 35.7k | C | ★★★★★ |
-| 9 | Tinycast | +738 | 6.1k | Swift | ★★★★☆ |
-| 10 | agent-skills | +680 | 95.8k | JavaScript | ★★★★☆ |
-
-## 今日重点
-
-### 1. BrowserSkill
-让 Codex、Claude Code、Cursor、Hermes 等 Agent 使用用户已经登录的真实浏览器，复用 Cookie、账号和登录态，并提供独立 Agent 窗口、Tab 借用和人工接管机制。
-
-**商业机会：** 企业后台 Agent、运营自动化、订单/客服流程、内容平台操作。  
-**判断：** 今天最值得新增研究的项目，代表“带真实登录态的 AI 员工 / AI RPA 2.0”。
-
-### 2. security-audit-skill
-Cloudflare 的安全审计 Skill，用分阶段流程、覆盖台账、结构化 findings 和独立 Reviewer 约束 Agent。关键原则是“发现者不能自己验证自己的发现”。
-
-**商业机会：** 把“执行 Agent → Reviewer Agent → 程序校验”迁移到广告投放、财务审核、客服质检、企业 OA。  
-**判断：** 今天最强 Agent 架构信号。
-
-### 3. OpenResearch
-让 Coding Agent 持续提出假设、并行实验、保留代码和证据，再决定下一轮实验。
-
-**商业机会：** 手游买量、素材 Hook、落地页 CRO、定价和活动实验 Agent。  
-**判断：** 非常适合迁移成“增长实验 Agent”。
-
-## 其他项目简析
-- **OpenCodeReview**：确定性工程 + LLM Agent，适合企业代码审查和高可靠 Agent 工作流。
-- **WeKnora**：RAG + ReAct Agent + Wiki + 知识图谱 + Memory + 企业连接器，适合中国企业知识 Agent。
-- **ECC**：成熟 Agent Harness，值得研究开源到 Hosted/Enterprise 的商业化路线。
-- **Colibri**：SSD/RAM/VRAM 分层运行超大 MoE，代表低成本私有推理基础设施。
-- **Tinycast**：轻量原生 macOS Launcher，产品包装思路好但赛道成熟。
-- **Ghidra**：成熟逆向工程框架，热度高但与当前商业主线关系较弱。
-- **agent-skills**：继续验证“专家方法 → 可执行 Skill”的趋势。
+| 1 | [security-audit-skill](https://github.com/cloudflare/security-audit-skill) | +3.4k | ~10.8k | JavaScript / Skill | ★★★★★ |
+| 2 | [OpenCodeReview](https://github.com/alibaba/open-code-review) | +2.9k | ~36.3k | Go | ★★★★★ |
+| 3 | [hypit](https://github.com/hypit-ai/hypit) | +2.1k | 9.8k | TypeScript | ★★★★★+ |
+| 4 | [BrowserSkill](https://github.com/Tencent/BrowserSkill) | +1.1k | 5.2k | TypeScript | ★★★★★ |
+| 5 | [ECC](https://github.com/affaan-m/ECC) | +883 | ~262k | JavaScript | ★★★★☆ |
+| 6 | [Orca](https://github.com/stablyai/orca) | +836 | 71.8k | TypeScript | ★★★★★ |
+| 7 | [reef](https://github.com/Human-Agent-Society/reef) | +768 | 3.6k | Python | ★★★★★+ |
+| 8 | [i-have-adhd](https://github.com/ayghri/i-have-adhd) | +568 | ~47.5k | Python / Skill | ★★★☆☆ |
+| 9 | [OpenResearch](https://github.com/alphaXiv/OpenResearch) | +525 | 5.3k | Rust | ★★★★★ |
+| 10 | [Brigade](https://github.com/spinabot/brigade) | +493 | 4.5k | TypeScript | ★★★★☆ |
 
 ## 今日最值得研究的 3 个机会
-1. **BrowserSkill → 带真实登录态的业务 Agent**
-2. **security-audit-skill → 可审计、可复核的 Agent**
-3. **OpenResearch → 增长实验 Agent**
 
-## 今日一句话
-Agent 产品正在从“会回答”转向“能进入真实系统、能执行、能被独立复核、能持续实验”的工作系统。
+### 1. Hypit：爆款视频 → 可编译、可批量的广告素材工厂
+Hypit 用 Agent 把参考视频转换成 SVML，再编译成 FFmpeg + HTML/CSS 动画；7 天约 +9.6k。最有价值的是把视频结构代码化，从而一条命令批量替换人脸、文案、B-roll、字幕和动效。适合广告素材、跨境商品视频、短剧/漫剧二创和 A/B 版本。
+
+### 2. reef：企业 Agent 的持续学习/AgentOps
+Reef 把真实交互和反馈进入 Serve→Observe→Grow→Commit 闭环，既能更新模型，也能演化 Harness。商业机会是客服/销售/企业 Agent 的“反馈→评测→灰度→回滚”平台。
+
+### 3. BrowserSkill：真实登录态的垂直 AI RPA
+让 Agent 使用用户真实 Chrome/Edge 登录态，解决 API 不完整、Cookie、验证码和人工确认问题。真正机会是围绕广告后台、订单、客服、CMS 等单一流程做窄而深的 AI 员工。
+
+完整分析：[2026-09-19 归档](archive/2026-09-19.md)
