@@ -98,10 +98,19 @@ categories.forEach((c,i)=>{
   chips.appendChild(b);
 });
 
-function detailUrl(p){return "./detail.html?id="+encodeURIComponent(p.id)+(selectedDate?"&date="+selectedDate:"");}
+function detailUrl(p){const d=selectedDate||lastSeen[p.id]||"";return "./detail.html?id="+encodeURIComponent(p.id)+(d?"&date="+encodeURIComponent(d):"");}
 function repoFullName(url){
   const m=String(url||"").match(/^https:\/\/github\.com\/([^/?#]+)\/([^/?#]+?)(?:\.git)?(?:[/?#]|$)/i);
   return m?(m[1]+"/"+m[2]).toLowerCase():"";
+}
+// Match daily snapshots to existing projects by repository URL, preserving private-note IDs.
+function canonicalDailyProject(snapshot){
+  const repo=repoFullName(snapshot.url);
+  const existing=master.find(p=>p.id===snapshot.id||(repo&&repoFullName(p.url)===repo));
+  if(existing)return {...snapshot,id:existing.id,tags:existing.tags||snapshot.tags||[]};
+  const created={...snapshot,tags:snapshot.tags||[],first_seen:snapshot.first_seen||snapshot._daily_date||"",last_seen:snapshot._daily_date||""};
+  master.push(created);
+  return created;
 }
 function noteUrl(p){return "./notes.html?id="+encodeURIComponent(p.id);}
 function parseStars(v){if(!v)return 0;const m=String(v).replace(/,/g,"").match(/([+-]?\d+(?:\.\d+)?)(k)?/i);if(!m)return 0;return Number(m[1])*(m[2]?1000:1);}
@@ -115,7 +124,8 @@ async function buildAppearance(){
   await Promise.all(need.map(async x=>{
     try{
       const data=await fetch("./daily/"+x.date+".json?v="+Date.now()).then(r=>r.json());
-      for(const p of (data.projects||[])){
+      for(const raw of (data.projects||[])){
+        const p=canonicalDailyProject({...raw,_daily_date:x.date});
         appearance[p.id]=appearance[p.id]||[];appearance[p.id].push(x.date);
         if(!firstSeen[p.id]||x.date<firstSeen[p.id])firstSeen[p.id]=x.date;
         if(!lastSeen[p.id]||x.date>lastSeen[p.id]){lastSeen[p.id]=x.date;latestDaily[p.id]=p;}
@@ -296,7 +306,7 @@ async function loadExactDate(date){
   if(!dateSet.has(date)){shown=[];document.getElementById("modeLabel").textContent=fmtDate(date)+" 暂无归档";render();return;}
   const data=await fetch("./daily/"+date+".json?v="+Date.now()).then(r=>r.json());
   const by=Object.fromEntries(master.map(p=>[p.id,p]));
-  shown=(data.projects||[]).map(p=>({...p,tags:by[p.id]?.tags||[],has_notes:by[p.id]?.has_notes||false,rating:by[p.id]?.rating||null,status:by[p.id]?.status||"👀 观察"}));
+  shown=(data.projects||[]).map(raw=>{const p=canonicalDailyProject({...raw,_daily_date:date});const base=by[p.id]||{};return {...p,tags:base.tags||p.tags||[],...(privateUnlocked?{has_notes:base.has_notes||false,rating:base.rating||null,status:base.status||"👀 观察"}:{})};});
   document.getElementById("modeLabel").textContent=fmtDate(date)+" 当日 Top 10";render();
 }
 
@@ -338,7 +348,7 @@ Promise.all([fetch("./projects.json?v="+Date.now()).then(r=>r.json()),fetch("./d
     const data=await fetch("./daily/"+selectedDate+".json?v="+Date.now()).then(r=>r.json()).catch(()=>null);
     if(data){
       const by=Object.fromEntries(master.map(p=>[p.id,p]));
-      shown=(data.projects||[]).map(p=>({...p,tags:by[p.id]?.tags||[],has_notes:by[p.id]?.has_notes||false,rating:by[p.id]?.rating||null,status:by[p.id]?.status||"👀 观察"}));
+      shown=(data.projects||[]).map(raw=>{const p=canonicalDailyProject({...raw,_daily_date:selectedDate});const base=by[p.id]||{};return {...p,tags:base.tags||p.tags||[],...(privateUnlocked?{has_notes:base.has_notes||false,rating:base.rating||null,status:base.status||"👀 观察"}:{})};});
       document.getElementById("modeLabel").textContent=fmtDate(selectedDate)+" 当日 Top 10";
     }
   }else if(timeFilter!=="all"){
