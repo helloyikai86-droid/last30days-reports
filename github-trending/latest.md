@@ -1,29 +1,24 @@
-# GitHub 热度机会日报｜2026-09-19
+# GitHub 商业机会 Top 10｜2026-09-20
 
-> 数据口径：截至 2026-09-19 08:22（中国时间），GitTrend 的全量 Today 页面仍显示 Updated September 17, 2026。因此本期排名使用**最新可验证的 9/17 daily delta**作为替代指标，并用 9/19 可见的总 Star/7 日动量二次核验；不把替代指标冒充今天严格 24h 数据。
+> 数据口径：截至 2026-09-20 上午（北京时间），优先采用 Seismograph/GitNova 基于 GitHub API 的 `Stars in a day / stars today` 作为可验证日增量代理；不保证与北京时间自然日严格对齐。Agent-Reach 最新数据截至 9/19，已单独标注。榜单聚焦 AI / Agent / AIGC / 自动化 / 开发工具和小团队商业化机会。
 
-| # | 项目 | 可验证增量替代指标 | 总 Star | 技术栈 | 判断 |
+| # | 项目 | 日增量代理 | 总 Star | 技术栈 | 判断 |
 |---|---|---:|---:|---|---|
-| 1 | [security-audit-skill](https://github.com/cloudflare/security-audit-skill) | +3.4k | ~10.8k | JavaScript / Skill | ★★★★★ |
-| 2 | [OpenCodeReview](https://github.com/alibaba/open-code-review) | +2.9k | ~36.3k | Go | ★★★★★ |
-| 3 | [hypit](https://github.com/hypit-ai/hypit) | +2.1k | 9.8k | TypeScript | ★★★★★+ |
-| 4 | [BrowserSkill](https://github.com/Tencent/BrowserSkill) | +1.1k | 5.2k | TypeScript | ★★★★★ |
-| 5 | [ECC](https://github.com/affaan-m/ECC) | +883 | ~262k | JavaScript | ★★★★☆ |
-| 6 | [Orca](https://github.com/stablyai/orca) | +836 | 71.8k | TypeScript | ★★★★★ |
-| 7 | [reef](https://github.com/Human-Agent-Society/reef) | +768 | 3.6k | Python | ★★★★★+ |
-| 8 | [i-have-adhd](https://github.com/ayghri/i-have-adhd) | +568 | ~47.5k | Python / Skill | ★★★☆☆ |
-| 9 | [OpenResearch](https://github.com/alphaXiv/OpenResearch) | +525 | 5.3k | Rust | ★★★★★ |
-| 10 | [Brigade](https://github.com/spinabot/brigade) | +493 | 4.5k | TypeScript | ★★★★☆ |
+|1|[ECC](https://github.com/affaan-m/ECC)|+738|262,904|JavaScript|★★★★★|
+|2|[agent-skills](https://github.com/addyosmani/agent-skills)|+477|96,975|JavaScript|★★★★★|
+|3|[skills](https://github.com/mattpocock/skills)|+436|265,807|Shell|★★★★☆|
+|4|[i-have-adhd](https://github.com/ayghri/i-have-adhd)|+413|48,670|Python / Skill|★★★☆☆|
+|5|[ponytail](https://github.com/DietrichGebert/ponytail)|+375|142,510|JavaScript|★★★★☆|
+|6|[Agent-Reach](https://github.com/Panniantong/Agent-Reach)|+262（截至9/19）|83,433|Python|★★★★★|
+|7|[hyperframes](https://github.com/heygen-com/hyperframes)|+190|51,649|TypeScript|★★★★★+|
+|8|[OpenMontage](https://github.com/calesthio/OpenMontage)|+188|60,160|Python|★★★★★|
+|9|[TradingAgents](https://github.com/TauricResearch/TradingAgents)|+103|107,612|Python|★★★★☆|
+|10|[context-mode](https://github.com/mksglu/context-mode)|+86|23,662|TypeScript|★★★★☆|
 
 ## 今日最值得研究的 3 个机会
 
-### 1. Hypit：爆款视频 → 可编译、可批量的广告素材工厂
-Hypit 用 Agent 把参考视频转换成 SVML，再编译成 FFmpeg + HTML/CSS 动画；7 天约 +9.6k。最有价值的是把视频结构代码化，从而一条命令批量替换人脸、文案、B-roll、字幕和动效。适合广告素材、跨境商品视频、短剧/漫剧二创和 A/B 版本。
+1. **Hyperframes：可编程视频素材工厂**——把 HTML/CSS/动画确定性渲染为视频，适合广告买量、商品视频和矩阵内容的批量 A/B。
+2. **Agent Skills：行业 SOP 软件化**——多个 skills/harness 项目同时高热，机会在把真实行业流程封装成能执行、检查、验收的 Agent 能力。
+3. **Agent-Reach：全网连接层 → 垂直商业情报**——把多平台实时数据、证据链、趋势判断和行动建议做成闭环，比通用搜索 Agent 更容易形成付费价值。
 
-### 2. reef：企业 Agent 的持续学习/AgentOps
-Reef 把真实交互和反馈进入 Serve→Observe→Grow→Commit 闭环，既能更新模型，也能演化 Harness。商业机会是客服/销售/企业 Agent 的“反馈→评测→灰度→回滚”平台。
-
-### 3. BrowserSkill：真实登录态的垂直 AI RPA
-让 Agent 使用用户真实 Chrome/Edge 登录态，解决 API 不完整、Cookie、验证码和人工确认问题。真正机会是围绕广告后台、订单、客服、CMS 等单一流程做窄而深的 AI 员工。
-
-完整分析：[2026-09-19 归档](archive/2026-09-19.md)
+完整分析：[2026-09-20 归档](archive/2026-09-20.md)
