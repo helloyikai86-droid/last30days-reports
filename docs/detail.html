@@ -48,7 +48,9 @@ const canonicalAnalysisKeys=new Set(defs.map(([,key])=>key).concat(["description
 function section(title,text){if(!text)return"";return '<section class="section"><h2>'+title+'</h2><div>'+String(text).replace(/</g,"&lt;").replace(/>/g,"&gt;")+'</div></section>';}
 Promise.all([fetch("./projects.json?v="+Date.now()).then(r=>r.json()),date?fetch("./daily/"+date+".json?v="+Date.now()).then(r=>r.json()).catch(()=>null):Promise.resolve(null)]).then(([p,d])=>{
   const base=(p.projects||[]).find(x=>x.id===id)||{};
-  const day=d?(d.projects||[]).find(x=>x.id===id):null;
+  // Daily snapshots may use a different ID for an existing repository.
+  const canonicalRepo=u=>{const m=String(u||"").match(/^https:\/\/github\.com\/([^/?#]+)\/([^/?#]+?)(?:\.git)?(?:[/?#]|$)/i);return m?(m[1]+"/"+m[2]).toLowerCase():"";};
+  const day=d?(d.projects||[]).find(x=>x.id===id||(base.url&&canonicalRepo(x.url)===canonicalRepo(base.url))):null;
   const x={...base};
   if(day){
     for(const [k,v] of Object.entries(day)){
