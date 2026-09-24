@@ -2,6 +2,7 @@
 
 | 日期 | Top 1 | 今日 3 个重点机会 | 报告 |
 |---|---|---|---|
+| 2026-09-24 | Google AX（+1,542 today） | Agent Substrate / video-use / Univer | [查看](archive/2026-09-24.md) |
 | 2026-09-23 | AI Engineering from Scratch（+8,270 today） | ArcBox / WeKnora / Univer | [查看](archive/2026-09-23.md) |
 | 2026-09-22 | OpenStock（GitHub Trending +843 today） | Agent-native SaaS / AI 投研工作台 / AutoClip 视频二创 | [查看](archive/2026-09-22.md) |
 | 2026-09-21 | security-audit-skill（最近可验证日增 +2,375） | BrowserSkill / json-render / Agent 可靠性治理 | [查看](archive/2026-09-21.md) |
