@@ -2,7 +2,10 @@
 
 | 日期 | Top 1 | 今日 3 个重点机会 | 报告 |
 |---|---|---|---|
+| 2026-10-01 | VoiceStudio（+3,481 today） | DBX / OpenRig / VoiceStudio | [查看](archive/2026-10-01.md) |
 | 2026-09-29 | Hindsight（+4,520 today） | OpenRig / VoiceStudio / Hindsight | [查看](archive/2026-09-29.md) |
+| 2026-09-26 | Hindsight（+1,668 today） | Strands Harness SDK / Hindsight / treg | [查看](archive/2026-09-26.md) |
+| 2026-09-25 | Hindsight（+1,607 today） | Hindsight / Univer / Flexprice | [查看](archive/2026-09-25.md) |
 | 2026-09-24 | Google AX（+1,542 today） | Agent Substrate / video-use / Univer | [查看](archive/2026-09-24.md) |
 | 2026-09-23 | AI Engineering from Scratch（+8,270 today） | ArcBox / WeKnora / Univer | [查看](archive/2026-09-23.md) |
 | 2026-09-22 | OpenStock（GitHub Trending +843 today） | Agent-native SaaS / AI 投研工作台 / AutoClip 视频二创 | [查看](archive/2026-09-22.md) |
