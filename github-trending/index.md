@@ -2,7 +2,8 @@
 
 | 日期 | Top 1 | 今日 3 个重点机会 | 报告 |
 |---|---|---|---|
-| 2026-10-01 | VoiceStudio（+3,481 today） | DBX / OpenRig / VoiceStudio | [查看](archive/2026-10-01.md) |
+| 2026-10-05 | Ponytail（+1,894 today） | e2e / OpenCut / claude-mem | [查看](archive/2026-10-05.md) |
+| 2026-10-03 | Ponytail（+1,429 today） | Agent-Reach / Cursor Plugins / Marketing Skills | [查看](archive/2026-10-03.md) |
 | 2026-09-29 | Hindsight（+4,520 today） | OpenRig / VoiceStudio / Hindsight | [查看](archive/2026-09-29.md) |
 | 2026-09-26 | Hindsight（+1,668 today） | Strands Harness SDK / Hindsight / treg | [查看](archive/2026-09-26.md) |
 | 2026-09-25 | Hindsight（+1,607 today） | Hindsight / Univer / Flexprice | [查看](archive/2026-09-25.md) |
