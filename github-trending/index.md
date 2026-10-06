@@ -2,7 +2,7 @@
 
 | 日期 | Top 1 | 今日 3 个重点机会 | 报告 |
 |---|---|---|---|
-| 2026-10-06 | Moli（+2,624 / 24h，GitDiscover） | e2e / Cloudflare OS / OpenMontage | [查看](archive/2026-10-06.md) |
+| 2026-10-06 | openGym（+1,444 today） | e2e / Cloudflare OS / OpenMontage | [查看](archive/2026-10-06.md) |
 | 2026-10-05 | Ponytail（+1,894 today） | e2e / OpenCut / claude-mem | [查看](archive/2026-10-05.md) |
 | 2026-10-03 | Ponytail（+1,429 today） | Agent-Reach / Cursor Plugins / Marketing Skills | [查看](archive/2026-10-03.md) |
 | 2026-09-29 | Hindsight（+4,520 today） | OpenRig / VoiceStudio / Hindsight | [查看](archive/2026-09-29.md) |
