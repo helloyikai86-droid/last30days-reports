@@ -1,10 +1,10 @@
-# GitHub 商业机会 Top 10｜2026-10-06
+# GitHub 商业机会 Top 10｜2026-10-09
 
-今日完整日报已归档：[archive/2026-10-06.md](./archive/2026-10-06.md)。
+今日完整日报已归档：[archive/2026-10-09.md](./archive/2026-10-09.md)。
 
-**今日前三机会**：
-1. e2e：Agentic QA / E2E 测试。
-2. Cloudflare OS：Company OS / AI App Factory。
-3. OpenMontage：Agentic 视频生产系统。
+**今日最值得研究的 3 个机会**：
+1. video-shotcraft：可用可复用镜头配方做低成本手游广告与产品演示；可以很快制作 3 个模板并测创意成本与效果。
+2. Knowledge Work Plugins：岗位插件打包 SOP、MCP 和命令，为企业客服、营销、游戏运营 Agent 提供直接可收费的行业化交付形式。
+3. MXC：企业 AI 员工自动执行代码时的最小权限和隔离需求强；可作为受控 RPA/Agent 执行平台的底座。
 
-数据口径：优先使用 GitHub Trending 当前 Today 页的 stars today，作为可核验的近24小时热度代理；该数值为滚动指标，并不等同于北京时间自然日严格24小时增量。Moli、Magpie 未进入当前 Trending Top 列表，因此使用 GitDiscover 2026-10-05 的最近可核验24h快照，并在各项目指标中明确标注快照日期。总 Star 使用本轮可直接核验的 GitHub 页面值。榜单在增速基础上按“新项目/首次纳入 > 老项目突然加速 > 重大更新 > 普通重复”去重；Agent-Reach、claude-mem 等重复且无明显结构变化的项目仅在去重简述中保留。
+数据口径：筛选范围为 GitHub Trending Today（全站及 Rust/TypeScript/Python/JavaScript 语言榜）及项目官方 GitHub 仓库。“stars today”是 GitHub 的滚动热度指标，作为近24小时代理，不是北京时间自然日严格24小时 Star 差值。总 Star 为本轮 GitHub 仓库 API 实际读取的快照，时间可能与 Trending 计数不同；依照“新发现、老项目明显加速、重大更新、普通重复”去重，故不是全 GitHub 不区分类别的机械排行。
