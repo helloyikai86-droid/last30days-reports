@@ -2,6 +2,7 @@
 
 | 日期 | Top 1 | 今日 3 个重点机会 | 报告 |
 |---|---|---|---|
+| 2026-10-13 | REA（+54,706，GitDiscover 10/13 滚动快照） | Anatomy / SolidCraft / Context Mode | [查看](archive/2026-10-13.md) |
 | 2026-10-12 | WordCraft（+2,107，10/11滚动快照） | iPhone Use / Coucou / GridCraft | [查看](archive/2026-10-12.md) |
 | 2026-10-11 | VectorCraft（+1,470，10/10 快照） | AutoHarness / Big Arrow / CADCraft | [查看](archive/2026-10-11.md) |
 | 2026-10-09 | REA（+7,738 today） | video-shotcraft / Knowledge Work Plugins / MXC | [查看](archive/2026-10-09.md) |
