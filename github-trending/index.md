@@ -2,6 +2,7 @@
 
 | 日期 | Top 1 | 今日 3 个重点机会 | 报告 |
 |---|---|---|---|
+| 2026-10-16 | Scout（+721，10/14第三方日榜） | Scout / New Term Radar / GPTibo | [查看](archive/2026-10-16.md) |
 | 2026-10-15 | iFixAi（+2,109，滚动星标代理） | HyperFrames / iFixAi / OpenIntelligentUI | [查看](archive/2026-10-15.md) |
 - [2026-10-14｜GitHub 商业机会 Top 10](archive/2026-10-14.md)
 | 2026-10-13 | REA（+54,706，GitDiscover 10/13 滚动快照） | Anatomy / SolidCraft / Context Mode | [查看](archive/2026-10-13.md) |
