@@ -55,8 +55,8 @@ Promise.all([fetch("./projects.json?v="+Date.now()).then(r=>r.json()),date?fetch
   if(day){
     for(const [k,v] of Object.entries(day)){
       // 分析资料以长期项目库为唯一版本；日榜只覆盖当天排名、Star、语言等快照字段。
-      if(canonicalAnalysisKeys.has(k)&&base[k])continue;
-      const placeholder=typeof v==="string"&&(v.startsWith("该项目曾出现在")||v.startsWith("历史日报恢复：")||v.startsWith("历史日报恢复记录："));
+      // 当日真实非空分析优先；空字符串及历史占位均不得覆盖长期分析。
+      const placeholder=typeof v==="string"&&(/^(该项目曾出现在|历史日报恢复|暂无详细分析|稍后补充)/.test(v.trim()));
       const empty=v===null||v===undefined||v===""||placeholder||(Array.isArray(v)&&v.length===0);
       if(!empty)x[k]=v;
     }

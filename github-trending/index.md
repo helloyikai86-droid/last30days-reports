@@ -2,6 +2,7 @@
 
 | 日期 | Top 1 | 今日 3 个重点机会 | 报告 |
 |---|---|---|---|
+| 2026-10-18 | CLI-Anything（+580，10/18滚动日榜） | CLI-Anything / ARTEMIS / UX/UI Agent Skills | [查看](archive/2026-10-18.md) |
 | 2026-10-17 | dsh-ops（+754，10/16滚动日榜） | DigUp / HeliosGen / Folkbench | [查看](archive/2026-10-17.md) |
 | 2026-10-16 | Scout（+721，10/14第三方日榜） | Scout / New Term Radar / GPTibo | [查看](archive/2026-10-16.md) |
 | 2026-10-15 | iFixAi（+2,109，滚动星标代理） | HyperFrames / iFixAi / OpenIntelligentUI | [查看](archive/2026-10-15.md) |
