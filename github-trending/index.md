@@ -2,6 +2,7 @@
 
 | 日期 | Top 1 | 今日 3 个重点机会 | 报告 |
 |---|---|---|---|
+| 2026-10-20 | Pele（+748，10/19滚动日榜） | Graphify / earshot / Hy-Memory | [查看](archive/2026-10-20.md) |
 | 2026-10-19 | Harness²（+4,039，10/18滚动日榜代理） | Harness² / Perplexity SPACE / OpenFilm | [阅读日报](archive/2026-10-19.md) |
 | 2026-10-18 | CLI-Anything（+580，10/18滚动日榜） | CLI-Anything / ARTEMIS / UX/UI Agent Skills | [查看](archive/2026-10-18.md) |
 | 2026-10-17 | dsh-ops（+754，10/16滚动日榜） | DigUp / HeliosGen / Folkbench | [查看](archive/2026-10-17.md) |
