@@ -2,6 +2,7 @@
 
 | 日期 | Top 1 | 今日 3 个重点机会 | 报告 |
 |---|---|---|---|
+| 2026-10-25 | Peach（约+2,500，10/25滚动采样） | ffmpeg-skill / Skill Recorder / NVIDIA OpenShell | [查看](archive/2026-10-25.md) |
 | 2026-10-24 | Magpie（+899，10/23 滚动日榜） | GenOffice / Beacon / 3D Model Anything | [查看](archive/2026-10-24.md) |
 | 2026-10-23 | MacNativeGames（+1,091，10/22滚动日榜） | ego lite / easyeda-agent / OmniVoice | [查看](archive/2026-10-23.md) |
 | 2026-10-21 | DeepInfer（约+12,080/日，非严格24h） | huashu-motion / Headroom / cn-math-taxonomy | [查看](archive/2026-10-21.md) |
