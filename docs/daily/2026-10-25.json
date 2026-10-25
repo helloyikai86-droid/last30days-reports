@@ -5,7 +5,7 @@
   "metric_note": "星标增长来自OSS Radar 2026-10-24 23:40 UTC采样的滚动日增代理；NVIDIA OpenShell例外，来自GitHub Trending Today 2026-10-24 06:58 UTC采样。‘约’表示榜单对增长的取整估算，所有项目均没有同起止时间官方双快照，不等于严格24小时增量。总Star为2026-10-25北京时间早间读取的GitHub官方仓库值。榜单为按增长优先、去重后的AI/开发工具/小团队商业机会精选，而不是全站未经筛选的绝对涨幅Top10。",
   "selection": "本期10个项目均首次进入截至10月24日的公开长期项目库；首次入库不等于GitHub新建。优先考虑近期增长、AI相关性和可实证的商业问题。",
   "sources": {
-    "OSS Radar": "https://ossradar.org/",
+    "OSS Radar": "https://ossradar.net/",
     "GitHub Trending": "https://github.com/trending",
     "GitHub repository metadata": "https://api.github.com/"
   },

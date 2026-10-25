@@ -414,7 +414,7 @@
 
 ## 七、原始资料
 
-- [OSS Radar](https://ossradar.org/)
+- [OSS Radar](https://ossradar.net/)
 - [GitHub Trending](https://github.com/trending)
 - 项目README和GitHub仓库元数据：各项目段落所附官方仓库链接。
 
