@@ -2,6 +2,7 @@
 
 | 日期 | Top 1 | 今日 3 个重点机会 | 报告 |
 |---|---|---|---|
+| 2026-10-27 | AI Design Skills（+2,345，10/27滚动增长代理） | 数字人口播 / Pomerado / AI Design Skills | [查看](archive/2026-10-27.md) |
 | 2026-10-26 | GPU Unlock（+3,773/日，Trendar日速） | Hallmark / Short Drama Skills / Experiential | [查看](archive/2026-10-26.md) |
 | 2026-10-25 | Peach（约+2,500，10/25滚动采样） | ffmpeg-skill / Skill Recorder / NVIDIA OpenShell | [查看](archive/2026-10-25.md) |
 | 2026-10-24 | Magpie（+899，10/23 滚动日榜） | GenOffice / Beacon / 3D Model Anything | [查看](archive/2026-10-24.md) |
