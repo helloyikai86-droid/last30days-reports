@@ -2,6 +2,7 @@
 
 | 日期 | Top 1 | 今日 3 个重点机会 | 报告 |
 |---|---|---|---|
+| 2026-10-28 | ub-mode（+1,555/日，Trendar速率代理） | Postiz / NVIDIA SkillSpector / OpenBot | [查看](archive/2026-10-28.md) |
 | 2026-10-27 | AI Design Skills（+2,345，10/27滚动增长代理） | 数字人口播 / Pomerado / AI Design Skills | [查看](archive/2026-10-27.md) |
 | 2026-10-26 | GPU Unlock（+3,773/日，Trendar日速） | Hallmark / Short Drama Skills / Experiential | [查看](archive/2026-10-26.md) |
 | 2026-10-25 | Peach（约+2,500，10/25滚动采样） | ffmpeg-skill / Skill Recorder / NVIDIA OpenShell | [查看](archive/2026-10-25.md) |
