@@ -2,6 +2,7 @@
 
 | 日期 | Top 1 | 今日 3 个重点机会 | 报告 |
 |---|---|---|---|
+| 2026-10-31 | DeepSeek Harness（+939，OSS Radar滚动24h） | OpenBot / Mika / AstrBot | [查看](archive/2026-10-31.md) |
 | 2026-10-30 | Day Trader Skill（+584/日，Trendar日速代理） | 铜匠实验室 / BAMA / Claude Code Game Studios | [查看](archive/2026-10-30.md) |
 | 2026-10-29 | Zero Breach Toolkit（+2,314/日估算，Trendar） | Concat / OpenDuet / MotionSites | [查看](archive/2026-10-29.md) |
 | 2026-10-28 | ub-mode（+1,555/日，Trendar速率代理） | Postiz / NVIDIA SkillSpector / OpenBot | [查看](archive/2026-10-28.md) |
