@@ -2,6 +2,7 @@
 
 | 日期 | Top 1 | 今日 3 个重点机会 | 报告 |
 |---|---|---|---|
+| 2026-11-02 | Agent Desktop（+1,872，Trendrepo未结束当日累计） | AnyModelBot / OpenJutsu / Agent Desktop | [查看](archive/2026-11-02.md) |
 | 2026-11-01 | Unslop（+2,169，OSS Radar滚动24h代理） | Unslop / DeepSeek Superagent / TokenEconomizer | [查看](archive/2026-11-01.md) |
 | 2026-10-31 | DeepSeek Harness（+939，OSS Radar滚动24h） | OpenBot / Mika / AstrBot | [查看](archive/2026-10-31.md) |
 | 2026-10-30 | Day Trader Skill（+584/日，Trendar日速代理） | 铜匠实验室 / BAMA / Claude Code Game Studios | [查看](archive/2026-10-30.md) |
