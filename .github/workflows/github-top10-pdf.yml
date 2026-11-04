@@ -1,0 +1,44 @@
+name: GitHub 商业机会手机PDF
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'github-trending/archive/*.md'
+      - '.github/workflows/github-top10-pdf.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  mobile-pdf:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install CJK font and PDF engine
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-wqy-microhei
+          python -m pip install --no-cache-dir 'fpdf2==2.8.4' 'fonttools>=4.53,<5'
+      - name: Build PDF from newest daily archive
+        run: |
+          DAY="$(sed -n '1s/.*\\(20[0-9][0-9]-[0-9][0-9]-[0-9][0-9]\\).*/\\1/p' github-trending/latest.md)"
+          test -n "$DAY"
+          test -f "github-trending/archive/$DAY.md"
+          python .github/scripts/build_github_trending_pdf.py "github-trending/archive/$DAY.md" "github-trending/pdf/$DAY.pdf"
+          echo "REPORT_DAY=$DAY" >> "$GITHUB_ENV"
+      - name: Commit only the generated PDF
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "github-trending/pdf/$REPORT_DAY.pdf"
+          if ! git diff --cached --quiet; then
+            git commit -m "Archive mobile PDF for $REPORT_DAY"
+            git push
+          else
+            echo "Already present, no changes"
+          fi
