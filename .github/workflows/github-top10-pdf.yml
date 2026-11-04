@@ -26,7 +26,7 @@ jobs:
           python -m pip install --no-cache-dir 'fpdf2==2.8.4' 'fonttools>=4.53,<5'
       - name: Build PDF from newest daily archive
         run: |
-          DAY="$(sed -n '1s/.*\\(20[0-9][0-9]-[0-9][0-9]-[0-9][0-9]\\).*/\\1/p' github-trending/latest.md)"
+          DAY="$(grep -oE '20[0-9]{2}-[0-9]{2}-[0-9]{2}' github-trending/latest.md | head -n1)"
           test -n "$DAY"
           test -f "github-trending/archive/$DAY.md"
           python .github/scripts/build_github_trending_pdf.py "github-trending/archive/$DAY.md" "github-trending/pdf/$DAY.pdf"
