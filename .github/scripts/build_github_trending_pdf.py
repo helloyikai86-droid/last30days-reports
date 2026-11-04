@@ -15,6 +15,14 @@ def font_path() -> str:
     ]
     for name in files:
         if Path(name).exists():
+            if name.endswith(".ttc"):
+                # fpdf2 expects a single font, not a TrueType Collection;
+                # extract collection member 0 with fontTools.
+                from fontTools.ttLib import TTCollection
+                ttf = Path("/tmp/github_business_cjk.ttf")
+                collection = TTCollection(name)
+                collection.fonts[0].save(str(ttf))
+                return str(ttf)
             return name
     raise RuntimeError("Missing CJK font. Install fonts-wqy-microhei.")
 
