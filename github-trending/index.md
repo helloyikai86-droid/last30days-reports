@@ -2,6 +2,7 @@
 
 | 日期 | Top 1 | 今日 3 个重点机会 | 报告 |
 |---|---|---|---|
+| 2026-11-05 | Agent Autoloop（Trendar约+1,664/日，估算） | Agent Autoloop / rea-video / voxl | [日报](archive/2026-11-05.md) |
 | 2026-11-04 | Auto Ontology（+1,685，美西当日未结束增速代理） | ReelMimic / Auto Ontology / FailproofAI | [查看](archive/2026-11-04.md) |
 | 2026-11-03 | NOIR（+1,057/日，Trendar短仓龄速率代理） | Claude Animated Shorts / Kanzo / reanimate | [查看](archive/2026-11-03.md) |
 | 2026-11-02 | Agent Desktop（+1,872，Trendrepo未结束当日累计） | AnyModelBot / OpenJutsu / Agent Desktop | [查看](archive/2026-11-02.md) |
