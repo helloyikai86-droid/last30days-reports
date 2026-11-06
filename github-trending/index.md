@@ -2,6 +2,7 @@
 
 | 日期 | Top 1 | 今日 3 个重点机会 | 报告 |
 |---|---|---|---|
+| 2026-11-06 | Locally Uncensored（近24h约+2.3k，四舍五入代理） | Scenario Agent Skills / Poki / Locally Uncensored | [日报](archive/2026-11-06.md) |
 | 2026-11-05 | Agent Autoloop（Trendar约+1,664/日，估算） | Agent Autoloop / rea-video / voxl | [日报](archive/2026-11-05.md) |
 | 2026-11-04 | Auto Ontology（+1,685，美西当日未结束增速代理） | ReelMimic / Auto Ontology / FailproofAI | [查看](archive/2026-11-04.md) |
 | 2026-11-03 | NOIR（+1,057/日，Trendar短仓龄速率代理） | Claude Animated Shorts / Kanzo / reanimate | [查看](archive/2026-11-03.md) |
