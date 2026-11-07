@@ -38,7 +38,19 @@ jobs:
           git add "github-trending/pdf/$REPORT_DAY.pdf"
           if ! git diff --cached --quiet; then
             git commit -m "Archive mobile PDF for $REPORT_DAY"
-            git push
+            # Daily JSON and project catalog may be committed while this PDF job runs.
+            # Rebase the PDF-only commit on the current main without overwriting other files.
+            for attempt in 1 2 3 4; do
+              git fetch origin main
+              git rebase origin/main || { git rebase --abort || true; exit 1; }
+              if git push origin HEAD:main; then
+                exit 0
+              fi
+              echo "Concurrent main update detected; retrying ($attempt/4)"
+              sleep 2
+            done
+            echo "PDF archive push failed after four retries" >&2
+            exit 1
           else
             echo "Already present, no changes"
           fi
