@@ -27,10 +27,14 @@ def font_path() -> str:
     raise RuntimeError("Missing CJK font. Install fonts-wqy-microhei.")
 
 class Report(FPDF):
+    def __init__(self, *args, report_day="当日", **kwargs):
+        super().__init__(*args, **kwargs)
+        self.report_day = report_day
+
     def header(self):
         self.set_font("CJK", size=8)
         self.set_text_color(110,125,145)
-        self.cell(0, 5, "GitHub 商业机会 · 2026-11-04", align="R", new_x="LMARGIN", new_y="NEXT")
+        self.cell(0, 5, f"GitHub 商业机会 · {self.report_day}", align="R", new_x="LMARGIN", new_y="NEXT")
         self.ln(2)
     def footer(self):
         self.set_y(-12)
@@ -49,7 +53,7 @@ def main():
     txt=src.read_text(encoding="utf-8")
     day=re.search(r"(20\d\d-\d\d-\d\d)", src.name)
     day=day.group(1) if day else "当日"
-    pdf=Report(orientation="P",unit="mm",format="A5")
+    pdf=Report(orientation="P",unit="mm",format="A5",report_day=day)
     pdf.set_title(f"GitHub 商业机会 Top 10｜{day}")
     pdf.set_author("GitHub Business Opportunities")
     pdf.set_auto_page_break(auto=True,margin=15)
@@ -105,3 +109,4 @@ def main():
 
 if __name__=="__main__":
     main()
+
