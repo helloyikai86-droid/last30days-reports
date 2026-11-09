@@ -2,6 +2,7 @@
 
 | 日期 | Top 1 | 今日 3 个重点机会 | 报告 |
 |---|---|---|---|
+| 2026-11-09 | Mister Download Manager（美西当日+1,025，非严格24h） | Pinky / GIF Factory / RGB MoCap | [日报](archive/2026-11-09.md) |
 | 2026-11-08 | NiubiGEO（美西当日未结束+1,206 Star） | Bang Motion / vork / NiubiGEO | [日报](archive/2026-11-08.md) |
 | 2026-11-07 | vAPI Network（最近24h约+1k，OSS Radar） | LivLiv Player / sand3d / Answer me with HTML | [查看](archive/2026-11-07.md) |
 | 2026-11-06 | Locally Uncensored（近24h约+2.3k，四舍五入代理） | Scenario Agent Skills / Poki / Locally Uncensored | [日报](archive/2026-11-06.md) |
