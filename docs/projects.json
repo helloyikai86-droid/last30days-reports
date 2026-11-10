@@ -10735,7 +10735,6 @@
         "AI/Agent",
         "企业AI",
         "开发工具",
-        "新项目",
         "重点"
       ],
       "description": "桌面端AI学习工作台，先诊断用户的知识边界，再构建前置知识依赖图，按理解程度教、练、复习，并把命题与推理关系本地保存。",
@@ -10764,7 +10763,8 @@
       "pilot": "选5名新人和5名对照组，完成7天训练，比较操作题准确率、额外提示次数、导师耗时与成本。",
       "analysis_scope": "GitHub官方README及Trendrepo 2026-11-09 23:20 UTC增长代理，非商业效果实测",
       "stars_metric_source": "https://trendrepo.dev/",
-      "source_checked_at": "2026-11-10T00:30:00Z"
+      "source_checked_at": "2026-11-10T00:30:00Z",
+      "selection_type": "老项目突然加速"
     },
     {
       "rank": 8,
@@ -17070,7 +17070,8 @@
       "last_seen": "2026-11-10",
       "latest_rank": 1,
       "latest_stars_today": 1560,
-      "latest_analysis_date": "2026-11-10"
+      "latest_analysis_date": "2026-11-10",
+      "selection_type": "首次入库"
     },
     {
       "rank": 2,
@@ -17112,7 +17113,8 @@
       "last_seen": "2026-11-10",
       "latest_rank": 2,
       "latest_stars_today": 1274,
-      "latest_analysis_date": "2026-11-10"
+      "latest_analysis_date": "2026-11-10",
+      "selection_type": "首次入库"
     },
     {
       "rank": 3,
@@ -17156,7 +17158,8 @@
       "last_seen": "2026-11-10",
       "latest_rank": 3,
       "latest_stars_today": 1204,
-      "latest_analysis_date": "2026-11-10"
+      "latest_analysis_date": "2026-11-10",
+      "selection_type": "首次入库"
     },
     {
       "rank": 5,
@@ -17200,7 +17203,8 @@
       "last_seen": "2026-11-10",
       "latest_rank": 5,
       "latest_stars_today": 780,
-      "latest_analysis_date": "2026-11-10"
+      "latest_analysis_date": "2026-11-10",
+      "selection_type": "首次入库"
     },
     {
       "rank": 6,
@@ -17244,7 +17248,8 @@
       "last_seen": "2026-11-10",
       "latest_rank": 6,
       "latest_stars_today": 533,
-      "latest_analysis_date": "2026-11-10"
+      "latest_analysis_date": "2026-11-10",
+      "selection_type": "首次入库"
     },
     {
       "rank": 7,
@@ -17286,7 +17291,8 @@
       "last_seen": "2026-11-10",
       "latest_rank": 7,
       "latest_stars_today": 403,
-      "latest_analysis_date": "2026-11-10"
+      "latest_analysis_date": "2026-11-10",
+      "selection_type": "首次入库"
     },
     {
       "rank": 8,
@@ -17330,7 +17336,8 @@
       "last_seen": "2026-11-10",
       "latest_rank": 8,
       "latest_stars_today": 399,
-      "latest_analysis_date": "2026-11-10"
+      "latest_analysis_date": "2026-11-10",
+      "selection_type": "首次入库"
     },
     {
       "rank": 9,
@@ -17373,7 +17380,8 @@
       "last_seen": "2026-11-10",
       "latest_rank": 9,
       "latest_stars_today": 263,
-      "latest_analysis_date": "2026-11-10"
+      "latest_analysis_date": "2026-11-10",
+      "selection_type": "首次入库"
     },
     {
       "rank": 10,
@@ -17418,7 +17426,8 @@
       "last_seen": "2026-11-10",
       "latest_rank": 10,
       "latest_stars_today": 231,
-      "latest_analysis_date": "2026-11-10"
+      "latest_analysis_date": "2026-11-10",
+      "selection_type": "首次入库"
     }
   ],
   "recovery_note": "长期库保留全部真实非空历史分析；当日分析仅真实非空时覆盖，指标按来源注明严格差值/代理口径；公开数据没有私人笔记和评分。"
