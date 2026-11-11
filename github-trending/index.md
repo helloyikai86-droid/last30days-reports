@@ -2,6 +2,7 @@
 
 | 日期 | Top 1 | 今日 3 个重点机会 | 报告 |
 |---|---|---|---|
+| 2026-11-11 | Exact（美西当日+760，非严格24h） | dsh-media-desk / Horizon / Exact | [日报](archive/2026-11-11.md) |
 | 2026-11-10 | HGhub（美西当日+1,560，非严格24h；禁商业化） | LearnHarness / FluentRead / Flide | [日报](archive/2026-11-10.md) |
 | 2026-11-09 | Mister Download Manager（美西当日+1,025，非严格24h） | Pinky / GIF Factory / RGB MoCap | [日报](archive/2026-11-09.md) |
 | 2026-11-08 | NiubiGEO（美西当日未结束+1,206 Star） | Bang Motion / vork / NiubiGEO | [日报](archive/2026-11-08.md) |
