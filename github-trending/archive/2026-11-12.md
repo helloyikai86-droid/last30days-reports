@@ -8,39 +8,22 @@ Trendrepo截至2026-11-11 23:20 UTC、计算美西时间11月11日未结束当�
 
 来源：[Trendrepo](https://trendrepo.dev/?sort=gained) · [Trendar](https://trendar.org/) · [GitHub API](https://docs.github.com/en/rest/repos/repos)
 
-
-
 ## 二、今日Top 10
 
 | 排名 | 项目 | 增长代理 | GitHub总Star（另一时点） | 技术 | 类型 |
-
 |---:|---|---:|---:|---|---|
-
 | 1 | [Modern Web Guidance｜多浏览器团队共建的Agent前端规范](https://github.com/GoogleChrome/modern-web-guidance) | +1,398 | 5,024 | Agent Skills / JavaScript 工具链 / Web API 文档 | 首次入库 |
-
 | 2 | [SuperMimic｜可微世界模型的人形机器人动作追踪](https://github.com/HybridRobotics/supermimic) | 约+768/日（估算） | 1,025 | Python / PyTorch与CUDA生态 / mjlab机器人仿真 | 首次入库（新仓库日速估算） |
-
 | 3 | [CFDTool｜图形化流体与热传导仿真工具](https://github.com/precise-simulation/cfdtool) | +571 | 927 | MATLAB / OpenFOAM / SU2 / CFD数值仿真 | 老仓库突然加速（首次入库） |
-
 | 4 | [Daily Stock Analysis｜多源行情与LLM投研日报](https://github.com/ZhuLinsen/daily_stock_analysis) | +516 | 70,213 | Python / 数据采集 / LLM API / GitHub Actions | 老仓库突然加速（首次入库） |
-
 | 5 | [Improve｜强模型做代码审计，低成本Agent执行](https://github.com/shadcn/improve) | +489 | 10,855 | Agent Skills / Markdown计划 / Git worktree | 首次入库 |
-
 | 6 | [Stela｜让x86 PC运行Apple Silicon软件的兼容层](https://github.com/tylertms/Stela) | +424 | 524 | Rust / UEFI / AOT与JIT翻译 / Metal驱动 | 首次入库（异常加速） |
-
 | 7 | [Nod｜带独立电脑与审批机制的个人Agent](https://github.com/n8n-io/nod) | +395 | 454 | TypeScript / Node.js / Fastify / React / PostgreSQL / Electron | 首次入库 |
-
 | 8 | [Yogurt｜本地优先的无参会机器人AI会议记录](https://github.com/FrigadeHQ/yogurt) | +326 | 385 | TypeScript / Electron / Whisper / llama.cpp | 首次入库（刚发布） |
-
 | 9 | [Codex Security｜可验证漏洞的AI安全扫描SDK](https://github.com/openai/codex-security) | +307 | 11,706 | TypeScript / Node.js CLI与SDK / Python依赖 / Codex Runtime | 首次入库（旧仓库加速） |
-
 | 10 | [SEO Skills｜让Agent交付可上线的SEO/GEO改动](https://github.com/Illyism/seo-skills) | +211 | 985 | Agent Skills SKILL.md / Markdown / MCP搜索数据接口 | 首次入库 |
 
-
-
 ## 三、十个项目的完整中文深度分析
-
-
 
 ### 1. Modern Web Guidance｜多浏览器团队共建的Agent前端规范
 
@@ -82,8 +65,6 @@ Trendrepo截至2026-11-11 23:20 UTC、计算美西时间11月11日未结束当�
 
 **推荐验证实验：** 选择登录、商品页、结算页等10个真实页面；用未安装技能和已安装技能的同一Coding Agent分别修复；比较Lighthouse、实际设备兼容性、人工修复次数和回归缺陷。
 
-
-
 ### 2. SuperMimic｜可微世界模型的人形机器人动作追踪
 
 **GitHub：** https://github.com/HybridRobotics/supermimic
@@ -123,8 +104,6 @@ Trendrepo截至2026-11-11 23:20 UTC、计算美西时间11月11日未结束当�
 **明确判断：** ★★★★☆（技术前沿）/★★☆☆☆（小团队短期商业化）。作为具身智能情报追踪，暂不建议直接投入产品开发。
 
 **推荐验证实验：** 在可控仿真中重跑仓库示例，比较关节误差、训练GPU小时、扰动恢复和不同初态下的稳定性；没有机器人安全测试场地时不接入实体设备。
-
-
 
 ### 3. CFDTool｜图形化流体与热传导仿真工具
 
@@ -166,8 +145,6 @@ Trendrepo截至2026-11-11 23:20 UTC、计算美西时间11月11日未结束当�
 
 **推荐验证实验：** 选择公开标准流体测试案例，用工具与成熟求解器交叉比较残差、速度场和耗时；核对许可证后再讨论商用扩展。
 
-
-
 ### 4. Daily Stock Analysis｜多源行情与LLM投研日报
 
 **GitHub：** https://github.com/ZhuLinsen/daily_stock_analysis
@@ -207,8 +184,6 @@ Trendrepo截至2026-11-11 23:20 UTC、计算美西时间11月11日未结束当�
 **明确判断：** ★★★★☆（工作流）/★★☆☆☆（荐股产品）。应将其视为投研辅助和行业情报架构范例。
 
 **推荐验证实验：** 用20只标的连续7天和人工行情源交叉核对时间戳、价格、引用、报告差异与错误率，禁止自动下单和未经核准的投资建议输出。
-
-
 
 ### 5. Improve｜强模型做代码审计，低成本Agent执行
 
@@ -250,8 +225,6 @@ Trendrepo截至2026-11-11 23:20 UTC、计算美西时间11月11日未结束当�
 
 **推荐验证实验：** 挑选同一仓库20项低中风险Issue，对比全程高配模型与‘高配审计+低配执行’两组的任务通过率、返工次数、总Token费用和合并后缺陷。
 
-
-
 ### 6. Stela｜让x86 PC运行Apple Silicon软件的兼容层
 
 **GitHub：** https://github.com/tylertms/Stela
@@ -291,8 +264,6 @@ Trendrepo截至2026-11-11 23:20 UTC、计算美西时间11月11日未结束当�
 **明确判断：** ★★☆☆☆（短期商业）。适合技术情报，不适合作为小团队立项。
 
 **推荐验证实验：** 先在虚拟或备份充分的专用机器评审安装与许可要求，记录指令覆盖率和性能；不得在生产电脑或重要数据盘上尝试。
-
-
 
 ### 7. Nod｜带独立电脑与审批机制的个人Agent
 
@@ -334,8 +305,6 @@ Trendrepo截至2026-11-11 23:20 UTC、计算美西时间11月11日未结束当�
 
 **推荐验证实验：** 在沙箱账户下安排30个非支付真实流程，统计成功率、越权拦截、人工接管、耗时与执行成本；不得连接真实付款或生产管理员账户。
 
-
-
 ### 8. Yogurt｜本地优先的无参会机器人AI会议记录
 
 **GitHub：** https://github.com/FrigadeHQ/yogurt
@@ -375,8 +344,6 @@ Trendrepo截至2026-11-11 23:20 UTC、计算美西时间11月11日未结束当�
 **明确判断：** ★★★★☆。面向企业内网与行业定制有机会，但通用AI纪要市场已经拥挤。
 
 **推荐验证实验：** 使用10场已取得参与者同意的中文会议，在3个系统上测试转录错误率、角色区分、任务提取和离线网络行为。
-
-
 
 ### 9. Codex Security｜可验证漏洞的AI安全扫描SDK
 
@@ -418,8 +385,6 @@ Trendrepo截至2026-11-11 23:20 UTC、计算美西时间11月11日未结束当�
 
 **推荐验证实验：** 在内部演示仓库植入10项已知可重现弱点并设置10项正常代码对照，测试检出、误报、修复后回归和每次扫描耗费；不扫描未授权目标。
 
-
-
 ### 10. SEO Skills｜让Agent交付可上线的SEO/GEO改动
 
 **GitHub：** https://github.com/Illyism/seo-skills
@@ -460,8 +425,6 @@ Trendrepo截至2026-11-11 23:20 UTC、计算美西时间11月11日未结束当�
 
 **推荐验证实验：** 挑选10个已经有搜索流量的页面，先记录自然搜索点击、注册和咨询；对5页应用Skill建议并人工上线，另外5页对照观察2-4周。
 
-
-
 ## 四、今日最值得研究的3个机会
 
 ### 1. Nod｜带独立电脑与审批机制的个人Agent
@@ -487,8 +450,6 @@ Trendrepo截至2026-11-11 23:20 UTC、计算美西时间11月11日未结束当�
 **具体验证：**选10个现有落地页做两组实验，跟踪自然搜索→咨询→注册链路。百度和Google分开评估，拒绝关键词排名保证。
 
 **判断：**★★★★★（低成本验证）。适合直接研究自有网站的搜索获客闭环，但必须人工审核发布。
-
-
 
 ## 五、去重、历史与风险审查
 
