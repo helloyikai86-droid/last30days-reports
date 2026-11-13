@@ -8,21 +8,21 @@
 
 | 排名 | 仓库 | 美西11月12日部分日新增Star | 累计Star（另时点） | 领域 |
 |---:|---|---:|---:|---|
-| 0 | [aws/aws-emulator](https://github.com/aws/aws-emulator) | +2,256 | 5,389 | 开发工具、基础设施 |
-| 1 | [vercel-labs/ui](https://github.com/vercel-labs/ui) | +1,182 | 1,412 | AI/Agent、开发工具 |
-| 2 | [apex-compute/ANR](https://github.com/apex-compute/ANR) | +802 | 947 | AIGC、开发工具 |
-| 3 | [agentes-chat/agentes-chat](https://github.com/agentes-chat/agentes-chat) | +534 | 1,163 | AI/Agent、企业AI |
-| 4 | [shanselman/gputaskman](https://github.com/shanselman/gputaskman) | +501 | 2,711 | 开发工具、基础设施 |
-| 5 | [serveroshq/panel](https://github.com/serveroshq/panel) | +448 | 498 | 企业AI、基础设施 |
-| 6 | [Seagey/couch-tv](https://github.com/Seagey/couch-tv) | +360 | 948 | 开发工具、增长/内容 |
-| 7 | [Continuum-AI-Corp/OrcaRouter-Lite](https://github.com/Continuum-AI-Corp/OrcaRouter-Lite) | +264 | 2,352 | AI/Agent、企业AI |
-| 8 | [hyperionaidev/smolmaxxing](https://github.com/hyperionaidev/smolmaxxing) | +243 | 269 | AI/Agent、基础设施 |
-| 9 | [rivet-dev/open-orange](https://github.com/rivet-dev/open-orange) | +201 | 221 | 基础设施、开发工具 |
+| 1 | [aws/aws-emulator](https://github.com/aws/aws-emulator) | +2,256 | 5,389 | 开发工具、基础设施 |
+| 2 | [vercel-labs/ui](https://github.com/vercel-labs/ui) | +1,182 | 1,412 | AI/Agent、开发工具 |
+| 3 | [apex-compute/ANR](https://github.com/apex-compute/ANR) | +802 | 947 | AIGC、开发工具 |
+| 4 | [agentes-chat/agentes-chat](https://github.com/agentes-chat/agentes-chat) | +534 | 1,163 | AI/Agent、企业AI |
+| 5 | [shanselman/gputaskman](https://github.com/shanselman/gputaskman) | +501 | 2,711 | 开发工具、基础设施 |
+| 6 | [serveroshq/panel](https://github.com/serveroshq/panel) | +448 | 498 | 企业AI、基础设施 |
+| 7 | [Seagey/couch-tv](https://github.com/Seagey/couch-tv) | +360 | 948 | 开发工具、增长/内容 |
+| 8 | [Continuum-AI-Corp/OrcaRouter-Lite](https://github.com/Continuum-AI-Corp/OrcaRouter-Lite) | +264 | 2,352 | AI/Agent、企业AI |
+| 9 | [hyperionaidev/smolmaxxing](https://github.com/hyperionaidev/smolmaxxing) | +243 | 269 | AI/Agent、基础设施 |
+| 10 | [rivet-dev/open-orange](https://github.com/rivet-dev/open-orange) | +201 | 221 | 基础设施、开发工具 |
 
 > 注：绝对累计Star在11月13日约00:27 UTC从GitHub API单独读取，与Trendrepo增长统计不是同一时点。排名为本次选择的商业研究榜单；当日完整数据未由星标事件API逐个复算。
 
 ---
-## 0. AWS Emulator｜AWS官方本地云服务仿真
+## 1. AWS Emulator｜AWS官方本地云服务仿真
 
 **GitHub：** https://github.com/aws/aws-emulator  
 **增长代理：** 美西11月12日部分自然日 +2,256 Star（非严格24h）  
@@ -73,7 +73,7 @@ AWS官方发布的本地AWS API模拟器，让开发者及AI编程Agent不需要
 
 ---
 
-## 1. UI SDK｜Agent可组合的跨框架界面行为库
+## 2. UI SDK｜Agent可组合的跨框架界面行为库
 
 **GitHub：** https://github.com/vercel-labs/ui  
 **增长代理：** 美西11月12日部分自然日 +1,182 Star（非严格24h）  
@@ -124,7 +124,7 @@ Vercel Labs的UI SDK beta，将焦点、键盘导航、弹出层、选择、拖�
 
 ---
 
-## 2. Apex Neural Rendering｜游戏画面插帧与超分辨率工具
+## 3. Apex Neural Rendering｜游戏画面插帧与超分辨率工具
 
 **GitHub：** https://github.com/apex-compute/ANR  
 **增长代理：** 美西11月12日部分自然日 +802 Star（非严格24h）  
@@ -175,7 +175,7 @@ Apex Compute发布的神经渲染项目：ANR FG插帧测试版已提供安装�
 
 ---
 
-## 3. agentes.chat｜人与Agent同频道协作平台
+## 4. agentes.chat｜人与Agent同频道协作平台
 
 **GitHub：** https://github.com/agentes-chat/agentes-chat  
 **增长代理：** 美西11月12日部分自然日 +534 Star（非严格24h）  
@@ -226,7 +226,7 @@ Apex Compute发布的神经渲染项目：ANR FG插帧测试版已提供安装�
 
 ---
 
-## 4. gputaskman｜能解释显存去向的GPU任务管理器
+## 5. gputaskman｜能解释显存去向的GPU任务管理器
 
 **GitHub：** https://github.com/shanselman/gputaskman  
 **增长代理：** 美西11月12日部分自然日 +501 Star（非严格24h）  
@@ -277,7 +277,7 @@ Apex Compute发布的神经渲染项目：ANR FG插帧测试版已提供安装�
 
 ---
 
-## 5. ServerOS Panel｜多云自有服务器统一管理面板
+## 6. ServerOS Panel｜多云自有服务器统一管理面板
 
 **GitHub：** https://github.com/serveroshq/panel  
 **增长代理：** 美西11月12日部分自然日 +448 Star（非严格24h）  
@@ -328,7 +328,7 @@ Apex Compute发布的神经渲染项目：ANR FG插帧测试版已提供安装�
 
 ---
 
-## 6. couch-tv｜无广告电视桌面与手机遥控器
+## 7. couch-tv｜无广告电视桌面与手机遥控器
 
 **GitHub：** https://github.com/Seagey/couch-tv  
 **增长代理：** 美西11月12日部分自然日 +360 Star（非严格24h）  
@@ -379,7 +379,7 @@ Apex Compute发布的神经渲染项目：ANR FG插帧测试版已提供安装�
 
 ---
 
-## 7. OrcaRouter Lite｜私有多模型路由与托管兜底
+## 8. OrcaRouter Lite｜私有多模型路由与托管兜底
 
 **GitHub：** https://github.com/Continuum-AI-Corp/OrcaRouter-Lite  
 **增长代理：** 美西11月12日部分自然日 +264 Star（非严格24h）  
@@ -430,7 +430,7 @@ Apex Compute发布的神经渲染项目：ANR FG插帧测试版已提供安装�
 
 ---
 
-## 8. smolmaxxing｜1GB设备运行大型LLM的极限实验
+## 9. smolmaxxing｜1GB设备运行大型LLM的极限实验
 
 **GitHub：** https://github.com/hyperionaidev/smolmaxxing  
 **增长代理：** 美西11月12日部分自然日 +243 Star（非严格24h）  
@@ -481,7 +481,7 @@ Apex Compute发布的神经渲染项目：ANR FG插帧测试版已提供安装�
 
 ---
 
-## 9. OpenOrange｜Cloudflare Worker跨云运行与迁移
+## 10. OpenOrange｜Cloudflare Worker跨云运行与迁移
 
 **GitHub：** https://github.com/rivet-dev/open-orange  
 **增长代理：** 美西11月12日部分自然日 +201 Star（非严格24h）  
