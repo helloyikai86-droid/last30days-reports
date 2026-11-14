@@ -2,6 +2,7 @@
 
 | 日期 | Top 1 | 今日 3 个重点机会 | 报告 |
 |---|---|---|---|
+| 2026-11-14 | Capri AI Desktop（美西11/13部分日+1,558，非24h） | OpenFilm / OpenCodeReview / Plannotator | [日报](archive/2026-11-14.md) |
 | 2026-11-13 | AWS Emulator（美西11/12部分日+2,256，非24h） | agentes.chat / UI SDK / OrcaRouter Lite | [日报](archive/2026-11-13.md) |
 | 2026-11-12 | Modern Web Guidance（美西11/11未结束+1,398，非24h） | Nod / Improve / SEO Skills | [日报](archive/2026-11-12.md) |
 | 2026-11-11 | Exact（美西当日+760，非严格24h） | dsh-media-desk / Horizon / Exact | [日报](archive/2026-11-11.md) |
