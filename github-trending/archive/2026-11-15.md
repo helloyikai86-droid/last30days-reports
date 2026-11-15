@@ -15,7 +15,7 @@
 | 3 | [Veyra NRVideo｜实时视频增强与采集管线](https://github.com/Likely7/Veyra-NRVideo) | +492 | 2,230 | C++ / Windows / GPU / Super Resolution / Frame Generation | 首次进入研究库 |
 | 4 | [Blender Skills｜94个3D制作Agent技能](https://github.com/arjun988/blender-skills) | +373 | 3,160 | TypeScript / Blender MCP / Agent Skills / Python脚本 | 首次进入研究库 |
 | 5 | [Abyssal Garden｜97KB代码生成水下世界](https://github.com/Noniv/abyssal-garden) | +366 | 367 | JavaScript / WebGPU / WGSL / Web Audio / 单HTML | 首次进入研究库 |
-| 6 | [Video Shotcraft｜可编辑AI产品视频技能](https://github.com/Vincentwei1021/video-shotcraft) | +351 | 19,606 | TypeScript / Remotion / React / Agent Skills / 剪映工程导出 | 首次进入研究库 |
+| 6 | [Video Shotcraft｜可编辑AI产品视频技能](https://github.com/Vincentwei1021/video-shotcraft) | +351 | 19,606 | TypeScript / Remotion / React / Agent Skills / 剪映工程导出 | 历史项目加速（首次发现2026-10-09） |
 | 7 | [Hikaku｜本地AI图像识别提示插件](https://github.com/hikaku-io/hikaku-extension) | +301 | 301 | JavaScript / Browser Extension Manifest V3 / 本地视觉模型 | 首次进入研究库 |
 | 8 | [PaperOrchestra｜Google多Agent科研论文流水线](https://github.com/google-research/paper-orchestra) | +256 | 450 | Python / Multi-Agent / Literature Review / LaTeX | 首次进入研究库 |
 | 9 | [Cloud Mail｜Cloudflare低成本自托管邮箱](https://github.com/maillab/cloud-mail) | +255 | 15,945 | JavaScript / Vue / Cloudflare Workers / R2 / Resend | 首次进入研究库 |
