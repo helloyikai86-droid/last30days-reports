@@ -2,6 +2,7 @@
 
 | 日期 | Top 1 | 今日 3 个重点机会 | 报告 |
 |---|---|---|---|
+| 2026-11-16 | PhoneBox（美西11/15部分日+845，非24h） | LoopForge / SkillEvaluator / PhoneBox | [日报](archive/2026-11-16.md) |
 | 2026-11-15 | Kiri（美西11/14部分日+1,242，非24h） | Video Shotcraft / Chrome DevTools MCP / Blender Skills | [日报](archive/2026-11-15.md) |
 | 2026-11-14 | Capri AI Desktop（美西11/13部分日+1,558，非24h） | OpenFilm / OpenCodeReview / Plannotator | [日报](archive/2026-11-14.md) |
 | 2026-11-13 | AWS Emulator（美西11/12部分日+2,256，非24h） | agentes.chat / UI SDK / OrcaRouter Lite | [日报](archive/2026-11-13.md) |
