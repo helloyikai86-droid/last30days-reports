@@ -2,6 +2,7 @@
 
 | 日期 | Top 1 | 今日 3 个重点机会 | 报告 |
 |---|---|---|---|
+| 2026-11-19 | Superpowers（美西11/18部分日+1,726，非24h） | OpenShorts / TryPost / AOCI-CODE | [日报](archive/2026-11-19.md) |
 | 2026-11-18 | Wireless Device Battery Monitor（美西11/17部分日+2,013，非24h） | OpenMotion / rust-anything / App Store Compliance | [日报](archive/2026-11-18.md) |
 | 2026-11-17 | ffmpeg-skill（美西11/16部分日+558，非24h） | 麦田 / ffmpeg-skill / Bombadil | [日报](archive/2026-11-17.md) |
 | 2026-11-16 | PhoneBox（美西11/15部分日+845，非24h） | LoopForge / SkillEvaluator / PhoneBox | [日报](archive/2026-11-16.md) |
