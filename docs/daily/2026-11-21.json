@@ -62,7 +62,7 @@
     },
     {
       "rank": 2,
-      "id": "pingdotgg-t3code",
+      "id": "t3code",
       "name": "T3 Code",
       "repo": "pingdotgg/t3code",
       "url": "https://github.com/pingdotgg/t3code",
@@ -99,7 +99,7 @@
     },
     {
       "rank": 3,
-      "id": "stablyai-orca",
+      "id": "orca",
       "name": "Orca",
       "repo": "stablyai/orca",
       "url": "https://github.com/stablyai/orca",
@@ -360,7 +360,7 @@
     },
     {
       "rank": 10,
-      "id": "haydenschmitty-floorplan",
+      "id": "haydenschmitty--floorplan",
       "name": "Floorplan",
       "repo": "haydenschmitty/floorplan",
       "url": "https://github.com/haydenschmitty/floorplan",
