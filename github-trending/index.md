@@ -2,6 +2,7 @@
 
 | 日期 | Top 1 | 今日 3 个重点机会 | 报告 |
 |---|---|---|---|
+| 2026-11-22 | Mister Download Manager（美西11/21部分日+1,057，非24h） | Chinese Novelist Skill / raea / OpenComputer | [日报](archive/2026-11-22.md) |
 | 2026-11-21 | XERJ（美西11/20部分日+1,112，非24h） | NeonClipping / XERJ / Floorplan | [日报](archive/2026-11-21.md) |
 | 2026-11-20 | gtavi-claudecode（美西11/19部分日+815，非24h） | AutoClip / Agent Access / AnyMachine | [日报](archive/2026-11-20.md) |
 | 2026-11-19 | Superpowers（美西11/18部分日+1,726，非24h） | OpenShorts / TryPost / AOCI-CODE | [日报](archive/2026-11-19.md) |
