@@ -2,6 +2,7 @@
 
 | 日期 | Top 1 | 今日 3 个重点机会 | 报告 |
 |---|---|---|---|
+| 2026-11-26 | openset-llm（美西11/25部分日+690，非24h） | HyperFrames / openset-llm / GameDev Agent Skills | [日报](archive/2026-11-26.md) |
 | 2026-11-25 | Shirudo（美西11/24部分日+1,645，非24h） | AI Pose Gallery / AIMLInterviews / Cicada | [日报](archive/2026-11-25.md) |
 | 2026-11-24 | xnulinux（美西11/23部分日+1,468，非24h） | Social Media Research Skills / Firecrawl / CrossDesk | [日报](archive/2026-11-24.md) |
 | 2026-11-23 | fast-anything（美西11/22部分日+1,510，非24h） | OpenReel / fast-anything / mobile-agent-testers | [日报](archive/2026-11-23.md) |
