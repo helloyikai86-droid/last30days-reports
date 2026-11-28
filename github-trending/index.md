@@ -2,6 +2,7 @@
 
 | 日期 | Top 1 | 今日 3 个重点机会 | 报告 |
 |---|---|---|---|
+| 2026-11-28 | Forge Neo Remi（美西11/27部分日+719，非24h） | Forge Neo Remi / 100x Engineer Skill / Tower | [日报](archive/2026-11-28.md) |
 | 2026-11-27 | Concat（美西11/26部分日+822，非24h） | OpenGame / Concat / Treg | [日报](archive/2026-11-27.md) |
 | 2026-11-26 | openset-llm（美西11/25部分日+690，非24h） | HyperFrames / openset-llm / GameDev Agent Skills | [日报](archive/2026-11-26.md) |
 | 2026-11-25 | Shirudo（美西11/24部分日+1,645，非24h） | AI Pose Gallery / AIMLInterviews / Cicada | [日报](archive/2026-11-25.md) |
